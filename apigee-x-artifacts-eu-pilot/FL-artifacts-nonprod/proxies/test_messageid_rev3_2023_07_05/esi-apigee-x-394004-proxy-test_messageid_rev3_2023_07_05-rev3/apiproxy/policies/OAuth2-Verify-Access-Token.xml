@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<OAuthV2 continueOnError="false" enabled="true" name="OAuth2-Verify-Access-Token">
-    <Operation>VerifyAccessToken</Operation>
-</OAuthV2>
