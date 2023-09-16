@@ -1,0 +1,15 @@
+{
+  "keyValueEntries": [
+    {
+      "name": {
+        "EncryptedValue": "aYBPTnoAF4b8I3JLyzgW+A==",
+        "IV": "EHCvYQuseTfMds0idQnpAQ=="
+      },
+      "value": {
+        "EncryptedValue": "oDYDq1ZxXx8sCkomR7Stsg==",
+        "IV": "zqMjy8eXtUUSz0kMaNuFyQ=="
+      }
+    }
+  ],
+  "nextPageToken": ""
+}
