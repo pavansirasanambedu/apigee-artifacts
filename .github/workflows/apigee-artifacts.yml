@@ -12,6 +12,7 @@ env:
   WORKFLOW_IDENTITY_FEDERATION_NAME: ${{ secrets.WORKFLOW_IDENTITY_FEDERATION_NAME }}
   APIGEE_BASE_URL: "https://apigee.googleapis.com/v1/organizations/"
   GITHUB_TOKEN: ${{ secrets.TOKEN_GIT }}
+  key: ${{ secrets.key }}
   FIELDS_TO_ENCRYPT: "name,value"
   firstlevelobject: "keyValueEntries"
 
@@ -46,6 +47,7 @@ jobs:
           $env:ORG = "${{ secrets.APIGEE_ORG }}"
           $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
           $env:git_token = "${{ secrets.TOKEN_GIT }}"
+          $env:key = "${{ secrets.key }}"
           
           $env:FieldValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
