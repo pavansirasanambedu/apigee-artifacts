@@ -1,0 +1,7 @@
+{
+  "name": "HTTPBin_CICD_2",
+  "host": "httpbin.org",
+  "port": 80,
+  "isEnabled": true,
+  "protocol": "HTTP"
+}
