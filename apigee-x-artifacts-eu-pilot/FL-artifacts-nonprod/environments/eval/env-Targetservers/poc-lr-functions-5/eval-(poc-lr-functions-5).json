@@ -1,0 +1,10 @@
+{
+  "name": "poc-lr-functions-5",
+  "host": "www.google.com",
+  "port": 443,
+  "isEnabled": false,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}
