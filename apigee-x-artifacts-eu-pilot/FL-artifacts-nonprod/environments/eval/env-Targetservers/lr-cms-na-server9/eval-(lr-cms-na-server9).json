@@ -1,0 +1,10 @@
+{
+  "name": "lr-cms-na-server9",
+  "host": "fzeu2-cexlrs-li-dev-mae-09.azurewebsites.net",
+  "port": 443,
+  "isEnabled": false,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}

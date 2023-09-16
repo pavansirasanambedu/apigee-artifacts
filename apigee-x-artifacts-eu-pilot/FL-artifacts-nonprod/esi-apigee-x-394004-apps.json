@@ -1,0 +1,81 @@
+{
+  "app": [
+    {
+      "appId": "4eb87b4e-e37c-49e1-8a94-db4a076a2329",
+      "callbackUrl": "http://weatherapp.com",
+      "createdAt": "1694775159874",
+      "credentials": [
+        {
+          "apiProducts": [
+            {
+              "apiproduct": "weatherProduct",
+              "status": "approved"
+            }
+          ],
+          "consumerKey": "MPIIii9w9bfLreorCNGxAg8HLhjuKfjjqHIpeorGLA7EazEg",
+          "consumerSecret": "UJFavnJ2WfYNVSPESSjGOlO8ifIaRLDWpoD1p5bD4cpPocbpyYlDzXJXqmXS28Eg",
+          "expiresAt": "-1",
+          "issuedAt": "1694775159910",
+          "status": "approved"
+        }
+      ],
+      "developerId": "5aa8a33d-1574-4e88-8961-cbe6f8135df0",
+      "lastModifiedAt": "1694775159874",
+      "name": "testmore",
+      "status": "approved"
+    },
+    {
+      "appId": "129c1e26-c1f0-4d33-b538-893ef50d51df",
+      "callbackUrl": "http://weatherapp.com",
+      "createdAt": "1694773713510",
+      "credentials": [
+        {
+          "apiProducts": [
+            {
+              "apiproduct": "weatherProduct",
+              "status": "approved"
+            }
+          ],
+          "consumerKey": "WZjO2vjhexmNVnOYXxrYllAco78Aipj2Nz0vayMimIz6jn9o",
+          "consumerSecret": "ePDcP1hCb2OQcqF56MgEsa98m68ecwXHblZNq9PMPU3XZvcinankxyt2yCpwemBr",
+          "expiresAt": "-1",
+          "issuedAt": "1694773713542",
+          "status": "approved"
+        }
+      ],
+      "developerId": "5aa8a33d-1574-4e88-8961-cbe6f8135df0",
+      "lastModifiedAt": "1694773713510",
+      "name": "test",
+      "status": "approved"
+    },
+    {
+      "appId": "562d95e2-9336-4bab-9c45-89bdd87fd5e5",
+      "attributes": [
+        {
+          "name": "DisplayName",
+          "value": "test-app"
+        }
+      ],
+      "createdAt": "1694757751084",
+      "credentials": [
+        {
+          "apiProducts": [
+            {
+              "apiproduct": "github-apiproduct",
+              "status": "approved"
+            }
+          ],
+          "consumerKey": "fBvH9Vw1A9oMBR3irEDgArW1zoT0DkqUfzDHupKSim9tREJP",
+          "consumerSecret": "iGEZFvktmOEgB57jGFzFRIyv8yq00maYaixBHbAvcT70q6xJN28IGWuH58GcauOS",
+          "expiresAt": "-1",
+          "issuedAt": "1694757751130",
+          "status": "approved"
+        }
+      ],
+      "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
+      "lastModifiedAt": "1694757751084",
+      "name": "test-app",
+      "status": "approved"
+    }
+  ]
+}

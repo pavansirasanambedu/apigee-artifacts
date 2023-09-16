@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault continueOnError="false" enabled="true" name="RF-Raise404Fault">
+    <DisplayName>RF-Raise404Fault</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Payload contentType="text/xml">
+                <root>Please contact support@company.com</root>
+            </Payload>
+            <StatusCode>500</StatusCode>
+        </Set>
+        <Add>
+            <Headers>
+                <Header name="FaultHeader">{fault.name}</Header>
+            </Headers>
+        </Add>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>
