@@ -1,0 +1,10 @@
+{
+  "name": "poc-target1",
+  "host": "www.dev.api.footlocker.eu",
+  "port": 443,
+  "isEnabled": true,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}

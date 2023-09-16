@@ -1,0 +1,13 @@
+{
+  "keyValueEntries": [
+    {
+      "name": "PREFIX",
+      "value": "EXMPL"
+    },
+    {
+      "name": "COMPANY",
+      "value": "example.com"
+    }
+  ],
+  "nextPageToken": ""
+}
