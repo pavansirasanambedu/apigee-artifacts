@@ -1,8 +1,0 @@
-{
-  "name": "test_tatro",
-  "host": "localhost2.local",
-  "port": 80,
-  "isEnabled": false,
-  "sSLInfo": {},
-  "protocol": "HTTP"
-}
