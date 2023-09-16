@@ -358,16 +358,6 @@ else {
             # $response | ConvertTo-Json
             # Write-Host "KVM Data: $response"
 
-            # Make the API request to get KVM data
-            $headers = @{
-              "Authorization" = "Bearer $token"
-            }
-      
-            $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$($envkvm)+"/entries"
-            Write-Host "kvmpthtestpath:$kvmpthtestpath"
-      
-            $kvmresponse = Invoke-RestMethod -Uri $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
-
             # Define a function to encrypt fields
             function Encrypt-Fields {
                 param (
@@ -400,6 +390,16 @@ else {
             try {
 
                 $filedtoitterate = $env:FIRST_LEVEL_OBJECT
+
+                # Make the API request to get KVM data
+                $headers = @{
+                    "Authorization" = "Bearer $token"
+                }
+            
+                $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$($envkvm)+"/entries"
+                Write-Host "kvmpthtestpath:$kvmpthtestpath"
+            
+                $kvmresponse = Invoke-RestMethod -Uri $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
             
                 # Check if the response contains data
                 if ($kvmresponse -and $kvmresponse.$filedtoitterate) {
