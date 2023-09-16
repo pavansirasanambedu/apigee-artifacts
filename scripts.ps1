@@ -400,8 +400,8 @@ else {
                 # Specify the fields you want to encrypt
                 Write-Host "Values: $env:FieldValuestoEncrypt"
                 
-                # $env:fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
-                $env:fieldsToEncrypt = @("name,value")
+                $fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
+                # $env:fieldsToEncrypt = @("name,value")
                 Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
                 # Define the path to the fields in your JSON data
