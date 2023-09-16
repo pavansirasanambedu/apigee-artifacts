@@ -417,9 +417,11 @@ else {
                     $AES.KeySize = 256
                     $AES.Key = [System.Text.Encoding]::UTF8.GetBytes($keyHex.PadRight(32))
                     $AES.Mode = [System.Security.Cryptography.CipherMode]::CBC
+
+                    Write-Host "Trying to enter into FOREACH...!"
             
                     # Loop through the JSON data and encrypt specified fields
-                    foreach ($entry in $($response.keyValueEntries)) {
+                    foreach ($entry in $response.keyValueEntries) {
                         Write-Host "Entered into FOREACH...!"
                         # Call the Encrypt-Fields function to encrypt the specified fields
                         $entry = Encrypt-Fields -data $entry -fieldsToEncrypt $fieldsToEncrypt -AES $AES
