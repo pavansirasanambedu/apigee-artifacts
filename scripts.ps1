@@ -390,44 +390,55 @@ else {
             try {
                 $git_token = $env:TOKEN
             
-                # Load JSON content from the response
-                $jsonContent = $response | ConvertTo-Json
-                Write-Host "jsonContent: $jsonContent"
-            
-                # Decryption key
-                $keyHex = $env:key
-            
-                # Specify the fields you want to encrypt
-                Write-Host "Values: $env:FieldValuestoEncrypt"
-            
-                $fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
-                Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
-            
-                # Create an AES object for encryption
-                $AES = New-Object System.Security.Cryptography.AesCryptoServiceProvider
-                $AES.KeySize = 256
-                $AES.Key = [System.Text.Encoding]::UTF8.GetBytes($keyHex.PadRight(32))
-                $AES.Mode = [System.Security.Cryptography.CipherMode]::CBC
-            
-                # Loop through the JSON data and encrypt specified fields
-                foreach ($entry in $jsonContent.keyValueEntries) {
-                    Write-Host "Entered into FOREACH...!"
-                    # Call the Encrypt-Fields function to encrypt the specified fields
-                    $entry = Encrypt-Fields -data $entry -fieldsToEncrypt $fieldsToEncrypt -AES $AES
+                # Make the API request to get KVM data
+                $headers = @{
+                    "Authorization" = "Bearer $git_token"
                 }
             
-                # Convert the JSON data back to a string
-                $encryptedJsonData = $jsonContent | ConvertTo-Json -Depth 10
+                $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/$($envkvm)/entries"
             
-                Write-Host "Encrypted data: $encryptedJsonData"
+                $response = Invoke-RestMethod -Uri $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
             
-                # Define the output file name based on environment variables
-                $fileName = "$($env.APIGEE_ORG)-$($envkvm).json"
+                # Check if the response contains data
+                if ($response -and $response.keyValueEntries) {
+                    Write-Host "KVM Data: $($response | ConvertTo-Json)"
+                    
+                    # Decryption key
+                    $keyHex = $env:key
             
-                # Save the encrypted data to the file
-                $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
+                    # Specify the fields you want to encrypt
+                    Write-Host "Values: $env:FieldValuestoEncrypt"
+                    $fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
+                    Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
-                Write-Host "Encrypted data saved to $fileName"
+                    # Create an AES object for encryption
+                    $AES = New-Object System.Security.Cryptography.AesCryptoServiceProvider
+                    $AES.KeySize = 256
+                    $AES.Key = [System.Text.Encoding]::UTF8.GetBytes($keyHex.PadRight(32))
+                    $AES.Mode = [System.Security.Cryptography.CipherMode]::CBC
+            
+                    # Loop through the JSON data and encrypt specified fields
+                    foreach ($entry in $response.keyValueEntries) {
+                        Write-Host "Entered into FOREACH...!"
+                        # Call the Encrypt-Fields function to encrypt the specified fields
+                        $entry = Encrypt-Fields -data $entry -fieldsToEncrypt $fieldsToEncrypt -AES $AES
+                    }
+            
+                    # Convert the JSON data back to a string
+                    $encryptedJsonData = $response | ConvertTo-Json -Depth 10
+            
+                    Write-Host "Encrypted data: $encryptedJsonData"
+            
+                    # Define the output file name based on environment variables
+                    $fileName = "$($env.APIGEE_ORG)-$($envkvm).json"
+            
+                    # Save the encrypted data to the file
+                    $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
+            
+                    Write-Host "Encrypted data saved to $fileName"
+                } else {
+                    Write-Host "No data found in the response."
+                }
             }
             catch {
                 Write-Host "An error occurred: $_"
