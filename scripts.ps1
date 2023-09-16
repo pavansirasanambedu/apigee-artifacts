@@ -398,11 +398,12 @@ else {
                 $keyHex = $env:key
                 
                 # Specify the fields you want to encrypt
-                $env:fieldsToEncrypt = $env:fieldsToEncrypt -split ","
+                $env:fieldsToEncrypt = $env:FieldsValuestoEncrypt -split ","
                 Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
                 # Define the path to the fields in your JSON data
                 $fieldPath = $env:FIRST_LEVEL_OBJECT
+                Write-Host "fieldPath: $fieldPath"
             
                 # Create an AES object for encryption
                 $AES = New-Object System.Security.Cryptography.AesCryptoServiceProvider
