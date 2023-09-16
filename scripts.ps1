@@ -9,6 +9,7 @@ $headers = @{Authorization = "Bearer $token"}
 
 # Define a function to encrypt fields
 function Encrypt-Fields {
+    Write-Host "Entered into FUNCTION...!"
     param (
         [System.Object]$data,
         [System.String[]]$fieldsToEncrypt,
@@ -415,7 +416,7 @@ else {
                 $AES.Mode = [System.Security.Cryptography.CipherMode]::CBC
             
                 # Loop through the JSON data and encrypt specified fields
-                foreach ($entry in $jsonContent.$fieldPath) {
+                foreach ($entry in $jsonContent.keyValueEntries) {
                     Write-Host "Entered into FOREACH...!"
                     # Call the Encrypt-Fields function to encrypt the specified fields
                     $entry = Encrypt-Fields -data $entry -fieldsToEncrypt $fieldsToEncrypt -AES $AES
