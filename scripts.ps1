@@ -353,8 +353,91 @@ else {
             
             $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$envkvm+"/entries"
 
-            $response = Invoke-RestMethod $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-($($envkvm)).json"
+            $response = Invoke-RestMethod $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 #-OutFile "$env-($($envkvm)).json"
             $response | ConvertTo-Json
+
+            # Define a function to encrypt fields
+            function Encrypt-Fields {
+                param (
+                    [System.Object]$data,
+                    [System.String[]]$fieldsToEncrypt,
+                    [System.Security.Cryptography.AesCryptoServiceProvider]$AES
+                )
+            
+                foreach ($field in $fieldsToEncrypt) {
+                    $dataValue = $data.$field
+            
+                    $dataBytes = [System.Text.Encoding]::UTF8.GetBytes($dataValue)
+            
+                    $AES.GenerateIV()
+                    $IVBase64 = [System.Convert]::ToBase64String($AES.IV)
+            
+                    $encryptor = $AES.CreateEncryptor()
+                    $encryptedBytes = $encryptor.TransformFinalBlock($dataBytes, 0, $dataBytes.Length)
+                    $encryptedBase64 = [System.Convert]::ToBase64String($encryptedBytes)
+            
+                    $data.$field = @{
+                        "EncryptedValue" = $encryptedBase64
+                        "IV" = $IVBase64
+                    }
+                }
+            
+                return $data
+            }
+            
+            try {
+                $git_token = $env:token
+            
+                # $env:JSON_FILE_PATH = "kvmdata/kvmdata.json"
+            
+                # Load JSON content from the file
+                $jsonContent = $response
+                Write-Host "jsonContent: $jsonContent"
+            
+                # Decryption key
+                $keyHex = $env:key
+            
+                # Specify the fields you want to encrypt
+                $fieldsToEncrypt = $env:fieldsToEncrypt -split ","
+                Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
+            
+                # Define the path to the fields in your JSON data
+                $fieldPath = $env:FIRST_LEVEL_OBJECT
+            
+                # Create an AES object for encryption
+                $AES = New-Object System.Security.Cryptography.AesCryptoServiceProvider
+                $AES.KeySize = 256
+                $AES.Key = [System.Text.Encoding]::UTF8.GetBytes($keyHex.PadRight(32))
+                $AES.Mode = [System.Security.Cryptography.CipherMode]::CBC
+            
+                # Loop through the JSON data and encrypt specified fields
+                foreach ($entry in $jsonContent.$fieldPath) {
+                    Write-Host "Entered into FOREACH...!"
+                    # Call the Encrypt-Fields function to encrypt the specified fields
+                    $entry = Encrypt-Fields -data $entry -fieldsToEncrypt $fieldsToEncrypt -AES $AES
+                }
+            
+                # Convert the JSON data back to a string
+                $encryptedJsonData = $jsonContent | ConvertTo-Json -Depth 10
+            
+                Write-Host "Encrypted data: $encryptedJsonData"
+            
+                # Define the output file name based on environment variables
+                $fileName = "$env-($($envkvm)).json"
+            
+                # Save the encrypted data to the file
+                $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
+            
+                Write-Host "Encrypted data saved to $fileName"
+            }
+            catch {
+                Write-Host "An error occurred: $_"
+            }
+
+
+
+
+            
             cd ..
         }
         cd ..
