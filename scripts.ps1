@@ -7,35 +7,6 @@ $headers = @{Authorization = "Bearer $token"}
 
 # --------------------Apigee All Artifacts-------------------------------------------
 
-# Define a function to encrypt fields
-function Encrypt-Fields {
-    Write-Host "Entered into FUNCTION...!"
-    param (
-        [System.Object]$data,
-        [System.String[]]$fieldsToEncrypt,
-        [System.Security.Cryptography.AesCryptoServiceProvider]$AES
-    )
-
-    foreach ($field in $fieldsToEncrypt) {
-        $dataValue = $data.$field
-
-        $dataBytes = [System.Text.Encoding]::UTF8.GetBytes($dataValue)
-
-        $AES.GenerateIV()
-        $IVBase64 = [System.Convert]::ToBase64String($AES.IV)
-
-        $encryptor = $AES.CreateEncryptor()
-        $encryptedBytes = $encryptor.TransformFinalBlock($dataBytes, 0, $dataBytes.Length)
-        $encryptedBase64 = [System.Convert]::ToBase64String($encryptedBytes)
-
-        $data.$field = @{
-            "EncryptedValue" = $encryptedBase64
-            "IV" = $IVBase64
-        }
-    }
-
-    return $data
-}
 
 # ----------------------create apigee organisation level artifacts folder------------
 # if(!(test-path -PathType container apigee)){
@@ -386,28 +357,51 @@ else {
             $response = Invoke-RestMethod $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
             $response | ConvertTo-Json
             Write-Host "KVM Data: $response"
+
+            # Define a function to encrypt fields
+            function Encrypt-Fields {
+                param (
+                    [System.Object]$data,
+                    [System.String[]]$fieldsToEncrypt,
+                    [System.Security.Cryptography.AesCryptoServiceProvider]$AES
+                )
+            
+                foreach ($field in $fieldsToEncrypt) {
+                    $dataValue = $data.$field
+            
+                    $dataBytes = [System.Text.Encoding]::UTF8.GetBytes($dataValue)
+            
+                    $AES.GenerateIV()
+                    $IVBase64 = [System.Convert]::ToBase64String($AES.IV)
+            
+                    $encryptor = $AES.CreateEncryptor()
+                    $encryptedBytes = $encryptor.TransformFinalBlock($dataBytes, 0, $dataBytes.Length)
+                    $encryptedBase64 = [System.Convert]::ToBase64String($encryptedBytes)
+            
+                    $data.$field = @{
+                        "EncryptedValue" = $encryptedBase64
+                        "IV" = $IVBase64
+                    }
+                }
+            
+                return $data
+            }
             
             try {
-                Write-Host "Entered into TRY...!"
-                $git_token = $env:token
+                $git_token = $env:TOKEN
             
-                # Load JSON content from the file
+                # Load JSON content from the response
                 $jsonContent = $response | ConvertTo-Json
                 Write-Host "jsonContent: $jsonContent"
             
                 # Decryption key
                 $keyHex = $env:key
-                
+            
                 # Specify the fields you want to encrypt
                 Write-Host "Values: $env:FieldValuestoEncrypt"
-                
-                $fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
-                # $env:fieldsToEncrypt = @("name,value")
-                Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
-                # Define the path to the fields in your JSON data
-                $fieldPath = $env:FIRST_LEVEL_OBJECT
-                Write-Host "fieldPath: $fieldPath"
+                $fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
+                Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
                 # Create an AES object for encryption
                 $AES = New-Object System.Security.Cryptography.AesCryptoServiceProvider
@@ -428,7 +422,7 @@ else {
                 Write-Host "Encrypted data: $encryptedJsonData"
             
                 # Define the output file name based on environment variables
-                $fileName = "$env-($($envkvm)).json"
+                $fileName = "$($env.APIGEE_ORG)-$($envkvm).json"
             
                 # Save the encrypted data to the file
                 $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
@@ -438,6 +432,7 @@ else {
             catch {
                 Write-Host "An error occurred: $_"
             }
+
             
             cd ..
         }
