@@ -47,7 +47,7 @@ jobs:
           $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
           $env:git_token = "${{ secrets.TOKEN_GIT }}"
           
-          $env:fieldsToEncrypt = $env:FIELDS_TO_ENCRYPT
+          $env:FieldsValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = $env:firstlevelobject
           
           Invoke-Pester ./scripts.ps1 -Passthru
