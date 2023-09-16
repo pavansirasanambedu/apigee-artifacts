@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<JSONToXML continueOnError="false" enabled="true" name="J2X-JSONtoXML">
-    <DisplayName>J2X-JSONtoXML</DisplayName>
-    <Properties/>
-    <OutputVariable>response</OutputVariable>
-    <Source>response</Source>
-</JSONToXML>
