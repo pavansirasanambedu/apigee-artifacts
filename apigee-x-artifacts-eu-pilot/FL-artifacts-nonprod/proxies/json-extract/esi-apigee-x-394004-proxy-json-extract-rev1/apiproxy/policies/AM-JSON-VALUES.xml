@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-JSON-VALUES">
+    <DisplayName>AM-JSON-VALUES</DisplayName>
+    <Properties/>
+    <Set>
+        <!-- <Verb>GET</Verb> -->
+        <Payload contentType="application/json">
+            {
+            "id1":"{json.id1}",
+            "id2":"{json.id2}",
+            "id3":"{json.id3}",
+            "id4":"{json.id4}",
+            "PaymentType":"{json.PaymentType}"
+            }
+        </Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

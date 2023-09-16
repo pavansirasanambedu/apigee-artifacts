@@ -1,0 +1,27 @@
+{
+  "environment": "eval",
+  "apiProxy": "ZUUL-Filters",
+  "revision": "11",
+  "deployStartTime": "1691069217425",
+  "state": "READY",
+  "instances": [
+    {
+      "instance": "eval-instance",
+      "deployedRevisions": [
+        {
+          "revision": "11",
+          "percentage": 100
+        }
+      ],
+      "deployedRoutes": [
+        {
+          "basepath": "/v1/zuul-filters",
+          "envgroup": "eval-group",
+          "environment": "eval",
+          "percentage": 100
+        }
+      ]
+    }
+  ],
+  "proxyDeploymentType": "EXTENSIBLE"
+}
