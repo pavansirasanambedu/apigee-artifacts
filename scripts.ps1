@@ -396,9 +396,9 @@ else {
             
                 # Decryption key
                 $keyHex = $env:key
-            
+                
                 # Specify the fields you want to encrypt
-                $fieldsToEncrypt = $env:fieldsToEncrypt -split ","
+                $env:fieldsToEncrypt = $env:fieldsToEncrypt -split ","
                 Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
                 # Define the path to the fields in your JSON data
