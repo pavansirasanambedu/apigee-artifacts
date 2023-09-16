@@ -1,0 +1,17 @@
+<APIProxy revision="22" name="message-github-proxy_rev2_2023_09_04">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1694194796793</CreatedAt>
+    <LastModifiedAt>1694194796793</LastModifiedAt>
+    <BasePaths>/rajesh_messageid</BasePaths>
+    <Policies>
+        <Policy>AM-Response</Policy>
+        <Policy>FC-JWT-Token</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://randomnumber.js</Resource>
+    </Resources>
+</APIProxy>
