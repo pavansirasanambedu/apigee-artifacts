@@ -402,7 +402,7 @@ else {
                 $kvmresponse = Invoke-RestMethod -Uri $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
             
                 # Check if the response contains data
-                if ($kvmresponse -and $kvmresponse.$filedtoitterate) {
+                if ($kvmresponse -and $kvmresponse.keyValueEntries) {
                     Write-Host "Entered into IF...!"
                     Write-Host "KVM Data: $($response | ConvertTo-Json)"
                     
