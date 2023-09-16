@@ -12,6 +12,8 @@ env:
   WORKFLOW_IDENTITY_FEDERATION_NAME: ${{ secrets.WORKFLOW_IDENTITY_FEDERATION_NAME }}
   APIGEE_BASE_URL: "https://apigee.googleapis.com/v1/organizations/"
   GITHUB_TOKEN: ${{ secrets.TOKEN_GIT }}
+  FIELDS_TO_ENCRYPT: "name,value"
+  firstlevelobject: "keyValueEntries"
 
 jobs:
   apigee-window-artifacts:
@@ -44,6 +46,10 @@ jobs:
           $env:ORG = "${{ secrets.APIGEE_ORG }}"
           $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
           $env:git_token = "${{ secrets.TOKEN_GIT }}"
+          
+          $env:fieldsToEncrypt = $env:FIELDS_TO_ENCRYPT
+          $env:FIRST_LEVEL_OBJECT = $env:firstlevelobject
+          
           Invoke-Pester ./scripts.ps1 -Passthru
 
       - name: Remove GCP Credentials JSON File
