@@ -401,6 +401,7 @@ else {
             
                 # Check if the response contains data
                 if ($response -and $response.keyValueEntries) {
+                    Write-Host "Entered into IF...!"
                     Write-Host "KVM Data: $($response | ConvertTo-Json)"
                     
                     # Decryption key
