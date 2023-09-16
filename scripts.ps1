@@ -401,6 +401,7 @@ else {
                 Write-Host "Values: $env:FieldsValuestoEncrypt"
                 
                 $env:fieldsToEncrypt = $env:FieldsValuestoEncrypt -split ","
+                # $env:fieldsToEncrypt = @("name,value")
                 Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
                 # Define the path to the fields in your JSON data
