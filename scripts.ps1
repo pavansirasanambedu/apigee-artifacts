@@ -398,9 +398,9 @@ else {
                 $keyHex = $env:key
                 
                 # Specify the fields you want to encrypt
-                Write-Host "Values: $env:FieldsValuestoEncrypt"
+                Write-Host "Values: $env:FieldValuestoEncrypt"
                 
-                $env:fieldsToEncrypt = $env:FieldsValuestoEncrypt -split ","
+                $env:fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
                 # $env:fieldsToEncrypt = @("name,value")
                 Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
             
