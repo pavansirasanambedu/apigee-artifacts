@@ -412,6 +412,8 @@ else {
                     Write-Host "Values: $env:FieldValuestoEncrypt"
                     $fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
                     Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
+
+                    $filedtoitterate = $env:FIRST_LEVEL_OBJECT
             
                     # Create an AES object for encryption
                     $AES = New-Object System.Security.Cryptography.AesCryptoServiceProvider
@@ -422,7 +424,7 @@ else {
                     Write-Host "Trying to enter into FOREACH...!"
             
                     # Loop through the JSON data and encrypt specified fields
-                    foreach ($entry in $response.keyValueEntries) {
+                    foreach ($entry in $response.$filedtoitterate) {
                         Write-Host "Entered into FOREACH...!"
                         # Call the Encrypt-Fields function to encrypt the specified fields
                         $entry = Encrypt-Fields -data $entry -fieldsToEncrypt $fieldsToEncrypt -AES $AES
@@ -434,7 +436,7 @@ else {
                     Write-Host "Encrypted data: $encryptedJsonData"
             
                     # Define the output file name based on environment variables
-                    $fileName = "$($env.APIGEE_ORG)-$($envkvm).json"
+                    $fileName = "$($org)-$($envkvm).json"
             
                     # Save the encrypted data to the file
                     $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
