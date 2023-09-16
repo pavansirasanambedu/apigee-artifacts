@@ -48,7 +48,7 @@ jobs:
           $env:git_token = "${{ secrets.TOKEN_GIT }}"
           
           $env:FieldsValuestoEncrypt = "name,value"
-          $env:FIRST_LEVEL_OBJECT = $env:firstlevelobject
+          $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
           
           Invoke-Pester ./scripts.ps1 -Passthru
 
