@@ -352,11 +352,11 @@ else {
             # $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
             # $headers.Add("Authorization", "Bearer ya29.a0AfB_byCYq525bBvRLE3tibD4O1dOvozhbOrpAbNpIqXtsfkBvD-x8VFNszZKC5vj7mm0h-RypwdqL5H7_iukKjIn4BUxhYwUbPaTEdaZLFlFpu7hs_PwshYQuP1QisNg3bz2lbFTftNHMlS6fOh4oXEYVMoU9-s7htHCCvWqgeYaCgYKAcgSARESFQHsvYlsRs-EXW1LLkfCbK-OgQ9KYg0178")
             
-            $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$envkvm+"/entries"
+            # $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$envkvm+"/entries"
 
-            $response = Invoke-RestMethod $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
-            $response | ConvertTo-Json
-            Write-Host "KVM Data: $response"
+            # $response = Invoke-RestMethod $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
+            # $response | ConvertTo-Json
+            # Write-Host "KVM Data: $response"
 
             # Define a function to encrypt fields
             function Encrypt-Fields {
@@ -392,10 +392,11 @@ else {
             
                 # Make the API request to get KVM data
                 $headers = @{
-                    "Authorization" = "Bearer $git_token"
+                    "Authorization" = "Bearer $token"
                 }
             
-                $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/$($envkvm)/entries"
+                $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$($envkvm)+"/entries"
+                Write-Host "kvmpthtestpath:$kvmpthtestpath"
             
                 $response = Invoke-RestMethod -Uri $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
             
