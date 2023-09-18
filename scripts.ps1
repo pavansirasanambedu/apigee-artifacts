@@ -291,7 +291,7 @@ else {
     }
 	
     $Apps = $baseURL+$org+"/apps?expand=true"
-    $Appdetails = Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
+    # $Appdetails = Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
     $baseURL = "https://apigee.googleapis.com/v1/organizations/"
     $org = "esi-apigee-x-394004"
 
@@ -384,6 +384,13 @@ else {
 	                    $encryptedJsonData = $app | ConvertTo-Json -Depth 10
 	                    Write-Host "Modified JSON Data:"
 	                    Write-Host $encryptedJsonData
+		     			# Define the output file name based on environment variables
+                    	$fileName = ""$org-encrypt_apps_data.json""
+                    
+	                    # Save the encrypted data to the file
+	                    $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
+	                    
+	                    Write-Host "Encrypted data saved to $fileName"
 	                }
 	                catch {
 	                    Write-Host "An error occurred: $_"
@@ -394,6 +401,7 @@ else {
 	        }
 	    }
 	}
+ 	Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
 
 	
 # ------------------------------master-deployments-proxies----------------------------
