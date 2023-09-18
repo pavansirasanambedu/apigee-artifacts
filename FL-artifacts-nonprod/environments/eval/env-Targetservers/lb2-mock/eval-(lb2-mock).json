@@ -1,8 +1,0 @@
-{
-  "name": "lb2-mock",
-  "host": "httpbin.org",
-  "port": 80,
-  "isEnabled": true,
-  "sSLInfo": {},
-  "protocol": "HTTP"
-}
