@@ -1,8 +1,0 @@
-{
-  "name": "lb1-mock",
-  "host": "mocktarget.apigee.net",
-  "port": 80,
-  "isEnabled": true,
-  "sSLInfo": {},
-  "protocol": "HTTP"
-}
