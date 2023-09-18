@@ -1,6 +1,6 @@
 name: Apigee Artifacts Export
-on: push
-  # workflow_dispatch:
+on: 
+  workflow_dispatch:
 
 env:
   DEPLOYMENT_NAME: Apigee Artifacts Push # TODO: update to deployment name
