@@ -356,11 +356,11 @@ else {
 	
 	                if (!(Test-Path -PathType Container $appName)) {
 	                    New-Item -Path . -Name $appName -ItemType Directory
-	                    Set-Location -Path $appName
+	                    cd $appName
 	                    Write-Host "Directory created: $appName"
 	                }
 	                else {
-	                    Set-Location -Path $appName
+	                    cd $appName
 	                    Write-Host "Directory already exists: $appName"
 	                }
 	
@@ -397,9 +397,9 @@ else {
 	                }
 	                cd ..
 	            }
-	            cd ..
 	        }
 	    }
+     	cd ..
 	}
  	Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
 
