@@ -1,0 +1,26 @@
+<APIProxy revision="1" name="oauth-jwt-token">
+    <DisplayName>oauth2-cc</DisplayName>
+    <Description>Dispense OAuth v2.0 Bearer tokens for client_credentials grant type.</Description>
+    <CreatedAt>1692624225281</CreatedAt>
+    <LastModifiedAt>1692624225281</LastModifiedAt>
+    <BasePaths>/oauth2-cc</BasePaths>
+    <Policies>
+        <Policy>JS-Groom-Token-Response</Policy>
+        <Policy>AM-TokenHeader</Policy>
+        <Policy>OAuthV2-GenerateAccessToken-CC</Policy>
+        <Policy>OAuthV2-GenerateJWT-AT-CC</Policy>
+        <Policy>RF-Invalid-Grant-Type</Policy>
+        <Policy>RF-Unknown-Request</Policy>
+        <Policy>AM-Clean-Response-Headers</Policy>
+        <Policy>AM-Inject-Proxy-Revision-Header</Policy>
+        <Policy>AM-PrivateKey-Variable</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>properties://secrets.properties</Resource>
+        <Resource>jsc://maybeFormatFault.js</Resource>
+        <Resource>jsc://groomTokenResponse.js</Resource>
+    </Resources>
+</APIProxy>

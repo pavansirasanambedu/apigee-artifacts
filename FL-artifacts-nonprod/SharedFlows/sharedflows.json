@@ -1,0 +1,13 @@
+{
+  "sharedFlows": [
+    {
+      "name": "SF-jwt-token"
+    },
+    {
+      "name": "rateLimiting_rev6_2023_07_30"
+    },
+    {
+      "name": "sample-hello-cicd-sf"
+    }
+  ]
+}

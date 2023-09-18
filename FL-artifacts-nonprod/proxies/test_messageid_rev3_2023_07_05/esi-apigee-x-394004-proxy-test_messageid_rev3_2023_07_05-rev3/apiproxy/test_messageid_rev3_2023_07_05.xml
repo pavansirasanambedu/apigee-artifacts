@@ -1,0 +1,16 @@
+<APIProxy revision="3" name="test_messageid_rev3_2023_07_05">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1690738033694</CreatedAt>
+    <LastModifiedAt>1690738033694</LastModifiedAt>
+    <BasePaths>/rajesh_messageid</BasePaths>
+    <Policies>
+        <Policy>AM-Response</Policy>
+        <Policy>OAuth2-Verify-Access-Token</Policy>
+        <Policy>VerifyJWT</Policy>
+        <Policy>PrivateKey</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+</APIProxy>
