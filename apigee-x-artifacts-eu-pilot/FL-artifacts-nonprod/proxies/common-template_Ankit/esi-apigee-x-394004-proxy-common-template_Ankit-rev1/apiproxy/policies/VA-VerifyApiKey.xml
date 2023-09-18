@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyAPIKey continueOnError="false" enabled="true" name="VA-VerifyApiKey">
+    <DisplayName>VA-VerifyApiKey</DisplayName>
+    <!-- This policy will check the header param &quot;apikey&quot; against the apps defined in Foot Locker
+       organization, fail the request if it does not match, and then validate the API product -->
+    <APIKey ref="request.header.apikey"/>
+</VerifyAPIKey>

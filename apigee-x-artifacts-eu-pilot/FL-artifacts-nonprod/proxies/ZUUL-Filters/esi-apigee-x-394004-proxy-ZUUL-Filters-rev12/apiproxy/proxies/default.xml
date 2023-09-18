@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>FC-JWT</Name>
+            </Step>
+            <Step>
+                <Name>JS-RoutingVars</Name>
+            </Step>
+            <Step>
+                <Name>LC-FLResponseCachePreFilter</Name>
+            </Step>
+            <Step>
+                <Name>RF-ResponseCacheNotFound</Name>
+                <Condition>lookupcache.LC-FLResponseCachePreFilter.cachehit == false</Condition>
+            </Step>
+            <Step>
+                <Name>RC-ResponseCachePreFilter</Name>
+            </Step>
+            <Step>
+                <Name>JS-ClientIdentityFilter</Name>
+            </Step>
+            <Step>
+                <Name>JS-FLSessionPostFilter</Name>
+            </Step>
+            <Step>
+                <Name>RF-ClientIdentityFilter</Name>
+                <Condition>cachekey == null</Condition>
+            </Step>
+        </Request>
+        <Response>
+            <Step>
+                <Name>GenerateSessionId</Name>
+            </Step>
+            <Step>
+                <Name>JS-FLSessionPreFilter</Name>
+            </Step>
+            <Step>
+                <Name>JS-ResponseLogFilter</Name>
+            </Step>
+            <Step>
+                <Name>JS-ResponseCachePreFilter</Name>
+            </Step>
+            <Step>
+                <Name>PC-FLResponseCachePostFilter</Name>
+            </Step>
+            <Step>
+                <Name>TargetResponseInforPostFilter</Name>
+            </Step>
+            <Step>
+                <Name>JS-jsonpayload</Name>
+            </Step>
+            <Step>
+                <Name>JS-ResponseLogFilter</Name>
+            </Step>
+            <Step>
+                <Name>AM-SessionPostFilter</Name>
+            </Step>
+            <Step>
+                <Name>AM-PrintCustomStatusCode</Name>
+            </Step>
+        </Response>
+    </PreFlow>
+    <Flows/>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/v1/zuul-filters</BasePath>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

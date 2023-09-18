@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SharedFlow name="default">
+    <Step>
+        <Name>clientBasedConfig</Name>
+    </Step>
+    <Step>
+        <Name>isClientbasedRatelimit</Name>
+    </Step>
+    <Step>
+        <Name>setFlowVariables</Name>
+    </Step>
+    <Step>
+        <Name>spikeEffectiveTrue</Name>
+        <Condition>(SpikeEffectiveCount is true)</Condition>
+    </Step>
+    <Step>
+        <Name>spikeEffectiveFalse</Name>
+        <Condition>(SpikeEffectiveCount is false)</Condition>
+    </Step>
+    <Step>
+        <Name>spikeEffectiveTrueIp</Name>
+        <Condition>(SpikeEffectiveCountIp is true)</Condition>
+    </Step>
+    <Step>
+        <Name>spikeEffectiveFalseIp</Name>
+        <Condition>(SpikeEffectiveCountIp is false)</Condition>
+    </Step>
+</SharedFlow>
