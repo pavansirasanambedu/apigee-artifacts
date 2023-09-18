@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-SetGenericFaultMessage">
+    <DisplayName>AM-SetGenericFaultMessage</DisplayName>
+    <Properties/>
+    <Set>
+        <Payload contentType="application/json">{"error_message":"Unknown Error","error_code":"E0Q01","error_reference":"http://errordetails"}</Payload>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>
