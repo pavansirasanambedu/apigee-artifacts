@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-CacheValueHeader">
+    <DisplayName>AM-CacheValueHeader</DisplayName>
+    <Add>
+        <Headers>
+            <Header name="HEADER_NAME">{cacheResponse}</Header>
+        </Headers>
+    </Add>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

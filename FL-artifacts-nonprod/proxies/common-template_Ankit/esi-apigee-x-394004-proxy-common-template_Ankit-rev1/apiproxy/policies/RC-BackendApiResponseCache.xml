@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ResponseCache continueOnError="false" enabled="true" name="RC-BackendApiResponseCache">
+    <DisplayName>RC-BackendApiResponseCache</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <Prefix/>
+        <KeyFragment ref="request.uri" type="string"/>
+    </CacheKey>
+    <Scope>Exclusive</Scope>
+    <ExpirySettings>
+        <TimeoutInSeconds ref="">600</TimeoutInSeconds>
+    </ExpirySettings>
+    <!-- Explicitly refresh the cached response by submitting a request message to this proxy with the HTTP header "skip-lookup:true" -->
+    <SkipCacheLookup>request.header.skip-lookup = "true"</SkipCacheLookup>
+    <!-- Explicitly refresh the cached response by submitting a request message to this proxy with the HTTP header "skip-population:true" -->
+    <SkipCachePopulation>response.status.code != 200 or request.verb != "GET"</SkipCachePopulation>
+    <ExcludeErrorResponse>true</ExcludeErrorResponse>
+</ResponseCache>
