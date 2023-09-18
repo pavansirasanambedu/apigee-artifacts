@@ -1,0 +1,14 @@
+<APIProxy revision="4" name="test_messageid_rev3_2023_07_05">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1692344891525</CreatedAt>
+    <LastModifiedAt>1692345383846</LastModifiedAt>
+    <BasePaths>/rajesh_messageid</BasePaths>
+    <Policies>
+        <Policy>AM-Response</Policy>
+        <Policy>FC-JWT-Token</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+</APIProxy>
