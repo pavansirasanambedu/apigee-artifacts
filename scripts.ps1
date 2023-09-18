@@ -395,9 +395,9 @@ else {
 	    }
      	cd ..
 	}
-	cd ..
+	
  	Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
-
+	cd ..
 	
 # ------------------------------master-deployments-proxies----------------------------
     $masterDeploymentPath = $baseURL+$org+"/deployments"
