@@ -399,6 +399,7 @@ else {
 					}
 					}
 		 }
+   }
 					catch {
 							Write-Host "Error: $($_.Exception.Message)"
 					  }
