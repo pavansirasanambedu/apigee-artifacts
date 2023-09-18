@@ -1,0 +1,7 @@
+{
+  "name": "CICDTargetGit",
+  "host": "116.75.82.171",
+  "port": 3306,
+  "isEnabled": false,
+  "protocol": "HTTP"
+}
