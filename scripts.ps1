@@ -314,7 +314,6 @@ else {
         # Change directory back to 'apps' for the next iteration
         cd ..
     }
-
     cd ..
 
     Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
