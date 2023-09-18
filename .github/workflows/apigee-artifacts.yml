@@ -15,6 +15,7 @@ env:
   key: ${{ secrets.key }}
   FIELDS_TO_ENCRYPT: "name,value"
   firstlevelobject: "keyValueEntries"
+  APP_FIELDS: "consumerKey,consumerSecret"
 
 jobs:
   apigee-window-artifacts:
@@ -51,6 +52,9 @@ jobs:
           
           $env:FieldValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
+
+          # Split the comma-separated string into an array
+          $env:appfieds = $env:APP_FIELDS
           
           Invoke-Pester ./scripts.ps1 -Passthru
 
