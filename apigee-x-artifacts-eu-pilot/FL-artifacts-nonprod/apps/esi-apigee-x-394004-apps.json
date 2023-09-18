@@ -1,34 +1,32 @@
 {
   "app": [
     {
-      "appId": "562d95e2-9336-4bab-9c45-89bdd87fd5e5",
-      "callbackUrl": "https://new-callback-url.com",
-      "createdAt": "1694757751084",
-      "credentials": [
+      "appId": "58fc9308-1d22-4d35-832e-d139c394dbc8",
+      "attributes": [
         {
-          "consumerKey": "1536errt",
-          "consumerSecret": "7689jffc",
-          "expiresAt": "1694998717558",
-          "issuedAt": "1694998537558",
-          "status": "approved"
-        },
+          "name": "DisplayName",
+          "value": "testapp"
+        }
+      ],
+      "createdAt": "1695035733622",
+      "credentials": [
         {
           "apiProducts": [
             {
-              "apiproduct": "github-apiproduct",
+              "apiproduct": "testapikey",
               "status": "approved"
             }
           ],
-          "consumerKey": "fBvH9Vw1A9oMBR3irEDgArW1zoT0DkqUfzDHupKSim9tREJP",
-          "consumerSecret": "iGEZFvktmOEgB57jGFzFRIyv8yq00maYaixBHbAvcT70q6xJN28IGWuH58GcauOS",
+          "consumerKey": "QAm9EAO8WnOS52DHkS0ObE0YsxfLXukqpKsiKsHVuMCcDUHG",
+          "consumerSecret": "I4rDJpdUPlMoeaaXS0ing8PngFhcdHyM8rGJUXspJEfIvwEMzBSFGn9pZSxaJuF9",
           "expiresAt": "-1",
-          "issuedAt": "1694757751130",
+          "issuedAt": "1695035733652",
           "status": "approved"
         }
       ],
-      "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
-      "lastModifiedAt": "1695032026952",
-      "name": "test-app",
+      "developerId": "834eb901-8c26-42e1-8799-c8d83a53e90d",
+      "lastModifiedAt": "1695035733622",
+      "name": "testapp",
       "status": "approved"
     }
   ]

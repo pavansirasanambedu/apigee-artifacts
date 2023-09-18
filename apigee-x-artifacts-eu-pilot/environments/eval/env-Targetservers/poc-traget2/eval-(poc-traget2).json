@@ -1,0 +1,10 @@
+{
+  "name": "poc-traget2",
+  "host": "www.test.api.footlocker.eu",
+  "port": 443,
+  "isEnabled": true,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}
