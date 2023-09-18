@@ -1,0 +1,23 @@
+<APIProxy revision="24" name="esi-apigee-x-394004-proxy-FLSessionPreFilter-rev5">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1694194898994</CreatedAt>
+    <LastModifiedAt>1694194898994</LastModifiedAt>
+    <BasePaths>/v1/flsessionprefilter</BasePaths>
+    <Policies>
+        <Policy>JS-SessionResponseHeaders</Policy>
+        <Policy>JS-GenerateSessionID</Policy>
+        <Policy>AM-SessionVariables</Policy>
+        <Policy>RF-SessionVariablesNotFound</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://SessionResponseHeaders.js</Resource>
+        <Resource>jsc://JS-GenerateSessionID.js</Resource>
+    </Resources>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

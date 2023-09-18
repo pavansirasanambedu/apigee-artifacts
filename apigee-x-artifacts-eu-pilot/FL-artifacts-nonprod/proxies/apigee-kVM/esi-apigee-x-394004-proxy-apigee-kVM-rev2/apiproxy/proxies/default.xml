@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow name="PreFlow">
+        <Request/>
+        <Response/>
+    </PreFlow>
+    <Flows>
+        <Flow name="Populate_Cache">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>GenerateSessionId</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/populate-cache") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="lookup_cache">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>RF-SessionID-Error</Name>
+                </Step>
+                <Step>
+                    <Name>Lookup-Cache-1</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>Assign-Message-2</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/lookup-cache") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="cache_target">
+            <Description/>
+            <Request/>
+            <Response>
+                <Step>
+                    <Name>GenerateSessionId</Name>
+                </Step>
+                <Step>
+                    <Name>Populate-Cache-2</Name>
+                </Step>
+                <Step>
+                    <Name>jsonpayload</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/get") and (request.verb = "GET")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <HTTPProxyConnection>
+        <BasePath>/cartsNew</BasePath>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="default">
+        <Condition>(proxy.pathsuffix MatchesPath "/get") and (request.verb = "GET")</Condition>
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+    <RouteRule name="no-target"/>
+</ProxyEndpoint>
