@@ -1,0 +1,10 @@
+{
+  "name": "functest.dev.wenpdcx.footlocker.com",
+  "host": "functest.dev.wenpdcx.footlocker.com",
+  "port": 443,
+  "isEnabled": true,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}

@@ -1,0 +1,45 @@
+<APIProxy revision="1" name="common-template_Ankit">
+    <DisplayName>poc-common-template</DisplayName>
+    <Description>This is a master template, which can be used as a blueprint for creating new proxies.</Description>
+    <CreatedAt>1691064429533</CreatedAt>
+    <LastModifiedAt>1691064429533</LastModifiedAt>
+    <BasePaths>/common-template</BasePaths>
+    <Policies>
+        <Policy>SA-SpikePerMinute</Policy>
+        <Policy>AC-AllowIPAddress</Policy>
+        <Policy>AM-CacheValueHeader</Policy>
+        <Policy>AM-SetCacheHeaders</Policy>
+        <Policy>AM-SetPayload</Policy>
+        <Policy>AM-SetResponseHeader</Policy>
+        <Policy>AM-DeleteHeader</Policy>
+        <Policy>EV-DeveloperEmail</Policy>
+        <Policy>JS-SetURL</Policy>
+        <Policy>J2X-JSONtoXML</Policy>
+        <Policy>KVM-ReadCommonConfig</Policy>
+        <Policy>LC-CommonCache</Policy>
+        <Policy>OA-CreateAccessToken</Policy>
+        <Policy>OA-VerifyAccessToken</Policy>
+        <Policy>OS-OASSpecValidation</Policy>
+        <Policy>PC-CommonTemplatePolicy</Policy>
+        <Policy>RC-BackendApiResponseCache</Policy>
+        <Policy>SC-PetStore</Policy>
+        <Policy>AE-GetDeveloperProfileEmail</Policy>
+        <Policy>AM-AssignPrivateKey</Policy>
+        <Policy>Quota-DailyQuota</Policy>
+        <Policy>VA-VerifyApiKey</Policy>
+        <Policy>VJWT-VerifyJWToken</Policy>
+        <Policy>RF-Raise404Fault</Policy>
+        <Policy>AM-SetGenericFaultMessage</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>oas://openapi (3).yaml</Resource>
+        <Resource>jsc://js-set-url.js</Resource>
+    </Resources>
+    <TargetEndpoints>
+        <TargetEndpoint>TE-httpbin</TargetEndpoint>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>
