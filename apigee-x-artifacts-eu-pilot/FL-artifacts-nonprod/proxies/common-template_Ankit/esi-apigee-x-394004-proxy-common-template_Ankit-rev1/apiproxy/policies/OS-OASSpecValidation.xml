@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<OASValidation continueOnError="false" enabled="false" name="OS-OASSpecValidation">
-    <DisplayName>OS-OASSpecValidation</DisplayName>
-    <Properties/>
-    <Source>request</Source>
-    <OASResource>oas://openapi (3).yaml</OASResource>
-</OASValidation>
