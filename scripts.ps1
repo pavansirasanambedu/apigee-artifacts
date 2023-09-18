@@ -18,17 +18,6 @@ $headers = @{Authorization = "Bearer $token"}
 # }
 
 # create apigee artifacts non prod folder
-if(!(test-path -PathType container apigee-x-artifacts-eu-pilot)){
-      mkdir "apigee-x-artifacts-eu-pilot"
-      cd apigee-x-artifacts-eu-pilot
-      Write-Host "inside 1st if"
-}
-else {
-      cd apigee-x-artifacts-eu-pilot
-      Write-Host "1st else"
-}
-
-# create apigee artifacts non prod folder
 if(!(test-path -PathType container FL-artifacts-nonprod)){
       mkdir "FL-artifacts-nonprod"
       cd FL-artifacts-nonprod
@@ -287,313 +276,215 @@ else {
     else {
         cd apps
     }
-     $baseURL = "https://apigee.googleapis.com/v1/organizations/"
-     $org = "esi-apigee-x-394004"
+
+    $Apps = $baseURL+$org+"/apps?expand=true"
+    $Appdetails = Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
+    $baseURL = "https://apigee.googleapis.com/v1/organizations/"
+    $org = "esi-apigee-x-394004"
       
-     # API endpoint to get the list of apps
-     $AppsEndpoint = "${baseURL}${org}/apps?expand=true"
+    # API endpoint to get the list of apps
+    $AppsEndpoint = "${baseURL}${org}/apps?expand=true"
       
-     # Make the API call to get the list of apps
-     try {
-         $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -TimeoutSec 60
-      
-         # Loop through the list of apps
-         foreach ($app in $AppList.app) {  # Access the 'app' property
-             if ($app.name) {
-                 Write-Host "Entered into FOREACH: $($app.name)"
-      
-                 if(!(test-path -PathType container ($app.name)))
-                 {
-                     mkdir "($app.name)"
-                     cd ($app.name)
-                 }
-                 else {
-                     cd ($app.name)
-                 }
-                 cd ..
-             }
-             cd ..
-         }
-     }
-     catch {
-         Write-Host "Error: $($_.Exception.Message)"
-     }
-     cd ..
-     Invoke-RestMethod -Uri $AppsEndpoint -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
+	  # Make the API call to get the list of apps
+	  try {
+	     $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -TimeoutSec 60
+	  
+	     # Loop through the list of apps
+	     foreach ($app in $AppList.app) {  # Access the 'app' property
+	         if ($app.name) {
+	             Write-Host "Entered into FOREACH: $($app.name)"
+	  
+	             if(!(test-path -PathType container ($app.name)))
+	             {
+	                 mkdir "($app.name)"
+	                 cd ($app.name)
+	             }
+	             else {
+	                 cd ($app.name)
+	             }
+	             cd ..
+	         }
+	         cd ..
+	     }
+	  }
+	  catch {
+	     Write-Host "Error: $($_.Exception.Message)"
+	  }
+    cd ..
+
+    Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
+
+# ------------------------------master-deployments-proxies----------------------------
+    $masterDeploymentPath = $baseURL+$org+"/deployments"
+    $masterDeployments = Invoke-RestMethod -Uri $masterDeploymentPath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-master-proxy-deployments.json"
+
+# -----------------------------Environments Start-------------------------------------
+    if(!(test-path -PathType container environments)){
+        mkdir "environments"
+        cd environments
+    }
+    else {
+        cd environments
+    }
+
+    $envpath = $baseURL+$org+"/environments"
+    Invoke-RestMethod -Uri $envpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60  -OutFile "$org-env.json"
+    $environments = Invoke-RestMethod -Uri $envpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
     
-      
-      
-      
+    #iterate for each environment
+    foreach ($env in $($environments)) {
 
+        if(!(test-path -PathType container $($env))){
+            mkdir "$($env)"
+            cd $($env)
+        }
+        else {
+            cd $($env)
+        }
 
-# # ------------------------------master-deployments-proxies----------------------------
-#     $masterDeploymentPath = $baseURL+$org+"/deployments"
-#     $masterDeployments = Invoke-RestMethod -Uri $masterDeploymentPath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-master-proxy-deployments.json"
+        # -----------------------------Environments - KVMs -------------------------------------
+        if(!(test-path -PathType container env-kvms)){
+            mkdir "env-kvms"
+            cd env-kvms
+        }
+        else {
+            cd env-kvms
+        }
 
-# # -----------------------------Environments Start-------------------------------------
-#     if(!(test-path -PathType container environments)){
-#         mkdir "environments"
-#         cd environments
-#     }
-#     else {
-#         cd environments
-#     }
+        $kvmpathenv = $baseURL+$org+"/environments/"+$($env)+"/keyvaluemaps"
+        Invoke-RestMethod -Uri $kvmpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-kvms.json"
+        $envkvms = Invoke-RestMethod -Uri $kvmpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
 
-#     $envpath = $baseURL+$org+"/environments"
-#     Invoke-RestMethod -Uri $envpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60  -OutFile "$org-env.json"
-#     $environments = Invoke-RestMethod -Uri $envpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
-    
-#     #iterate for each environment
-#     foreach ($env in $($environments)) {
+        foreach ($envkvm in $($envkvms)) {
+            if(!(test-path -PathType container $($envkvm))){
+                mkdir "$($envkvm)"
+                cd $($envkvm)
+            }
+            else {
+                cd $($envkvm)
+            }
 
-#         if(!(test-path -PathType container $($env))){
-#             mkdir "$($env)"
-#             cd $($env)
-#         }
-#         else {
-#             cd $($env)
-#         }
-
-#         # -----------------------------Environments - KVMs -------------------------------------
-#         if(!(test-path -PathType container env-kvms)){
-#             mkdir "env-kvms"
-#             cd env-kvms
-#         }
-#         else {
-#             cd env-kvms
-#         }
-
-#         $kvmpathenv = $baseURL+$org+"/environments/"+$($env)+"/keyvaluemaps"
-#         Invoke-RestMethod -Uri $kvmpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-kvms.json"
-#         $envkvms = Invoke-RestMethod -Uri $kvmpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
-
-#         foreach ($envkvm in $($envkvms)) {
-#             if(!(test-path -PathType container $($envkvm))){
-#                 mkdir "$($envkvm)"
-#                 cd $($envkvm)
-#             }
-#             else {
-#                 cd $($envkvm)
-#             }
-
-#             # $kvmpathenv2 = $kvmpathenv+"/"+$($envkvm)+"/entries"
-#             # $envkvm = Invoke-RestMethod -Uri $kvmpath2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-($($envkvm)).json"
-#             # cd ..
-#             # $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-#             # $headers.Add("Authorization", "Bearer ya29.a0AfB_byCYq525bBvRLE3tibD4O1dOvozhbOrpAbNpIqXtsfkBvD-x8VFNszZKC5vj7mm0h-RypwdqL5H7_iukKjIn4BUxhYwUbPaTEdaZLFlFpu7hs_PwshYQuP1QisNg3bz2lbFTftNHMlS6fOh4oXEYVMoU9-s7htHCCvWqgeYaCgYKAcgSARESFQHsvYlsRs-EXW1LLkfCbK-OgQ9KYg0178")
+            # $kvmpathenv2 = $kvmpathenv+"/"+$($envkvm)+"/entries"
+            # $envkvm = Invoke-RestMethod -Uri $kvmpath2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-($($envkvm)).json"
+            # cd ..
+            # $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
+            # $headers.Add("Authorization", "Bearer ya29.a0AfB_byCYq525bBvRLE3tibD4O1dOvozhbOrpAbNpIqXtsfkBvD-x8VFNszZKC5vj7mm0h-RypwdqL5H7_iukKjIn4BUxhYwUbPaTEdaZLFlFpu7hs_PwshYQuP1QisNg3bz2lbFTftNHMlS6fOh4oXEYVMoU9-s7htHCCvWqgeYaCgYKAcgSARESFQHsvYlsRs-EXW1LLkfCbK-OgQ9KYg0178")
             
-#             # $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$envkvm+"/entries"
+            $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/"+$envkvm+"/entries"
 
-#             # $response = Invoke-RestMethod $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
-#             # $response | ConvertTo-Json
-#             # Write-Host "KVM Data: $response"
+            $response = Invoke-RestMethod $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-($($envkvm)).json"
+            $response | ConvertTo-Json
+            cd ..
+        }
+        cd ..
 
-#             # Define a function to encrypt fields
-#             function Encrypt-Fields {
-#                 param (
-#                     [System.Object]$data,
-#                     [System.String[]]$fieldsToEncrypt,
-#                     [System.Security.Cryptography.AesCryptoServiceProvider]$AES
-#                 )
-            
-#                 foreach ($field in $fieldsToEncrypt) {
-#                     if ($data.$field -ne $null) {
-#                         $dataValue = $data.$field
-            
-#                         $dataBytes = [System.Text.Encoding]::UTF8.GetBytes($dataValue)
-            
-#                         $AES.GenerateIV()
-#                         $IVBase64 = [System.Convert]::ToBase64String($AES.IV)
-            
-#                         $encryptor = $AES.CreateEncryptor()
-#                         $encryptedBytes = $encryptor.TransformFinalBlock($dataBytes, 0, $dataBytes.Length)
-#                         $encryptedBase64 = [System.Convert]::ToBase64String($encryptedBytes)
-            
-#                         $data.$field = @{
-#                             "EncryptedValue" = $encryptedBase64
-#                             "IV" = $IVBase64
-#                         }
-#                     }
-#                 }
-            
-#                 return $data
-#             }
-            
-#             try {
-#                 $git_token = $env:TOKEN
-            
-#                 # Make the API request to get KVM data
-#                 $headers = @{
-#                     "Authorization" = "Bearer $token"
-#                 }
-            
-#                 $kvmpthtestpath = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/keyvaluemaps/$($envkvm)/entries"
-            
-#                 $response = Invoke-RestMethod -Uri $kvmpthtestpath -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
+        # -------------------------------Environments - Targetservers-----------------------------
+        if(!(test-path -PathType container env-Targetservers)){
+            mkdir "env-Targetservers"
+            cd env-Targetservers
+        }
+        else {
+            cd env-Targetservers
+        }
 
-#                 $itterateobject = $env:FIRST_LEVEL_OBJECT
-            
-#                 # Check if the response contains data
-#                 if ($response -and $response.$itterateobject) {
-#                     Write-Host "Entered into IF...!"
-#                     Write-Host "KVM Data: $($response | ConvertTo-Json)"
-                    
-#                     # Decryption key
-#                     $keyHex = $env:key
-                    
-#                     # Specify the fields you want to encrypt
-#                     Write-Host "Values: $env:FieldValuestoEncrypt"
-#                     $fieldsToEncrypt = $env:FieldValuestoEncrypt -split ","
-#                     Write-Host "fieldsToEncrypt: $fieldsToEncrypt"
-                    
-#                     # Create an AES object for encryption
-#                     $AES = New-Object System.Security.Cryptography.AesCryptoServiceProvider
-#                     $AES.KeySize = 256
-#                     $AES.Key = [System.Text.Encoding]::UTF8.GetBytes($keyHex.PadRight(32))
-#                     $AES.Mode = [System.Security.Cryptography.CipherMode]::CBC
-            
-#                     Write-Host "Trying to enter into FOREACH...!"
-            
-#                     # Loop through the JSON data and encrypt specified fields
-#                     foreach ($entry in $response.$itterateobject) {
-#                         Write-Host "Entered into FOREACH...!"
-#                         # Call the Encrypt-Fields function to encrypt the specified fields
-#                         $entry = Encrypt-Fields -data $entry -fieldsToEncrypt $fieldsToEncrypt -AES $AES
-#                     }
-                    
-#                     # Convert the JSON data back to a string
-#                     $encryptedJsonData = $response | ConvertTo-Json -Depth 10
-                    
-#                     Write-Host "Encrypted data: $encryptedJsonData"
-                    
-#                     # Define the output file name based on environment variables
-#                     $fileName = "$($org)-$($envkvm).json"
-                    
-#                     # Save the encrypted data to the file
-#                     $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
-                    
-#                     Write-Host "Encrypted data saved to $fileName"
-#                 } else {
-#                     Write-Host "No data found in the response."
-#                 }
-#             }
-#             catch {
-#                 Write-Host "An error occurred: $_"
-#             }
+        $targetserverpathenv = $baseURL+$org+"/environments/"+$($env)+"/targetservers"
+        Invoke-RestMethod -Uri $targetserverpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-targetservers.json"
+        $envtargetserver = Invoke-RestMethod -Uri $targetserverpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
 
-            
-#             cd ..
-#         }
-#         cd ..
+        Write-Host $envtargetserver
 
-#         # -------------------------------Environments - Targetservers-----------------------------
-#         if(!(test-path -PathType container env-Targetservers)){
-#             mkdir "env-Targetservers"
-#             cd env-Targetservers
-#         }
-#         else {
-#             cd env-Targetservers
-#         }
+        foreach ($value in $($envtargetserver)) {
+            if(!(test-path -PathType container $($value))){
+                mkdir "$($value)"
+                cd $($value)
+            }
+            else {
+                cd $($value)
+            }
 
-#         $targetserverpathenv = $baseURL+$org+"/environments/"+$($env)+"/targetservers"
-#         Invoke-RestMethod -Uri $targetserverpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-targetservers.json"
-#         $envtargetserver = Invoke-RestMethod -Uri $targetserverpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
+            $targetserverpathenv2 = $targetserverpathenv+"/"+$value
+            $envtargetserver = Invoke-RestMethod -Uri $targetserverpathenv2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-($value).json"
+            cd ..
+        }
+        cd ..
 
-#         Write-Host $envtargetserver
+        # --------------------------------Environment - Proxies--------------------------------------
+        if(!(test-path -PathType container proxies)){
+            mkdir "proxies"
+            cd proxies
+        }
+        else {
+            cd proxies
+        }
 
-#         foreach ($value in $($envtargetserver)) {
-#             if(!(test-path -PathType container $($value))){
-#                 mkdir "$($value)"
-#                 cd $($value)
-#             }
-#             else {
-#                 cd $($value)
-#             }
-
-#             $targetserverpathenv2 = $targetserverpathenv+"/"+$value
-#             $envtargetserver = Invoke-RestMethod -Uri $targetserverpathenv2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-($value).json"
-#             cd ..
-#         }
-#         cd ..
-
-#         # --------------------------------Environment - Proxies--------------------------------------
-#         if(!(test-path -PathType container proxies)){
-#             mkdir "proxies"
-#             cd proxies
-#         }
-#         else {
-#             cd proxies
-#         }
-
-#         $proxypathenv = $baseURL+$org+"/environments/"+$($env)+"/deployments"
-#         Invoke-RestMethod -Uri $proxypathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-proxies.json"
+        $proxypathenv = $baseURL+$org+"/environments/"+$($env)+"/deployments"
+        Invoke-RestMethod -Uri $proxypathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-proxies.json"
         
-#         $proxypathenv1 = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/deployments"
-#         Invoke-RestMethod -Uri $proxypathenv -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$env-proxies.json"
+        $proxypathenv1 = "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/deployments"
+        Invoke-RestMethod -Uri $proxypathenv -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$env-proxies.json"
 
-#         # Load the JSON data from the file
-#         $jsonData = Get-Content -Path "$env-proxies.json" | ConvertFrom-Json
+        # Load the JSON data from the file
+        $jsonData = Get-Content -Path "$env-proxies.json" | ConvertFrom-Json
 
-#         # Extract the apiproxy and revision values
-#         $deployments = $jsonData.deployments
-#         foreach ($deployment in $deployments) {
-#             $apiproxy = $deployment.apiProxy
-#             $revision = $deployment.revision
-#             if(!(test-path -PathType container $($proxy.name))){
-#                 mkdir -p "$apiproxy"
-#                 cd $apiproxy
-#             }
-#             else {
-#                 cd $apiproxy
-#             }
+        # Extract the apiproxy and revision values
+        $deployments = $jsonData.deployments
+        foreach ($deployment in $deployments) {
+            $apiproxy = $deployment.apiProxy
+            $revision = $deployment.revision
+            if(!(test-path -PathType container $($proxy.name))){
+                mkdir -p "$apiproxy"
+                cd $apiproxy
+            }
+            else {
+                cd $apiproxy
+            }
 
-#             if(!(test-path -PathType container $revision)){
-#                 mkdir -p "$revision"
-#                 cd $revision
-#             }
-#             else {
-#                 cd $revision
-#             }
+            if(!(test-path -PathType container $revision)){
+                mkdir -p "$revision"
+                cd $revision
+            }
+            else {
+                cd $revision
+            }
 
-#             # Output the extracted values
-#             $path2 = $baseURL+$org+"/environments/"+$($env)+"/apis/"+$apiproxy+"/revisions/"+$revision+"/deployments"
-#             Invoke-RestMethod -Uri $path2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-proxy-$($proxy.name).json"
-#             cd ..
-#             cd ..
-#         }
+            # Output the extracted values
+            $path2 = $baseURL+$org+"/environments/"+$($env)+"/apis/"+$apiproxy+"/revisions/"+$revision+"/deployments"
+            Invoke-RestMethod -Uri $path2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-proxy-$($proxy.name).json"
+            cd ..
+            cd ..
+        }
         
-#         cd ..
+        cd ..
 
-#         # # --------------------------------Environment - SharedFlows--------------------------------------
-#         # if(!(test-path -PathType container env-sharedflows)){
-#         #     mkdir "env-sharedflows"
-#         #     cd env-sharedflows
-#         # }
-#         # else {
-#         #     cd env-sharedflows
-#         # }
+        # # --------------------------------Environment - SharedFlows--------------------------------------
+        # if(!(test-path -PathType container env-sharedflows)){
+        #     mkdir "env-sharedflows"
+        #     cd env-sharedflows
+        # }
+        # else {
+        #     cd env-sharedflows
+        # }
 
-#         # $sharedflowpathenv = $baseURL+$org+"/environments/"+$($env)+"/sharedflows"
-#         # $envsharedflow = Invoke-RestMethod -Uri $sharedflowpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-sharedflow.json"
+        # $sharedflowpathenv = $baseURL+$org+"/environments/"+$($env)+"/sharedflows"
+        # $envsharedflow = Invoke-RestMethod -Uri $sharedflowpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-sharedflow.json"
         
-#         # cd ..
+        # cd ..
 
-#         # --------------------------------Environment - Resource Files--------------------------------------
-#         # if(!(test-path -PathType container env-resourcefiles)){
-#         #     mkdir "env-resourcefiles"
-#         #     cd env-resourcefiles
-#         # }
-#         # else {
-#         #     cd env-resourcefiles
-#         # }
+        # --------------------------------Environment - Resource Files--------------------------------------
+        # if(!(test-path -PathType container env-resourcefiles)){
+        #     mkdir "env-resourcefiles"
+        #     cd env-resourcefiles
+        # }
+        # else {
+        #     cd env-resourcefiles
+        # }
 
-#         # $resourcefilespathenv = $baseURL+$org+"/environments/"+$($env)+"/resourcefiles"
-#         # $envresourcefiles = Invoke-RestMethod -Uri $envresourcefiles -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-resourcefiles.json"
+        # $resourcefilespathenv = $baseURL+$org+"/environments/"+$($env)+"/resourcefiles"
+        # $envresourcefiles = Invoke-RestMethod -Uri $envresourcefiles -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$env-resourcefiles.json"
         
-#         cd ..
-#     }
+        cd ..
+    }
     cd ..
 
 # -----------------------------Environments Closing-------------------------------------
-cd ..
 cd ..
