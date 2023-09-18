@@ -339,13 +339,14 @@ else {
 	        $appName = $app.name
 	        Write-Host "Entered into FOREACH: $appName"
 	      
-	        if (!(Test-Path -PathType Container $appName)) {
-	            New-Item -Path $appName -ItemType Directory
-	            Set-Location -Path $appName
-	        }
-	        else {
-	            Set-Location -Path $appName
-	        }
+	        if(!(test-path -PathType container ($appName)))
+		    {
+		        mkdir "$appName"
+		        cd $appName
+		    }
+		    else {
+		        cd $appName
+		    }
 		try {
 		    $token = $env:TOKEN
 		    $headers = @{Authorization = "Bearer $token"}
