@@ -300,14 +300,15 @@ else {
       
      # Loop through the list of apps
      foreach ($app in $AppList) {
+         Write-Host "entered into FOREACH: $app.name"
          # Create a folder for each app
-         if(!(test-path -PathType container $($app.name)))
+         if(!(test-path -PathType container ($app.name)))
           {
-              mkdir "$($app.name)"
-              cd $($app.name)
+              mkdir "($app.name)"
+              cd ($app.name)
           }
           else {
-              cd $($app.name)
+              cd ($app.name)
           }
          # $appFolder = Join-Path -Path $PWD -ChildPath $app.name
          # if (!(Test-Path -PathType Container $appFolder)) {
