@@ -1,0 +1,27 @@
+<APIProxy revision="2" name="sessionid-cache">
+    <DisplayName>POC_C010557_test</DisplayName>
+    <Description></Description>
+    <CreatedAt>1690887052638</CreatedAt>
+    <LastModifiedAt>1690887193685</LastModifiedAt>
+    <BasePaths>/carts_test</BasePaths>
+    <Policies>
+        <Policy>jsonpayload</Policy>
+        <Policy>Assign-Message-1</Policy>
+        <Policy>GenerateSessionId</Policy>
+        <Policy>Populate-Cache-2</Policy>
+        <Policy>Assign-Message-2</Policy>
+        <Policy>Populate-Cache-1</Policy>
+        <Policy>Lookup-Cache-1</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://jsonpayload.js</Resource>
+        <Resource>jsc://StoreInCache.js</Resource>
+        <Resource>jsc://GenerateSessionId.js</Resource>
+    </Resources>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>
