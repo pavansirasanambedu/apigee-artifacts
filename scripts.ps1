@@ -345,9 +345,6 @@ else {
 	$appfileds = $env:appfieds -split ","
 	$encryptedFields = @{}
 	
-	# Encryption key
-	$keyHex = $env:key  # Replace with your encryption key
-	
 	# Loop through the list of apps
 	foreach ($app in $AppList.app) {
 	    if ($app.name) {
@@ -380,14 +377,15 @@ else {
 	                            # Encrypt the data using the Encrypt-Data function
 	                            $encryptedData = Encrypt-Data -plaintext $plaintext -keyHex $keyHex
 	
-	                            # Store the encrypted value in the $encryptedFields dictionary
-	                            $encryptedFields[$field] = $encryptedData
+	                            # Update the JSON data with the encrypted value
+	                            $app.credentials[0].$field = $encryptedData
 	                        }
 	                    }
 	
-	                    # Display the encrypted fields
-	                    Write-Host "Encrypted Fields:"
-	                    Write-Host (ConvertTo-Json $encryptedFields -Depth 10)
+	                    # Display the modified JSON data with only encrypted values
+	                    $encryptedJsonData = $app | ConvertTo-Json -Depth 10
+	                    Write-Host "Modified JSON Data:"
+	                    Write-Host $encryptedJsonData
 	                }
 	                catch {
 	                    Write-Host "An error occurred: $_"
@@ -398,6 +396,7 @@ else {
 	        }
 	    }
 	}
+ 	cd ..
 
 	
 # ------------------------------master-deployments-proxies----------------------------
