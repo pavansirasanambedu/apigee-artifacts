@@ -281,19 +281,15 @@ else {
     Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-developers.json"
 
 # ------------------------------Apps-------------------------------------------------
-    # Check if the "apps" directory exists
-    $appsDirectory = "apps"
-    if (!(Test-Path -PathType Container $appsDirectory)) {
-        # If it doesn't exist, create the "apps" directory
-        New-Item -Path $appsDirectory -ItemType Directory
-    } else {
-        # If it already exists, you can optionally display a message
-        Write-Host "The '$appsDirectory' directory already exists."
+    if(!(test-path -PathType container apps))
+    {
+        mkdir "apps"
+        cd apps
     }
-    
-    # # Change to the "apps" directory
-    Set-Location -Path $appsDirectory
-
+    else {
+        cd apps
+    }
+	
     $Apps = $baseURL+$org+"/apps?expand=true"
     $Appdetails = Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
     $baseURL = "https://apigee.googleapis.com/v1/organizations/"
@@ -330,6 +326,8 @@ else {
 	        "IV" = $IVBase64
 	    }
 	}
+
+ 	Write-Host "Current Directory: $(Get-Location)"
 	
 	# Your API endpoint and other variables
 	$baseURL = "https://apigee.googleapis.com/v1/organizations/"
@@ -396,7 +394,6 @@ else {
 	        }
 	    }
 	}
- 	cd ..
 
 	
 # ------------------------------master-deployments-proxies----------------------------
