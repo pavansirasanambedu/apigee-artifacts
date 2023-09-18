@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Javascript name="GenerateSessionId">
-    <DisplayName>Generate Session ID Update 5</DisplayName>
-    <Properties>
-        <Property name="variable">session.id</Property>
-    </Properties>
-    <ResourceURL>jsc://GenerateSessionId.js</ResourceURL>
-</Javascript>
