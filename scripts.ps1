@@ -280,40 +280,50 @@ else {
 
 # ------------------------------Apps-------------------------------------------------
     # Check if the 'apps' directory exists, if not, create it
-      if (!(Test-Path -PathType Container apps)) {
-          mkdir "apps"
-      }
+    if(!(test-path -PathType container apps))
+    {
+        mkdir "apps"
+        cd apps
+    }
+    else {
+        cd apps
+    }
       
-      # Change directory to 'apps'
-      cd apps
+     $baseURL = "https://apigee.googleapis.com/v1/organizations/"
+     $org = "esi-apigee-x-394004"
       
-      $baseURL = "https://apigee.googleapis.com/v1/organizations/"
-      $org = "esi-apigee-x-394004"
+     # API endpoint to get the list of apps
+     $AppsEndpoint = ${baseURL}+${org}+"/apps?expand=true"
       
-      # API endpoint to get the list of apps
-      $AppsEndpoint = ${baseURL}+${org}+"/apps?expand=true"
+     # Make the API call to get the list of apps
+     $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
       
-      # Make the API call to get the list of apps
-      $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
-      
-      # Loop through the list of apps
-      foreach ($app in $AppList) {
-          # Create a folder for each app
-          $appFolder = Join-Path -Path $PWD -ChildPath $app.name
-          if (!(Test-Path -PathType Container $appFolder)) {
-              mkdir $app.name
+     # Loop through the list of apps
+     foreach ($app in $AppList) {
+         # Create a folder for each app
+         if(!(test-path -PathType container $($app.name)))
+          {
+              mkdir "$($app.name)"
+              cd $($app.name)
           }
+          else {
+              cd $($app.name)
+          }
+         # $appFolder = Join-Path -Path $PWD -ChildPath $app.name
+         # if (!(Test-Path -PathType Container $appFolder)) {
+         #     mkdir $app.name
+         # }
+     
+         # # Change directory to the app folder
+         # cd $app.name
       
-          # Change directory to the app folder
-          cd $app.name
+         # Save the details of the app to a JSON file in the app folder
+         $appDetailsFile = "${app.name}-details.json"
+         $app | ConvertTo-Json | Set-Content -Path $appDetailsFile -Encoding UTF8
       
-          # Save the details of the app to a JSON file in the app folder
-          $appDetailsFile = "${app.name}-details.json"
-          $app | ConvertTo-Json | Set-Content -Path $appDetailsFile -Encoding UTF8
-      
-          # Change directory back to 'apps' for the next iteration
-          cd ..
-      }
+         # Change directory back to 'apps' for the next iteration
+         cd ..
+     }
       
 
     Invoke-RestMethod -Uri $AppsEndpoint -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
