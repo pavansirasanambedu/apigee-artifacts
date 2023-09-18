@@ -1,0 +1,10 @@
+{
+  "name": "lr_cms_server",
+  "host": "fzwe-cusexp-li-dev-fap-07.azurewebsites.net",
+  "port": 443,
+  "isEnabled": true,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}

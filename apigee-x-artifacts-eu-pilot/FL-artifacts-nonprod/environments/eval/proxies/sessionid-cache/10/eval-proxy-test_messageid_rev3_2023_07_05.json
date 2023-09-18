@@ -1,0 +1,27 @@
+{
+  "environment": "eval",
+  "apiProxy": "sessionid-cache",
+  "revision": "10",
+  "deployStartTime": "1690957362683",
+  "state": "READY",
+  "instances": [
+    {
+      "instance": "eval-instance",
+      "deployedRevisions": [
+        {
+          "revision": "10",
+          "percentage": 100
+        }
+      ],
+      "deployedRoutes": [
+        {
+          "basepath": "/session-cache",
+          "envgroup": "eval-group",
+          "environment": "eval",
+          "percentage": 100
+        }
+      ]
+    }
+  ],
+  "proxyDeploymentType": "EXTENSIBLE"
+}

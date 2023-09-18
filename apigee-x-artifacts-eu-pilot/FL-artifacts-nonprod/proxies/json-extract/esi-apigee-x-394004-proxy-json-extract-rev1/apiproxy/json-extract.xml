@@ -1,0 +1,14 @@
+<APIProxy revision="1" name="json-extract">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1691724194110</CreatedAt>
+    <LastModifiedAt>1691724650144</LastModifiedAt>
+    <BasePaths>/json-extract</BasePaths>
+    <Policies>
+        <Policy>AM-JSON-VALUES</Policy>
+        <Policy>EV-JSON-DATA</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+</APIProxy>
