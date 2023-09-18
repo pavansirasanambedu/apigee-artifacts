@@ -282,13 +282,17 @@ else {
 
 # ------------------------------Apps-------------------------------------------------
     # Check if the "apps" directory exists
-	if (!(Test-Path -PathType Container "apps")) {
-	    # If it doesn't exist, create the "apps" directory
-	    New-Item -ItemType Directory -Name "apps"
-	}
-	
-	# Change to the "apps" directory
-	Set-Location -Path "apps"
+    $appsDirectory = "apps"
+    if (!(Test-Path -PathType Container $appsDirectory)) {
+        # If it doesn't exist, create the "apps" directory
+        New-Item -Path $appsDirectory -ItemType Directory
+    } else {
+        # If it already exists, you can optionally display a message
+        Write-Host "The '$appsDirectory' directory already exists."
+    }
+    
+    # Change to the "apps" directory
+    Set-Location -Path $appsDirectory
 
     $Apps = $baseURL+$org+"/apps?expand=true"
     $Appdetails = Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
