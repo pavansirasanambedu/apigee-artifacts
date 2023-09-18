@@ -1,0 +1,14 @@
+<SharedFlowBundle revision="3" name="SF-jwt-token">
+    <DisplayName>SF-Verify-jwt-token</DisplayName>
+    <Description></Description>
+    <CreatedAt>1690788738783</CreatedAt>
+    <LastModifiedAt>1690788738783</LastModifiedAt>
+    <Policies>
+        <Policy>PrivateKey-jwt</Policy>
+        <Policy>VerifyJWT</Policy>
+    </Policies>
+    <SharedFlows>
+        <SharedFlow>default</SharedFlow>
+    </SharedFlows>
+    <subType>SharedFlow</subType>
+</SharedFlowBundle>
