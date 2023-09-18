@@ -1,0 +1,8 @@
+{
+  "name": "api-namespace-tatro",
+  "host": "localhost3.local",
+  "port": 80,
+  "isEnabled": false,
+  "sSLInfo": {},
+  "protocol": "HTTP"
+}
