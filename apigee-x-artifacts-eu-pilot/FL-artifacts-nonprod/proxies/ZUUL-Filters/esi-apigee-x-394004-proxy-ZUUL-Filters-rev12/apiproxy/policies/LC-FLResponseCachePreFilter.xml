@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<LookupCache continueOnError="false" enabled="true" name="LC-FLResponseCachePreFilter">
+    <DisplayName>LC-FLResponseCachePreFilter</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <Prefix/>
+        <KeyFragment ref="request.queryparam.cachekey"/>
+    </CacheKey>
+    <Scope>Exclusive</Scope>
+    <AssignTo>requestContent</AssignTo>
+</LookupCache>

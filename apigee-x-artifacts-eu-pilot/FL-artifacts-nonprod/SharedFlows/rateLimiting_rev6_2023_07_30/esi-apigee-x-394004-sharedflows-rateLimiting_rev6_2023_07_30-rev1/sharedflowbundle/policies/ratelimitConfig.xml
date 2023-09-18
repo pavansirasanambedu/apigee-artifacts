@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<KeyValueMapOperations async="false" continueOnError="false" enabled="true" name="ratelimitConfig" mapIdentifier="client_based_rate_limit">
+    <DisplayName>ratelimitConfig</DisplayName>
+    <Properties/>
+    <ExclusiveCache>false</ExclusiveCache>
+    <ExpiryTimeInSecs>300</ExpiryTimeInSecs>
+    <Get assignTo="spikeArrestEnabled">
+        <Key>
+            <Parameter>zendesk_cc_spike_enabled</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="spikeArrestRate">
+        <Key>
+            <Parameter>zendesk_cc_spike_arrest_rate</Parameter>
+        </Key>
+    </Get>
+    <Get assignTo="spikeEffectiveCountIp">
+        <Key>
+            <Parameter>zendesk_cc_spike_effective_count_ip</Parameter>
+        </Key>
+    </Get>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <Scope>environment</Scope>
+</KeyValueMapOperations>
