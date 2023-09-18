@@ -315,13 +315,22 @@ else {
     # Invoke-RestMethod -Uri $AppsEndpoint -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
 
     # Check if the 'apps' directory exists, if not, create it
-      $appsDirectory = "apps"
-      if (-not (Test-Path -PathType Container $appsDirectory)) {
-          New-Item -Path $appsDirectory -ItemType Directory
-      }
+    if(!(test-path -PathType container apps))
+    {
+        mkdir "apps"
+        cd apps
+    }
+    else {
+        cd apps
+    }
+    
+      # $appsDirectory = "apps"
+      # if (-not (Test-Path -PathType Container $appsDirectory)) {
+      #     New-Item -Path $appsDirectory -ItemType Directory
+      # }
       
       # Change the current directory to 'apps'
-      Set-Location -Path $appsDirectory
+      # Set-Location -Path $appsDirectory
       
       $baseURL = "https://apigee.googleapis.com/v1/organizations/"
       $org = "esi-apigee-x-394004"
@@ -338,13 +347,16 @@ else {
               if ($app.name) {
                   Write-Host "Entered into FOREACH: $($app.name)"
       
-                  # Create a folder for each app
-                  $appName = $app.name
-                  if (-not (Test-Path -PathType Container $appName)) {
-                      New-Item -Path $appName -ItemType Directory
+                  if(!(test-path -PathType container ($app.name)))
+                  {
+                      mkdir "($app.name)"
+                      cd ($app.name)
                   }
-                  cd ..
+                  else {
+                      cd ($app.name)
+                  }
               }
+              cd ..
           }
       }
       catch {
