@@ -291,20 +291,20 @@ else {
 	  
 	     # Loop through the list of apps
 	     foreach ($app in $AppList.app) {  # Access the 'app' property
-				 if ($app.name) {
-				     Write-Host "Entered into FOREACH: $($app.name)"
-			  
-				     if(!(test-path -PathType container ($app.name)))
-				     {
-					 		 mkdir "($app.name)"
-							 cd ($app.name)
-							}
-				 			else {
-							 cd ($app.name)
-							}
-							cd ..
-				 }
-				 cd ..
+		 if ($app.name) {
+		     Write-Host "Entered into FOREACH: $($app.name)"
+	  
+		     if(!(test-path -PathType container ($app.name)))
+		     {
+			 mkdir "($app.name)"
+			 cd ($app.name)
+			}
+			else {
+			 cd ($app.name)
+			}
+			cd ..
+		 }
+		 cd ..
 	     }
 	  }
 	  catch {
