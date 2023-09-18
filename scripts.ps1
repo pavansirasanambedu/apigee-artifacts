@@ -279,55 +279,75 @@ else {
     Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-developers.json"
 
 # ------------------------------Apps-------------------------------------------------
-    # Check if the 'apps' directory exists, if not, create it
-    if(!(test-path -PathType container apps))
-    {
-        mkdir "apps"
-        cd apps
-    }
-    else {
-        cd apps
-    }
+    # # Check if the 'apps' directory exists, if not, create it
+    # if(!(test-path -PathType container apps))
+    # {
+    #     mkdir "apps"
+    #     cd apps
+    # }
+    # else {
+    #     cd apps
+    # }
       
-     $baseURL = "https://apigee.googleapis.com/v1/organizations/"
-     $org = "esi-apigee-x-394004"
+    #  $baseURL = "https://apigee.googleapis.com/v1/organizations/"
+    #  $org = "esi-apigee-x-394004"
       
-     # API endpoint to get the list of apps
-     $AppsEndpoint = ${baseURL}+${org}+"/apps?expand=true"
+    #  # API endpoint to get the list of apps
+    #  $AppsEndpoint = ${baseURL}+${org}+"/apps?expand=true"
       
-     # Make the API call to get the list of apps
-     $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
+    #  # Make the API call to get the list of apps
+    #  $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
       
-     # Loop through the list of apps
-     foreach ($app in $AppList) {
-         Write-Host "entered into FOREACH: $app.name"
-         # Create a folder for each app
-         if(!(test-path -PathType container ($app.name)))
-          {
-              mkdir "($app.name)"
-              cd ($app.name)
-          }
-          else {
-              cd ($app.name)
-          }
-         # $appFolder = Join-Path -Path $PWD -ChildPath $app.name
-         # if (!(Test-Path -PathType Container $appFolder)) {
-         #     mkdir $app.name
-         # }
-     
-         # # Change directory to the app folder
-         # cd $app.name
-      
-         # Save the details of the app to a JSON file in the app folder
-         $appDetailsFile = "${app.name}-details.json"
-         $app | ConvertTo-Json | Set-Content -Path $appDetailsFile -Encoding UTF8
-      
-         # Change directory back to 'apps' for the next iteration
-         cd ..
-     }
-      
+    #  # Loop through the list of apps
+    #  foreach ($app in $AppList) {
+    #      Write-Host "entered into FOREACH: $app.name"
+    #      # Create a folder for each app
+    #      if(!(test-path -PathType container ($app.name)))
+    #       {
+    #           mkdir "($app.name)"
+    #           cd ($app.name)
+    #       }
+    #       else {
+    #           cd ($app.name)
+    #       }
+    #      cd ..
+    #  }
+    # Invoke-RestMethod -Uri $AppsEndpoint -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
 
-    Invoke-RestMethod -Uri $AppsEndpoint -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
+    # Check if the 'apps' directory exists, if not, create it
+      $appsDirectory = "apps"
+      if (-not (Test-Path -PathType Container $appsDirectory)) {
+          New-Item -Path $appsDirectory -ItemType Directory
+      }
+      
+      # Change the current directory to 'apps'
+      Set-Location -Path $appsDirectory
+      
+      $baseURL = "https://apigee.googleapis.com/v1/organizations/"
+      $org = "esi-apigee-x-394004"
+      
+      # API endpoint to get the list of apps
+      $AppsEndpoint = ${baseURL}+${org}+"/apps?expand=true"
+      
+      # Make the API call to get the list of apps
+      try {
+          $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -TimeoutSec 60
+      
+          # Loop through the list of apps
+          foreach ($app in $AppList) {
+              Write-Host "entered into FOREACH: $($app.name)"
+      
+              # Create a folder for each app
+              $appName = $app.name
+              if (-not (Test-Path -PathType Container $appName)) {
+                  New-Item -Path $appName -ItemType Directory
+              }
+          }
+      }
+      catch {
+          Write-Host "Error: $($_.Exception.Message)"
+      }
+
 
 # ------------------------------master-deployments-proxies----------------------------
     $masterDeploymentPath = $baseURL+$org+"/deployments"
