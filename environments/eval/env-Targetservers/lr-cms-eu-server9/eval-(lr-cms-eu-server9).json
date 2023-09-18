@@ -1,0 +1,10 @@
+{
+  "name": "lr-cms-eu-server9",
+  "host": "fzwe-cusexp-li-dev-mae-09.azurewebsites.net",
+  "port": 443,
+  "isEnabled": true,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}

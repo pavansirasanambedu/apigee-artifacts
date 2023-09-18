@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AccessEntity continueOnError="false" enabled="true" name="AE-GetDeveloperProfileEmail">
+    <DisplayName>AE-GetDeveloperProfileEmail</DisplayName>
+    <Properties/>
+    <!-- We tell the policy to use the API key (presented as header parameter) to identify the developer. -->
+    <EntityIdentifier ref="request.header.apikey" type="consumerkey"/>
+    <!-- This is the type entity whose profile we need to pull from the Apigee datastore. -->
+    <EntityType value="developer"/>
+</AccessEntity>

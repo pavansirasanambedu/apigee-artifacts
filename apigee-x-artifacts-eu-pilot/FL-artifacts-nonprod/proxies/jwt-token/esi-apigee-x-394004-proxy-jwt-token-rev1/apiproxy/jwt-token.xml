@@ -1,0 +1,18 @@
+<APIProxy revision="1" name="jwt-token">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1690466525238</CreatedAt>
+    <LastModifiedAt>1690467058626</LastModifiedAt>
+    <BasePaths>/v1/login</BasePaths>
+    <Policies>
+        <Policy>GJWT-GenerateJWT</Policy>
+        <Policy>AM-PrivateKey</Policy>
+        <Policy>AM-JWTVariable</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

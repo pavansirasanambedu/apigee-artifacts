@@ -1,0 +1,25 @@
+{
+  "keyValueEntries": [
+    {
+      "name": {
+        "EncryptedValue": "9W2SgD4ekZduHY6e7iPgQA==",
+        "IV": "qg7I+29KPk3WIvFHKklF/Q=="
+      },
+      "value": {
+        "EncryptedValue": "MWQ1fbrMrr8nbd+Slt56IQ==",
+        "IV": "ivtm0e+Vpw8vpNzRji5r9Q=="
+      }
+    },
+    {
+      "name": {
+        "EncryptedValue": "pAr4e/ou77T0lRGTz3DjeA==",
+        "IV": "oxNspeT+0l7iPibxqBzjMQ=="
+      },
+      "value": {
+        "EncryptedValue": "uW03BaOLX0pka4JfKZV+Fw==",
+        "IV": "RoeaCGFpX6QYz90zlbhDCw=="
+      }
+    }
+  ],
+  "nextPageToken": ""
+}
