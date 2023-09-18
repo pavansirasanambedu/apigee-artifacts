@@ -1,0 +1,27 @@
+{
+  "environment": "eval",
+  "apiProxy": "test-apikey",
+  "revision": "5",
+  "deployStartTime": "1693999562529",
+  "state": "READY",
+  "instances": [
+    {
+      "instance": "eval-instance",
+      "deployedRevisions": [
+        {
+          "revision": "5",
+          "percentage": 100
+        }
+      ],
+      "deployedRoutes": [
+        {
+          "basepath": "/v1/test-apikey",
+          "envgroup": "eval-group",
+          "environment": "eval",
+          "percentage": 100
+        }
+      ]
+    }
+  ],
+  "proxyDeploymentType": "EXTENSIBLE"
+}
