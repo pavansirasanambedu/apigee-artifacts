@@ -2,7 +2,7 @@
   "app": [
     {
       "appId": "562d95e2-9336-4bab-9c45-89bdd87fd5e5",
-      "callbackUrl": "http://weatherapp.com",
+      "callbackUrl": "https://new-callback-url.com",
       "createdAt": "1694757751084",
       "credentials": [
         {
@@ -27,7 +27,7 @@
         }
       ],
       "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
-      "lastModifiedAt": "1695024672383",
+      "lastModifiedAt": "1695031978921",
       "name": "test-app",
       "status": "approved"
     }
