@@ -1,0 +1,67 @@
+{
+  "deployments": [
+    {
+      "environment": "eval",
+      "apiProxy": "jwt-token",
+      "revision": "1",
+      "deployStartTime": "1690467064453",
+      "proxyDeploymentType": "EXTENSIBLE"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "sessionid-cache",
+      "revision": "10",
+      "deployStartTime": "1690957362683",
+      "proxyDeploymentType": "EXTENSIBLE"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "ZUUL-Filters",
+      "revision": "11",
+      "deployStartTime": "1691069217425",
+      "proxyDeploymentType": "EXTENSIBLE"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "ResponseCachePreFilter",
+      "revision": "3",
+      "deployStartTime": "1691090069558",
+      "proxyDeploymentType": "EXTENSIBLE"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "json-extract",
+      "revision": "2",
+      "deployStartTime": "1691725364758",
+      "proxyDeploymentType": "EXTENSIBLE"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "test-world",
+      "revision": "1",
+      "deployStartTime": "1692985643433",
+      "proxyDeploymentType": "STANDARD"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "apigee-kVM",
+      "revision": "2",
+      "deployStartTime": "1693474885014",
+      "proxyDeploymentType": "EXTENSIBLE"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "test-apikey",
+      "revision": "5",
+      "deployStartTime": "1693999562529",
+      "proxyDeploymentType": "EXTENSIBLE"
+    },
+    {
+      "environment": "eval",
+      "apiProxy": "apigee-cicd",
+      "revision": "2",
+      "deployStartTime": "1694176458804",
+      "proxyDeploymentType": "EXTENSIBLE"
+    }
+  ]
+}
