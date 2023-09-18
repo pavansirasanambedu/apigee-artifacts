@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<SpikeArrest async="false" continueOnError="false" enabled="true" name="spikeEffectiveTrue">
-    <DisplayName>spikeEffectiveTrue</DisplayName>
-    <Properties/>
-    <Rate ref="SpikeArrestRate"/>
-    <UseEffectiveCount>true</UseEffectiveCount>
-</SpikeArrest>
