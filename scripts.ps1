@@ -385,7 +385,7 @@ else {
 	                    Write-Host "Modified JSON Data:"
 	                    Write-Host $encryptedJsonData
 		     			# Define the output file name based on environment variables
-                    	$fileName = ""$org-encrypt_apps_data.json""
+                    	$fileName = ""$org-encrypt-apps-data.json""
                     
 	                    # Save the encrypted data to the file
 	                    $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
