@@ -329,7 +329,7 @@ else {
 	    }
 	}
  	# API endpoint to get the list of apps
-    	$AppsEndpoint = "${baseURL}${org}/apps?expand=true"
+    $AppsEndpoint = "${baseURL}${org}/apps?expand=true"
 
   	$AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -TimeoutSec 60
   
@@ -338,62 +338,69 @@ else {
 	    if ($app.name) {
 	        $appName = $app.name
 	        Write-Host "Entered into FOREACH: $appName"
-	      
-	        if (!(Test-Path -PathType Container $($appName))) {
-	            New-Item -Path . -Name $($appName) -ItemType Directory
-	            Set-Location -Path $($appName)
-	        }
-	        else {
-	            Set-Location -Path $($appName)
-	     	}
+	      foreach ($app in $AppList.app) {
+		    if ($app.name) {
+		        $appName = $app.name
+		        Write-Host "Entered into FOREACH: $appName"
+		        Write-Host "Current Directory: $(Get-Location)"
+		   
+		        if (!(Test-Path -PathType Container $appName)) {
+		            New-Item -Path . -Name $appName -ItemType Directory
+		            Set-Location -Path $appName
+		            Write-Host "Directory created: $appName"
+		        }
+		        else {
+		            Set-Location -Path $appName
+		            Write-Host "Directory already exists: $appName"
+		        }
         
-		try {
-		    $token = $env:TOKEN
-		    $headers = @{Authorization = "Bearer $token"}
-		
-		    # Make the API call to get the data
-		    # $appdetailget = Invoke-RestMethod -Uri "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/developers/check.developer@gmail.com/apps/test-app" -Method 'GET' -Headers $headers
-		
-		    # Specify the fields you want to encrypt
-		    $appfileds = $env:appfieds -split ","
-		    
-		    # Encryption key
-		    $keyHex = $env:key  # Replace with your encryption key
-		
-		    # Loop through the specified fields and encrypt their values
-		    foreach ($field in $appfileds) {
-		
-			# Check if the credentials array exists and has at least one item
-			if ($($AppList.app).credentials.Count -gt 0) {
-		
-			    # Access the value of the current field
-			    $plaintext = ($AppList.app).credentials[0].$field
-		
-			    # Encrypt the data using the Encrypt-Data function
-			    $encryptedData = Encrypt-Data -plaintext $plaintext -keyHex $keyHex
-		
-			    # Store the encrypted value back in the JSON data
-			    ($AppList.app).credentials[0].$field = $encryptedData
-			}
-		    }
-		
-		    # Convert the modified JSON data back to JSON format with a higher depth value
-		    $encryptedJsonData = ($AppList.app) | ConvertTo-Json -Depth 10
-		
-		    # Display the modified JSON data
-		    Write-Host $encryptedJsonData
-		}
-		catch {
-		    Write-Host "An error occurred: $_"
-		}
-  		cd ..
-		}
-  		cd ..
-		}
-  	}
-   	catch {
-    		Write-Host "Error: $($_.Exception.Message)"
-      }
+				try {
+				    $token = $env:TOKEN
+				    $headers = @{Authorization = "Bearer $token"}
+				
+				    # Make the API call to get the data
+				    # $appdetailget = Invoke-RestMethod -Uri "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/developers/check.developer@gmail.com/apps/test-app" -Method 'GET' -Headers $headers
+				
+				    # Specify the fields you want to encrypt
+				    $appfileds = $env:appfieds -split ","
+				    
+				    # Encryption key
+				    $keyHex = $env:key  # Replace with your encryption key
+				
+				    # Loop through the specified fields and encrypt their values
+				    foreach ($field in $appfileds) {
+				
+					# Check if the credentials array exists and has at least one item
+					if ($($AppList.app).credentials.Count -gt 0) {
+				
+					    # Access the value of the current field
+					    $plaintext = ($AppList.app).credentials[0].$field
+				
+					    # Encrypt the data using the Encrypt-Data function
+					    $encryptedData = Encrypt-Data -plaintext $plaintext -keyHex $keyHex
+				
+					    # Store the encrypted value back in the JSON data
+					    ($AppList.app).credentials[0].$field = $encryptedData
+					}
+				    }
+				
+				    # Convert the modified JSON data back to JSON format with a higher depth value
+				    $encryptedJsonData = ($AppList.app) | ConvertTo-Json -Depth 10
+				
+				    # Display the modified JSON data
+				    Write-Host $encryptedJsonData
+				}
+				catch {
+				    Write-Host "An error occurred: $_"
+				}
+		  		cd ..
+				}
+		  		cd ..
+				}
+			  	}
+			   	catch {
+			    		Write-Host "Error: $($_.Exception.Message)"
+			      }
 
 	
 	
