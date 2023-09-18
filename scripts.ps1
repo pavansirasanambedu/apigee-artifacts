@@ -393,7 +393,6 @@ else {
 		}
 		cd ..
 	    }
-     	cd ..
 	}
 	
  	Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
