@@ -18,6 +18,17 @@ $headers = @{Authorization = "Bearer $token"}
 # }
 
 # create apigee artifacts non prod folder
+if(!(test-path -PathType container apigee-x-artifacts-eu-pilot)){
+      mkdir "apigee-x-artifacts-eu-pilot"
+      cd apigee-x-artifacts-eu-pilot
+      Write-Host "inside 1st if"
+}
+else {
+      cd apigee-x-artifacts-eu-pilot
+      Write-Host "1st else"
+}
+
+# create apigee artifacts non prod folder
 if(!(test-path -PathType container FL-artifacts-nonprod)){
       mkdir "FL-artifacts-nonprod"
       cd FL-artifacts-nonprod
@@ -456,4 +467,5 @@ else {
     cd ..
 
 # -----------------------------Environments Closing-------------------------------------
+cd ..
 cd ..
