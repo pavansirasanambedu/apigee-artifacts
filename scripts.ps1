@@ -327,26 +327,30 @@ else {
       $org = "esi-apigee-x-394004"
       
       # API endpoint to get the list of apps
-      $AppsEndpoint = ${baseURL}+${org}+"/apps?expand=true"
+      $AppsEndpoint = "${baseURL}${org}/apps?expand=true"
       
       # Make the API call to get the list of apps
       try {
           $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -TimeoutSec 60
       
           # Loop through the list of apps
-          foreach ($app in $AppList) {
-              Write-Host "entered into FOREACH: $($app.name)"
+          foreach ($app in $AppList.app) {  # Access the 'app' property
+              if ($app.name) {
+                  Write-Host "Entered into FOREACH: $($app.name)"
       
-              # Create a folder for each app
-              $appName = $app.name
-              if (-not (Test-Path -PathType Container $appName)) {
-                  New-Item -Path $appName -ItemType Directory
+                  # Create a folder for each app
+                  $appName = $app.name
+                  if (-not (Test-Path -PathType Container $appName)) {
+                      New-Item -Path $appName -ItemType Directory
+                  }
+                  cd ..
               }
           }
       }
       catch {
           Write-Host "Error: $($_.Exception.Message)"
       }
+      cd ..
 
 
 # ------------------------------master-deployments-proxies----------------------------
