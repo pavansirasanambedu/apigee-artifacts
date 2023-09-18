@@ -1,0 +1,10 @@
+{
+  "name": "GitCICDShow1",
+  "host": "httpbin.org",
+  "port": 443,
+  "isEnabled": false,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}
