@@ -281,14 +281,14 @@ else {
     Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-developers.json"
 
 # ------------------------------Apps-------------------------------------------------
-    if(!(test-path -PathType container apps))
-    {
-        mkdir "apps"
-        cd apps
-    }
-    else {
-        cd apps
-    }
+    # Check if the "apps" directory exists
+	if (!(Test-Path -PathType Container "apps")) {
+	    # If it doesn't exist, create the "apps" directory
+	    New-Item -ItemType Directory -Name "apps"
+	}
+	
+	# Change to the "apps" directory
+	Set-Location -Path "apps"
 
     $Apps = $baseURL+$org+"/apps?expand=true"
     $Appdetails = Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
