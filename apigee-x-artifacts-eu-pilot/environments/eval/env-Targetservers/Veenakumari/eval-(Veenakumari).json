@@ -1,0 +1,7 @@
+{
+  "name": "Veenakumari",
+  "host": "httpbin.org",
+  "port": 8080,
+  "isEnabled": true,
+  "protocol": "HTTP"
+}
