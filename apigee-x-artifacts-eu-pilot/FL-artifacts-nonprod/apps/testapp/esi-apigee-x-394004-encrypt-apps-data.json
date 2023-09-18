@@ -1,0 +1,35 @@
+{
+  "appId": "58fc9308-1d22-4d35-832e-d139c394dbc8",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "testapp"
+    }
+  ],
+  "createdAt": "1695035733622",
+  "credentials": [
+    {
+      "apiProducts": [
+        {
+          "apiproduct": "testapikey",
+          "status": "approved"
+        }
+      ],
+      "consumerKey": {
+        "IV": "tNmpVm9JYOqFy27hYHslJA==",
+        "EncryptedValue": "DabXe0LRWyfDUOyXwPf+3Fp1JGiqmxnc9BtmvWmNPfbVfwv2DfqeNn5zcUxUiNEy8Yt64KerlF7t4xp5QEyWTw=="
+      },
+      "consumerSecret": {
+        "IV": "Pu5Mog0L9eUEeKixNHCdsA==",
+        "EncryptedValue": "KTLEKWAs42WOzZ1LIOgqPQUmS7AMc1cA2in6sWO6ZDz0OeVLi6U736ke/Gd5zhWi16El40Q7IiTzJHTgTulC/MhVyj8ynZMiyTMU+vcFUlk="
+      },
+      "expiresAt": "-1",
+      "issuedAt": "1695035733652",
+      "status": "approved"
+    }
+  ],
+  "developerId": "834eb901-8c26-42e1-8799-c8d83a53e90d",
+  "lastModifiedAt": "1695035733622",
+  "name": "testapp",
+  "status": "approved"
+}
