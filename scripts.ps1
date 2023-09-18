@@ -346,61 +346,56 @@ else {
 	# Loop through the list of apps
 	foreach ($app in $AppList.app) {
 	    if ($app.name) {
-	        $appName = $app.name
-	        Write-Host "Entered into FOREACH: $appName"
-	        foreach ($app in $AppList.app) {
-	            if ($app.name) {
-	                $appName = $app.name
-	                Write-Host "Entered into FOREACH: $appName"
-	                Write-Host "Current Directory: $(Get-Location)"
-	
-	                if (!(Test-Path -PathType Container $appName)) {
-	                    New-Item -Path . -Name $appName -ItemType Directory
-	                    cd $appName
-	                    Write-Host "Directory created: $appName"
-	                }
-	                else {
-	                    cd $appName
-	                    Write-Host "Directory already exists: $appName"
-	                }
-	
-	                try {
-	                    # Loop through the specified fields and encrypt their values
-	                    foreach ($field in $appfileds) {
-	                        # Check if the credentials array exists and has at least one item
-	                        if ($($app).credentials.Count -gt 0) {
-	                            # Access the value of the current field
-	                            $plaintext = $($app).credentials[0].$field
-	
-	                            # Encrypt the data using the Encrypt-Data function
-	                            $encryptedData = Encrypt-Data -plaintext $plaintext -keyHex $keyHex
-	
-	                            # Update the JSON data with the encrypted value
-	                            $app.credentials[0].$field = $encryptedData
-	                        }
-	                    }
-	
-	                    # Display the modified JSON data with only encrypted values
-	                    $encryptedJsonData = $app | ConvertTo-Json -Depth 10
-	                    Write-Host "Modified JSON Data:"
-	                    Write-Host $encryptedJsonData
-		     			# Define the output file name based on environment variables
-                    	$fileName = "$org-encrypt-apps-data.json"
-                    
-	                    # Save the encrypted data to the file
-	                    $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
-	                    
-	                    Write-Host "Encrypted data saved to $fileName"
-	                }
-	                catch {
-	                    Write-Host "An error occurred: $_"
-	                }
-	                cd ..
-	            }
-	        }
+		$appName = $app.name
+		Write-Host "Entered into FOREACH: $appName"
+		Write-Host "Current Directory: $(Get-Location)"
+
+		if (!(Test-Path -PathType Container $appName)) {
+		    New-Item -Path . -Name $appName -ItemType Directory
+		    cd $appName
+		    Write-Host "Directory created: $appName"
+		}
+		else {
+		    cd $appName
+		    Write-Host "Directory already exists: $appName"
+		}
+
+		try {
+		    # Loop through the specified fields and encrypt their values
+		    foreach ($field in $appfileds) {
+			# Check if the credentials array exists and has at least one item
+			if ($($app).credentials.Count -gt 0) {
+			    # Access the value of the current field
+			    $plaintext = $($app).credentials[0].$field
+
+			    # Encrypt the data using the Encrypt-Data function
+			    $encryptedData = Encrypt-Data -plaintext $plaintext -keyHex $keyHex
+
+			    # Update the JSON data with the encrypted value
+			    $app.credentials[0].$field = $encryptedData
+			}
+		    }
+
+		    # Display the modified JSON data with only encrypted values
+		    $encryptedJsonData = $app | ConvertTo-Json -Depth 10
+		    Write-Host "Modified JSON Data:"
+		    Write-Host $encryptedJsonData
+				# Define the output file name based on environment variables
+		$fileName = "$org-encrypt-apps-data.json"
+	    
+		    # Save the encrypted data to the file
+		    $encryptedJsonData | Out-File -FilePath $fileName -Encoding UTF8
+		    
+		    Write-Host "Encrypted data saved to $fileName"
+		}
+		catch {
+		    Write-Host "An error occurred: $_"
+		}
+		cd ..
 	    }
      	cd ..
 	}
+	cd ..
  	Invoke-RestMethod -Uri $Apps -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
 
 	
