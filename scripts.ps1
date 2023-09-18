@@ -342,13 +342,13 @@ else {
 			    $appdetailget = Invoke-RestMethod -Uri "https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/developers/check.developer@gmail.com/apps/test-app" -Method 'GET' -Headers $headers
 			
 			    # Specify the fields you want to encrypt
-			    $fieldsToEncrypt = $env:fieldsToEncrypt -split ","
+			    $appfileds = $env:appfieds -split ","
 			    
 			    # Encryption key
 			    $keyHex = $env:key  # Replace with your encryption key
 			
 			    # Loop through the specified fields and encrypt their values
-			    foreach ($field in $fieldsToEncrypt) {
+			    foreach ($field in $appfileds) {
 			
 				# Check if the credentials array exists and has at least one item
 				if ($appdetailget.credentials.Count -gt 0) {
