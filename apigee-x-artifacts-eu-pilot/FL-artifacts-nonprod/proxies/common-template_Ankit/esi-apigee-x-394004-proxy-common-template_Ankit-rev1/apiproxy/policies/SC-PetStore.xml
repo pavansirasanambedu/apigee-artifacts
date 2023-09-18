@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout continueOnError="false" enabled="true" name="SC-PetStore">
+    <DisplayName>SC-PetStore</DisplayName>
+    <Request>
+        <Set>
+            <Headers>
+                <Header name="Accept">application/json</Header>
+            </Headers>
+            <Verb>GET</Verb>
+            <Payload/>
+        </Set>
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>PetStoreResponse</Response>
+    <Timeout>30000</Timeout>
+    <HTTPTargetConnection>
+        <URL>https://petstore3.swagger.io/api/v3/pet/findByStatus?status=sold</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
