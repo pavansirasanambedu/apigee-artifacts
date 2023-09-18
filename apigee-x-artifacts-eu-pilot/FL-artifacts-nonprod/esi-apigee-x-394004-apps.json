@@ -1,0 +1,69 @@
+{
+  "app": [
+    {
+      "appId": "d08fc10e-2898-40bc-8eea-f375023181a9",
+      "attributes": [
+        {
+          "name": "DisplayName",
+          "value": "git-app"
+        }
+      ],
+      "createdAt": "1695011951371",
+      "credentials": [
+        {
+          "apiProducts": [
+            {
+              "apiproduct": "testapikey",
+              "status": "approved"
+            }
+          ],
+          "consumerKey": "XTBKTzGyzrAZNOTbFHaUs6yZDbL7IjpCL9NfPQky1FmvkMpt",
+          "consumerSecret": "4Zn43YYs2dIgyL2yWLFUoa4KOx7AawS44WdCMEDn2upSpA6ZF5sZJmP7LpvxDy9N",
+          "expiresAt": "-1",
+          "issuedAt": "1695011951426",
+          "status": "approved"
+        }
+      ],
+      "developerId": "4bdf0e00-8c5f-404e-ae7a-b0f889d91444",
+      "lastModifiedAt": "1695011951371",
+      "name": "git-app",
+      "status": "approved"
+    },
+    {
+      "appId": "562d95e2-9336-4bab-9c45-89bdd87fd5e5",
+      "attributes": [
+        {
+          "name": "DisplayName",
+          "value": "test-app"
+        }
+      ],
+      "createdAt": "1694757751084",
+      "credentials": [
+        {
+          "consumerKey": "1536errt",
+          "consumerSecret": "7689jffc",
+          "expiresAt": "1694998717558",
+          "issuedAt": "1694998537558",
+          "status": "approved"
+        },
+        {
+          "apiProducts": [
+            {
+              "apiproduct": "github-apiproduct",
+              "status": "approved"
+            }
+          ],
+          "consumerKey": "fBvH9Vw1A9oMBR3irEDgArW1zoT0DkqUfzDHupKSim9tREJP",
+          "consumerSecret": "iGEZFvktmOEgB57jGFzFRIyv8yq00maYaixBHbAvcT70q6xJN28IGWuH58GcauOS",
+          "expiresAt": "-1",
+          "issuedAt": "1694757751130",
+          "status": "approved"
+        }
+      ],
+      "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
+      "lastModifiedAt": "1694757751084",
+      "name": "test-app",
+      "status": "approved"
+    }
+  ]
+}
