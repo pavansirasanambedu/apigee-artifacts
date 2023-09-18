@@ -279,41 +279,6 @@ else {
     Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-developers.json"
 
 # ------------------------------Apps-------------------------------------------------
-    # # Check if the 'apps' directory exists, if not, create it
-    # if(!(test-path -PathType container apps))
-    # {
-    #     mkdir "apps"
-    #     cd apps
-    # }
-    # else {
-    #     cd apps
-    # }
-      
-    #  $baseURL = "https://apigee.googleapis.com/v1/organizations/"
-    #  $org = "esi-apigee-x-394004"
-      
-    #  # API endpoint to get the list of apps
-    #  $AppsEndpoint = ${baseURL}+${org}+"/apps?expand=true"
-      
-    #  # Make the API call to get the list of apps
-    #  $AppList = Invoke-RestMethod -Uri $AppsEndpoint -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
-      
-    #  # Loop through the list of apps
-    #  foreach ($app in $AppList) {
-    #      Write-Host "entered into FOREACH: $app.name"
-    #      # Create a folder for each app
-    #      if(!(test-path -PathType container ($app.name)))
-    #       {
-    #           mkdir "($app.name)"
-    #           cd ($app.name)
-    #       }
-    #       else {
-    #           cd ($app.name)
-    #       }
-    #      cd ..
-    #  }
-    # Invoke-RestMethod -Uri $AppsEndpoint -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
-
     # Check if the 'apps' directory exists, if not, create it
     if(!(test-path -PathType container apps))
     {
@@ -323,16 +288,7 @@ else {
     else {
         cd apps
     }
-    
-      # $appsDirectory = "apps"
-      # if (-not (Test-Path -PathType Container $appsDirectory)) {
-      #     New-Item -Path $appsDirectory -ItemType Directory
-      # }
-      
-      # Change the current directory to 'apps'
-      # Set-Location -Path $appsDirectory
-      
-      $baseURL = "https://apigee.googleapis.com/v1/organizations/"
+     $baseURL = "https://apigee.googleapis.com/v1/organizations/"
       $org = "esi-apigee-x-394004"
       
       # API endpoint to get the list of apps
@@ -363,6 +319,11 @@ else {
           Write-Host "Error: $($_.Exception.Message)"
       }
       cd ..
+      Invoke-RestMethod -Uri $AppsEndpoint -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apps.json"
+    
+      
+      
+      
 
 
 # ------------------------------master-deployments-proxies----------------------------
