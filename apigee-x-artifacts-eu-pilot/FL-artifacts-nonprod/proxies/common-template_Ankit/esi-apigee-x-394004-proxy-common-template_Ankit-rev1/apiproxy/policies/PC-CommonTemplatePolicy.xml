@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PopulateCache continueOnError="false" enabled="true" name="PC-CommonTemplatePolicy">
+    <DisplayName>PC-CommonTemplatePolicy</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <Prefix>common-template</Prefix>
+        <KeyFragment>prefix_1</KeyFragment>
+        <KeyFragment>key_1</KeyFragment>
+    </CacheKey>
+    <CacheResource>common-template-config</CacheResource>
+    <Scope>Global</Scope>
+    <ExpirySettings>
+        <TimeoutInSeconds>3600</TimeoutInSeconds>
+    </ExpirySettings>
+    <Source>kvm.common.config.quota</Source>
+</PopulateCache>
