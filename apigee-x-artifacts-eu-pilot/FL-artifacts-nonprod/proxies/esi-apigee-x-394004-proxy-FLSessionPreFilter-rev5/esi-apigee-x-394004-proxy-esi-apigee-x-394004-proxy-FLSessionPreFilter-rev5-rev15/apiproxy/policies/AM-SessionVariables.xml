@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-SessionVariables">
+    <DisplayName>AM-SessionVariables</DisplayName>
+    <Properties/>
+    <Add>
+        <Headers>
+            <Header name="SessionId">{session.id}</Header>
+            <Header name="jwt-token">{request.header.jwt-token}</Header>
+            <Header name="Authentication">{request.header.isAuthenticated}</Header>
+        </Headers>
+    </Add>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo createNew="false" transport="http" type="request"/>
+</AssignMessage>

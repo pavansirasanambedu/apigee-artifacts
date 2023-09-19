@@ -1,0 +1,27 @@
+{
+  "environment": "eval",
+  "apiProxy": "apigee-cicd",
+  "revision": "5",
+  "deployStartTime": "1695120257253",
+  "state": "READY",
+  "instances": [
+    {
+      "instance": "eval-instance",
+      "deployedRevisions": [
+        {
+          "revision": "5",
+          "percentage": 100
+        }
+      ],
+      "deployedRoutes": [
+        {
+          "basepath": "/carts",
+          "envgroup": "eval-group",
+          "environment": "eval",
+          "percentage": 100
+        }
+      ]
+    }
+  ],
+  "proxyDeploymentType": "EXTENSIBLE"
+}
