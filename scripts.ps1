@@ -262,18 +262,20 @@ else {
 
     $developerpath = $baseURL+$org+"/developers"
     Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-developers.json"
-    $developer = Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
+    $developers = Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
 
     foreach ($developer in $($developers)) {
-        if(!(test-path -PathType container $($envdeveloper))){
-            mkdir "$($envdeveloper)"
-            cd $($envdeveloper)
+    	Write-Host "Entered into FOREACH...!"
+     	Write-Host $developer.email
+        if(!(test-path -PathType container $($developer.email))){
+            mkdir "$($developer.email)"
+            cd $($developer.email)
         }
         else {
-            cd $($envdeveloper)
+            cd $($developer.email)
         }
-        $developerdetail = $baseURL+$org+"/developers/"+$developer
-        Invoke-RestMethod -Uri $developerdetail -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60  -OutFile "$org-$apiproduct.json"
+        $developerdetail = $baseURL+$org+"/developers/"+$developer.email
+        Invoke-RestMethod -Uri $developerdetail -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60  -OutFile "$org-$developer.email.json"
         cd ..
     }
     cd ..
