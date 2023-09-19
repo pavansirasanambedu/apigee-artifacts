@@ -222,33 +222,35 @@ else {
 
 
 # # ----------------------------API Products------------------------------------------
-#     if(!(test-path -PathType container apiproducts))
-#     {
-#         mkdir "apiproducts"
-#         cd apiproducts
-#     }
-#     else {
-#         cd apiproducts
-#     }
+    if(!(test-path -PathType container apiproducts))
+    {
+        mkdir "apiproducts"
+        cd apiproducts
+    }
+    else {
+        cd apiproducts
+    }
 
-#     $productpath = $baseURL+$org+"/apiproducts"
-#     Invoke-RestMethod -Uri $productpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apiproducts.json"
-#     $apiproduct = Invoke-RestMethod -Uri $productpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
-#     foreach ($apiproduct in $($apiproducts)) {
-#         if(!(test-path -PathType container $($envapiproduct))){
-#             mkdir "$($envapiproduct)"
-#             cd $($envapiproduct)
-#         }
-#         else {
-#             cd $($envapiproduct)
-#         }
-#         $apiproductdetail = $baseURL+$org+"/apiproducts/"+$apiproduct
-#         Invoke-RestMethod -Uri $apiproductdetail -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60  -OutFile "$org-$apiproduct.json"
-#         cd ..
-#     }
-#     cd ..
+    $productpath = $baseURL + $org + "/apiproducts"
+	Invoke-RestMethod -Uri $productpath -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-apiproducts.json"
+	$apiproductsResponse = Invoke-RestMethod -Uri $productpath -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60
+	
+	foreach ($product in $apiproductsResponse.apiProduct) {
+	    $productFolder = $product.name
+	    if (!(Test-Path -PathType Container $productFolder)) {
+	        mkdir $productFolder
+	    }
+	    cd $productFolder
+	
+	    $apiproductdetail = $baseURL + $org + "/apiproducts/" + $product.name
+	    Invoke-RestMethod -Uri $apiproductdetail -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-$($product.name).json"
+	
+	    cd ..
+	}
+	
+	cd ..
 
-#     Invoke-RestMethod -Uri $productpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apiproducts.json"
+    Invoke-RestMethod -Uri $productpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apiproducts.json"
 
 # -----------------------------Developers------------------------------------------
     if(!(test-path -PathType container developers))
