@@ -279,7 +279,7 @@ else {
 	    else {
 	        cd $($developerItem.email)
 	    }
-	    $developerdetail = $baseURL + $org + "/developers/" + $developer.email
+	    $developerdetail = $baseURL + $org + "/developers/" + $($developerItem.email)
 	    Invoke-RestMethod -Uri $developerdetail -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-$($developerItem.email).json"
 	    cd ..
 	}
