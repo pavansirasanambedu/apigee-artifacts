@@ -262,9 +262,9 @@ else {
 
     $developerpath = $baseURL+$org+"/developers"
     Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-developers.json"
-    $developers = Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
+    $developer = Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
 
-    foreach ($developer in $($developers)) {
+    foreach ($developer.email in $($developer)) {
     	Write-Host "Entered into FOREACH...!"
      	Write-Host $developer.email
         if(!(test-path -PathType container $($developer.email))){
