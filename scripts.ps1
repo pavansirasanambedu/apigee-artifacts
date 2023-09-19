@@ -251,27 +251,30 @@ else {
     Invoke-RestMethod -Uri $productpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-apiproducts.json"
 
 # -----------------------------Developers------------------------------------------
-    if(!(test-path -PathType container developers))
-    {
-        mkdir "developers"
-        cd developers
-    }
-    else {
-        cd developers
-    }
-
-    $developerpath = $baseURL+$org+"/developers"
-    Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-developers.json"
-    $developer = Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
-
-    foreach ($developer in $developer) {
+    if (!(Test-Path -PathType container developers)) {
+	    Write-Host "Creating developers directory..."
+	    mkdir "developers"
+	    cd developers
+	}
+	else {
+	    cd developers
+	}
+	
+	$developerpath = $baseURL + $org + "/developers"
+	Write-Host "Developer Path: $developerpath"
+	
+	# Rest of your script...
+	
+	foreach ($developer in $developer) {
 	    Write-Host "Entered into FOREACH...!"
-	    Write-Host $developer.email
+	    Write-Host "Developer Email: $($developer.email)"
 	    if (!(Test-Path -PathType Container $developer.email)) {
-		mkdir "$developer.email"
-		cd $developer.email
-	    } else {
-		cd $developer.email
+	        Write-Host "Creating directory for $($developer.email)..."
+	        mkdir "$developer.email"
+	        cd $developer.email
+	    }
+	    else {
+	        cd $developer.email
 	    }
 	    $developerdetail = $baseURL + $org + "/developers/" + $developer.email
 	    Invoke-RestMethod -Uri $developerdetail -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-$($developer.email).json"
