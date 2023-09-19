@@ -265,19 +265,22 @@ else {
     $developer = Invoke-RestMethod -Uri $developerpath -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60
 
 	
-	foreach ($developer in $developer) {
+	foreach ($developerItem in $developer.developer) {
 	    Write-Host "Entered into FOREACH...!"
-	    Write-Host "Developer Email: $($developer.email)"
-	    if (!(Test-Path -PathType Container $developer.email)) {
-	        Write-Host "Creating directory for $($developer.email)..."
-	        mkdir "$developer.email"
-	        cd $developer.email
+	    
+	    # Print Developer Email (debugging)
+	    Write-Host "Developer Email: $($developerItem.email)"
+	    
+	    if (!(Test-Path -PathType Container $developerItem.email)) {
+	        Write-Host "Creating directory for $($developerItem.email)..."
+	        mkdir "$developerItem.email"
+	        cd $developerItem.email
 	    }
 	    else {
-	        cd $developer.email
+	        cd $developerItem.email
 	    }
 	    $developerdetail = $baseURL + $org + "/developers/" + $developer.email
-	    Invoke-RestMethod -Uri $developerdetail -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-$($developer.email).json"
+	    Invoke-RestMethod -Uri $developerdetail -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-($developerItem.email).json"
 	    cd ..
 	}
 	cd ..
