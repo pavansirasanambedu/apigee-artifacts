@@ -271,16 +271,16 @@ else {
 	    # Print Developer Email (debugging)
 	    Write-Host "Developer Email: $($developerItem.email)"
 	    
-	    if (!(Test-Path -PathType Container $developerItem.email)) {
+	    if (!(Test-Path -PathType Container $($developerItem.email))) {
 	        Write-Host "Creating directory for $($developerItem.email)..."
-	        mkdir "$developerItem.email"
-	        cd $developerItem.email
+	        mkdir "$($developerItem.email)"
+	        cd $($developerItem.email)
 	    }
 	    else {
-	        cd $developerItem.email
+	        cd $($developerItem.email)
 	    }
 	    $developerdetail = $baseURL + $org + "/developers/" + $developer.email
-	    Invoke-RestMethod -Uri $developerdetail -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-($developerItem.email).json"
+	    Invoke-RestMethod -Uri $developerdetail -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-$($developerItem.email).json"
 	    cd ..
 	}
 	cd ..
