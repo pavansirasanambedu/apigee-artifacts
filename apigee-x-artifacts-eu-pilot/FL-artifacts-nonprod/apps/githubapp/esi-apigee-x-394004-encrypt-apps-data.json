@@ -1,0 +1,35 @@
+{
+  "appId": "1869fad3-ef34-4cb8-afe0-e20911c3d10a",
+  "attributes": [
+    {
+      "name": "DisplayName",
+      "value": "githubapp"
+    }
+  ],
+  "createdAt": "1695043797847",
+  "credentials": [
+    {
+      "apiProducts": [
+        {
+          "apiproduct": "github-apiproduct",
+          "status": "approved"
+        }
+      ],
+      "consumerKey": {
+        "EncryptedValue": "HAh2wRWYbOgc0nmTNnFqAc0awewpGTqTAw7GO0ThTh0E3qkUk94lEUe8w0VbnisBOTKHbNEeMWBipOsVHHaMLQ==",
+        "IV": "aNrJ7czz/mk/oAA2Fj56qw=="
+      },
+      "consumerSecret": {
+        "EncryptedValue": "CO3QjpHPvprGoRZeykTASJsxFO0FxQHqmq0ObL/I65ACcfS49rgaLeXUtXl17JCHhK6r/TtS+htZDL8cv0B306Ba7qx6HwoBHvI51QF5eA4=",
+        "IV": "5p/VerGjnPAj/NOnE3EGDA=="
+      },
+      "expiresAt": "-1",
+      "issuedAt": "1695043797879",
+      "status": "approved"
+    }
+  ],
+  "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
+  "lastModifiedAt": "1695043797847",
+  "name": "githubapp",
+  "status": "approved"
+}
