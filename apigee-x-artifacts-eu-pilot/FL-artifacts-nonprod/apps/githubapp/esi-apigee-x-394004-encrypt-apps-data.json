@@ -16,12 +16,12 @@
         }
       ],
       "consumerKey": {
-        "EncryptedValue": "XJtVeRldMDRrNtOj3HfI6KunfI5KQ78M6MeviTPOy5Jyu2uro+LqD6WLZRNbXAEANqYHpHDFRDHT3XlQdu0pkg==",
-        "IV": "TcN/urP740DGtL+fEyvKQw=="
+        "IV": "2h4bVquG00TKYYNvU5j2NQ==",
+        "EncryptedValue": "V0EpwQ5Jokn9xJ1dqdA86Hr5UsioV1+zH+CUTieacf431X7REeErvGQkrMdjemhfzODxlZomrTZMlSQ2QmBcDQ=="
       },
       "consumerSecret": {
-        "EncryptedValue": "S6dMFAc8uoW7plp7U4fKpnmJ18HHvwTtXHGwS8AK/Jd5X90zAa450JI5HE0Jyb3XRrXgli6n4Z5jVfw8XZp65t5SHRhvINQ1HQvYnYjNpoQ=",
-        "IV": "LstdPsLbj5itBSDK0CW6YA=="
+        "IV": "vt/0Zjauy+Zj0LeMxkqktg==",
+        "EncryptedValue": "zYfEGVRYwPjUOFH4IY6y6j5D7ORWyWr69XekMVdlERCuugxgouhM80L32qrQm2a+g0yBz7vHmXLGsVdPfqOpnOC3Bk4+FvFpcYvhTq7vX0U="
       },
       "expiresAt": "-1",
       "issuedAt": "1695043797879",
