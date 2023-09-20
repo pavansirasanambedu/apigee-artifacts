@@ -1,35 +1,6 @@
 {
   "app": [
     {
-      "appId": "1869fad3-ef34-4cb8-afe0-e20911c3d10a",
-      "attributes": [
-        {
-          "name": "DisplayName",
-          "value": "githubapp"
-        }
-      ],
-      "createdAt": "1695043797847",
-      "credentials": [
-        {
-          "apiProducts": [
-            {
-              "apiproduct": "github-apiproduct",
-              "status": "approved"
-            }
-          ],
-          "consumerKey": "1dRWRUTSI5ZEAnF6GP4hjndepu0q4t328OdNj86Sh9c9DeGF",
-          "consumerSecret": "7SuR6RVFhISna3VLAwpylnbRE0d0L9VvC6YkNNnxZsq6FtPoLTcTkw1zfRWzW1EU",
-          "expiresAt": "-1",
-          "issuedAt": "1695043797879",
-          "status": "approved"
-        }
-      ],
-      "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
-      "lastModifiedAt": "1695043797847",
-      "name": "githubapp",
-      "status": "approved"
-    },
-    {
       "appId": "66b83e2a-4fdb-41ec-bd21-8594c7f4efbe",
       "attributes": [
         {

@@ -4,8 +4,7 @@
   "lastName": "developer",
   "userName": "developer_account",
   "apps": [
-    "app",
-    "githubapp"
+    "app"
   ],
   "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
   "organizationName": "esi-apigee-x-394004",
