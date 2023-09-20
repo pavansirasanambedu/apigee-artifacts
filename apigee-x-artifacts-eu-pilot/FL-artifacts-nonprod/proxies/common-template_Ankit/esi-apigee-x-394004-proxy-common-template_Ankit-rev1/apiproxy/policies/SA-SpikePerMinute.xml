@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<SpikeArrest continueOnError="false" enabled="true" name="SA-SpikePerMinute">
-    <DisplayName>SA-SpikePerMinute</DisplayName>
-    <Properties/>
-    <Rate ref="kvm.common.config.rate"/>
-</SpikeArrest>
