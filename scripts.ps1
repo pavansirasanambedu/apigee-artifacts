@@ -41,7 +41,7 @@ else {
       cd FL-artifacts-nonprod
       Write-Host "2nd else"
 	  # Remove the apiproducts folder and its contents
-	  Remove-Item -Path "FL-artifacts-nonprod" -Recurse
+	  Remove-Item -Path "apigee-x-artifacts-eu-pilot/FL-artifacts-nonprod" -Recurse
    	  # Introduce a 2-second delay
 	  Start-Sleep -Seconds 2
    	  if(!(test-path -PathType container FL-artifacts-nonprod)){
