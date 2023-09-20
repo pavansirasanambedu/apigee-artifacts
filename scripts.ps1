@@ -297,7 +297,7 @@ if (!(Test-Path -PathType Container $directoryName)) {
 	 #    }
 	    $developerdetail = $baseURL + $org + "/developers/" + $($developerItem.email)
 	    Invoke-RestMethod -Uri $developerdetail -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$org-$($developerItem.email).json"
-	    cd ..
+	    # cd ..
 	}
 	cd ..
 
