@@ -31,24 +31,28 @@ else {
       
 }
 
-# create apigee artifacts non prod folder
-if(!(test-path -PathType container FL-artifacts-nonprod)){
-      mkdir "FL-artifacts-nonprod"
-      cd FL-artifacts-nonprod
-      Write-Host "inside 2nd if"
-}
-else {
-      cd FL-artifacts-nonprod
-      Write-Host "2nd else"
-	  # Remove the apiproducts folder and its contents
-	  Remove-Item -Path "apigee-x-artifacts-eu-pilot/FL-artifacts-nonprod" -Recurse
-   	  # Introduce a 2-second delay
-	  Start-Sleep -Seconds 2
-   	  if(!(test-path -PathType container FL-artifacts-nonprod)){
-	      mkdir "FL-artifacts-nonprod"
-	      cd FL-artifacts-nonprod
-	      Write-Host "inside 2nd if"
-}
+# Specify the directory name
+$directoryName = "FL-artifacts-nonprod"
+
+# Check if the directory exists
+if (!(Test-Path -PathType Container $directoryName)) {
+    # If it doesn't exist, create it
+    mkdir $directoryName
+    cd $directoryName
+    Write-Host "Directory created: $directoryName"
+} else {
+    Write-Host "Directory already exists: $directoryName"
+    
+    # Remove the directory and its contents if it exists
+    Remove-Item -Path $directoryName -Recurse
+    
+    # Introduce a 2-second delay
+    Start-Sleep -Seconds 2
+    
+    # Recreate the directory
+    mkdir $directoryName
+    cd $directoryName
+    Write-Host "Directory recreated: $directoryName"
 }
 
 # --------------------------------Proxies - All Revisions-------------------------------------------
