@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "displayName": "test",
+  "approvalType": "auto",
+  "attributes": [
+    {
+      "name": "access",
+      "value": "private"
+    }
+  ],
+  "description": "hsufey",
+  "environments": [
+    "eval"
+  ],
+  "createdAt": "1694782349196",
+  "lastModifiedAt": "1694782349196"
+}

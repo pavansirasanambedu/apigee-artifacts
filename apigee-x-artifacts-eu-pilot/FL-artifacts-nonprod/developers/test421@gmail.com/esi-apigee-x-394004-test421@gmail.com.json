@@ -1,0 +1,14 @@
+{
+  "email": "test421@gmail.com",
+  "firstName": "testapp",
+  "lastName": "checktest",
+  "userName": "test421@gmail.com",
+  "apps": [
+    "testapp"
+  ],
+  "developerId": "834eb901-8c26-42e1-8799-c8d83a53e90d",
+  "organizationName": "esi-apigee-x-394004",
+  "status": "active",
+  "createdAt": "1694877640094",
+  "lastModifiedAt": "1694877640094"
+}

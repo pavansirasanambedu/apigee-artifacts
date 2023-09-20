@@ -1,0 +1,30 @@
+{
+  "name": "testapikey",
+  "displayName": "testapikey",
+  "approvalType": "auto",
+  "attributes": [
+    {
+      "name": "access",
+      "value": "public"
+    }
+  ],
+  "environments": [
+    "eval"
+  ],
+  "createdAt": "1693998426431",
+  "lastModifiedAt": "1693998426431",
+  "operationGroup": {
+    "operationConfigs": [
+      {
+        "apiSource": "test-apikey",
+        "operations": [
+          {
+            "resource": "/"
+          }
+        ],
+        "quota": {}
+      }
+    ],
+    "operationConfigType": "proxy"
+  }
+}

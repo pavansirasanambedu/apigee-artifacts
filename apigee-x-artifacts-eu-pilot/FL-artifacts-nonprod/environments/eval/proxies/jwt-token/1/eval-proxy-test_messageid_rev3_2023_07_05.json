@@ -1,0 +1,27 @@
+{
+  "environment": "eval",
+  "apiProxy": "jwt-token",
+  "revision": "1",
+  "deployStartTime": "1690467064453",
+  "state": "READY",
+  "instances": [
+    {
+      "instance": "eval-instance",
+      "deployedRevisions": [
+        {
+          "revision": "1",
+          "percentage": 100
+        }
+      ],
+      "deployedRoutes": [
+        {
+          "basepath": "/v1/login",
+          "envgroup": "eval-group",
+          "environment": "eval",
+          "percentage": 100
+        }
+      ]
+    }
+  ],
+  "proxyDeploymentType": "EXTENSIBLE"
+}

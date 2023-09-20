@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-SetPayload">
+    <DisplayName>AM-SetPayload</DisplayName>
+    <Set>
+        <Payload contentType="application/json">{PetStoreResponse.content}</Payload>
+    </Set>
+</AssignMessage>
