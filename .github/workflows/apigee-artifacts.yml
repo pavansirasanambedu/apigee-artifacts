@@ -31,6 +31,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: "${{ secrets.TOKEN_GIT }}"
 
       # Configure Workload Identity Federation and generate an access token.
       - id: 'auth'
