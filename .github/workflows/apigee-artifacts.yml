@@ -30,7 +30,6 @@ jobs:
       - name: Check out Git repository code
         uses: actions/checkout@v3
         with:
-          persist-credentials: false
           fetch-depth: 0
 
       # Configure Workload Identity Federation and generate an access token.
@@ -93,8 +92,6 @@ jobs:
           git status
 
       - name: Push changes to Git
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.TOKEN_GIT }}
-          branch: artifacts
+        run: |
+          git push origin artifacts
           
