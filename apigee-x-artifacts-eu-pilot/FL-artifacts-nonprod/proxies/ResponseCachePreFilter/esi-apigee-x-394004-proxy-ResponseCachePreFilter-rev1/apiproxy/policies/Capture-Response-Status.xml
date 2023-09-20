@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="Capture-Response-Status">
+    <DisplayName>Capture Response Status</DisplayName>
+    <Source>response</Source>
+    <JSONPayload>
+        <Variable name="responseStatusCode">
+            <JSONPath>$.statusCode</JSONPath>
+        </Variable>
+    </JSONPayload>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</ExtractVariables>

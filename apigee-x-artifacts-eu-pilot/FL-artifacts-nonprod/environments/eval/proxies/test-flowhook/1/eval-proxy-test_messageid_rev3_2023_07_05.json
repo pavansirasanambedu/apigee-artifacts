@@ -1,0 +1,27 @@
+{
+  "environment": "eval",
+  "apiProxy": "test-flowhook",
+  "revision": "1",
+  "deployStartTime": "1695185200296",
+  "state": "READY",
+  "instances": [
+    {
+      "instance": "eval-instance",
+      "deployedRevisions": [
+        {
+          "revision": "1",
+          "percentage": 100
+        }
+      ],
+      "deployedRoutes": [
+        {
+          "basepath": "/test-flowhook",
+          "envgroup": "eval-group",
+          "environment": "eval",
+          "percentage": 100
+        }
+      ]
+    }
+  ],
+  "proxyDeploymentType": "STANDARD"
+}

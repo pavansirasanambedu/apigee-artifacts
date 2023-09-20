@@ -1,0 +1,13 @@
+<APIProxy revision="1" name="test-flowhook">
+    <DisplayName></DisplayName>
+    <Description></Description>
+    <CreatedAt>1695185198797</CreatedAt>
+    <LastModifiedAt>1695185198797</LastModifiedAt>
+    <BasePaths>/test-flowhook</BasePaths>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

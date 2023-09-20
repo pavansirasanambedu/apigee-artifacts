@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ResponseCache continueOnError="false" enabled="true" name="RC-ResponseCachePreFilter">
+    <DisplayName>RC-ResponseCachePreFilter</DisplayName>
+    <Properties/>
+    <CacheKey>
+        <Prefix/>
+        <KeyFragment ref="request.uri" type="string"/>
+    </CacheKey>
+    <Scope>Exclusive</Scope>
+    <ExpirySettings>
+        <ExpiryDate/>
+        <TimeOfDay/>
+        <TimeoutInSec ref="">3600</TimeoutInSec>
+    </ExpirySettings>
+    <SkipCacheLookup/>
+    <SkipCachePopulation/>
+</ResponseCache>
