@@ -28,6 +28,7 @@ if(!(test-path -PathType container apigee-x-artifacts-eu-pilot)){
 else {
       cd apigee-x-artifacts-eu-pilot
       Write-Host "1st else"
+      
 }
 
 # create apigee artifacts non prod folder
@@ -39,6 +40,15 @@ if(!(test-path -PathType container FL-artifacts-nonprod)){
 else {
       cd FL-artifacts-nonprod
       Write-Host "2nd else"
+	  # Remove the apiproducts folder and its contents
+	  Remove-Item -Path "FL-artifacts-nonprod" -Recurse
+   	  # Introduce a 2-second delay
+	  Start-Sleep -Seconds 2
+   	  if(!(test-path -PathType container FL-artifacts-nonprod)){
+	      mkdir "FL-artifacts-nonprod"
+	      cd FL-artifacts-nonprod
+	      Write-Host "inside 2nd if"
+}
 }
 
 # --------------------------------Proxies - All Revisions-------------------------------------------
