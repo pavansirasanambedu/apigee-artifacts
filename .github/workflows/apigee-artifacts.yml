@@ -1,18 +1,34 @@
 name: Apigee Artifacts Export
+
 on:
   workflow_dispatch:
+    inputs:
+      Workflow-run:
+        type: choice
+        description: manual-run
+        default: "manual"
+        options:
+          - schedule
+          - manual
+      deployment-org:
+        type: choice
+        description: Import to Org
+        default: "esi-apigee-x-394004"
+        options:
+          - esi-apigee-x-394004
+          - esi-apigee-x-394004
+      environment:
+        type: string
+        required: false
+        default: "eval"
+        description: Environment to deploy
 
 env:
-  DEPLOYMENT_NAME: Apigee Artifacts Push # TODO: update to deployment name
-
-  # Default Target Apigee Organization et environment (can be also be dynamically defined in [Set Variables *] steps)
-  APIGEE_ORG: ${{ secrets.APIGEE_ORG }}
-  APIGEE_ENV: ${{ secrets.APIGEE_ENV }}
-  GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  WORKFLOW_IDENTITY_FEDERATION_NAME: ${{ secrets.WORKFLOW_IDENTITY_FEDERATION_NAME }}
-  APIGEE_BASE_URL: "https://apigee.googleapis.com/v1/organizations/"
+  APIGEE_ENV: ${{ github.event.inputs.environment }}
+  run: ${{ github.event.inputs.Workflow-run }}
   GITHUB_TOKEN: ${{ secrets.TOKEN_GIT }}
   key: ${{ secrets.key }}
+  org: ${{ secrets.APIGEE_ORG }}
   FIELDS_TO_ENCRYPT: "name,value"
   firstlevelobject: "keyValueEntries"
   APP_FIELDS: "consumerKey,consumerSecret"
@@ -33,7 +49,7 @@ jobs:
           fetch-depth: 0
           token: "${{ secrets.TOKEN_GIT }}"
 
-      # Configure Workload Identity Federation and generate an access token.
+       # Configure Workload Identity Federation and generate an access token.
       - id: 'auth'
         name: 'Authenticate to Google Apigee Cloud'
         uses: 'google-github-actions/auth@v1'
@@ -42,57 +58,142 @@ jobs:
           workload_identity_provider: 'projects/127369686749/locations/global/workloadIdentityPools/pavan-apigee-git/providers/pavan-apigee-git'
           service_account: 'workload-identity-federation@esi-apigee-x-394004.iam.gserviceaccount.com'
 
+
       - name: Perform Apigee Export
         shell: pwsh
         run: |
-          $env:ORG = "${{ secrets.APIGEE_ORG }}"
-          $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
           $env:git_token = "${{ secrets.TOKEN_GIT }}"
           $env:key = "${{ secrets.key }}"
+          $env:org = "${{ secrets.APIGEE_ORG }}"
+          $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
           
           $env:FieldValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
-
-          # Split the comma-separated string into an array
           $env:appfieds = $env:APP_FIELDS
-          
+          $env:run = $env:run
+
           Invoke-Pester ./scripts.ps1 -Passthru
 
-      - name: Remove GCP Credentials JSON File
-        run: rm gha-creds*.json
+          # ./scripts/apigee-artifacts.ps1 -AccessToken "${{ steps.auth.outputs.access_token }}" -org ${{ env.APIGEE_ORG }}  -env ${{ env.APIGEE_ENV }} -workflowmethod ${{ env.run }}
 
-      - name: Debug Git Config
-        run: |
-          git config --list
 
-      - name: Add local files to Git local branch
-        run: |
-            git config --global user.email "rajeshjanapati533@gmail.com"
-            git config --global user.name "pavansirasanambedu"
-            git add .
 
-      - name: Check for delta changes - Git
-        id: check_git_changes
-        run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            echo "Local branch is not up to date with remote_branch. Pushing latest code to Git"
-          else
-            echo "Local branch is up to date with Remote branch."
-            exit 0
-          fi
 
-      - name: Commit files to Git
-        run: |
-          if [[ -n "$(git status --porcelain)" ]]; then
-            git commit -a -m "Apigee Artifacts Export Updates"
-            exit 0
-          fi
 
-      - name: Debug Git Status
-        run: |
-          git status
 
-      - name: Push changes to Git
-        run: |
-          git push origin artifacts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# name: Apigee Artifacts Export
+# on:
+#   workflow_dispatch:
+
+# env:
+#   DEPLOYMENT_NAME: Apigee Artifacts Push # TODO: update to deployment name
+
+#   # Default Target Apigee Organization et environment (can be also be dynamically defined in [Set Variables *] steps)
+#   APIGEE_ORG: ${{ secrets.APIGEE_ORG }}
+#   APIGEE_ENV: ${{ secrets.APIGEE_ENV }}
+#   GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+#   WORKFLOW_IDENTITY_FEDERATION_NAME: ${{ secrets.WORKFLOW_IDENTITY_FEDERATION_NAME }}
+#   APIGEE_BASE_URL: "https://apigee.googleapis.com/v1/organizations/"
+#   GITHUB_TOKEN: ${{ secrets.TOKEN_GIT }}
+#   key: ${{ secrets.key }}
+#   FIELDS_TO_ENCRYPT: "name,value"
+#   firstlevelobject: "keyValueEntries"
+#   APP_FIELDS: "consumerKey,consumerSecret"
+
+# jobs:
+#   apigee-window-artifacts:
+#     name: FL Apigee Artifacts Export
+#     runs-on: ubuntu-latest
+
+#     permissions:
+#       contents: 'read'
+#       id-token: 'write'
+
+#     steps:
+#       - name: Check out Git repository code
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0
+#           token: "${{ secrets.TOKEN_GIT }}"
+
+#       # Configure Workload Identity Federation and generate an access token.
+#       - id: 'auth'
+#         name: 'Authenticate to Google Apigee Cloud'
+#         uses: 'google-github-actions/auth@v1'
+#         with:
+#           token_format: 'access_token'
+#           workload_identity_provider: 'projects/127369686749/locations/global/workloadIdentityPools/pavan-apigee-git/providers/pavan-apigee-git'
+#           service_account: 'workload-identity-federation@esi-apigee-x-394004.iam.gserviceaccount.com'
+
+#       - name: Perform Apigee Export
+#         shell: pwsh
+#         run: |
+#           $env:ORG = "${{ secrets.APIGEE_ORG }}"
+#           $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
+#           $env:git_token = "${{ secrets.TOKEN_GIT }}"
+#           $env:key = "${{ secrets.key }}"
+          
+#           $env:FieldValuestoEncrypt = "name,value"
+#           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
+
+#           # Split the comma-separated string into an array
+#           $env:appfieds = $env:APP_FIELDS
+          
+#           Invoke-Pester ./scripts.ps1 -Passthru
+
+#       - name: Remove GCP Credentials JSON File
+#         run: rm gha-creds*.json
+
+#       - name: Debug Git Config
+#         run: |
+#           git config --list
+
+#       - name: Add local files to Git local branch
+#         run: |
+#             git config --global user.email "rajeshjanapati533@gmail.com"
+#             git config --global user.name "pavansirasanambedu"
+#             git add .
+
+#       - name: Check for delta changes - Git
+#         id: check_git_changes
+#         run: |
+#           if [[ -n "$(git status --porcelain)" ]]; then
+#             echo "Local branch is not up to date with remote_branch. Pushing latest code to Git"
+#           else
+#             echo "Local branch is up to date with Remote branch."
+#             exit 0
+#           fi
+
+#       - name: Commit files to Git
+#         run: |
+#           if [[ -n "$(git status --porcelain)" ]]; then
+#             git commit -a -m "Apigee Artifacts Export Updates"
+#             exit 0
+#           fi
+
+#       - name: Debug Git Status
+#         run: |
+#           git status
+
+#       - name: Push changes to Git
+#         run: |
+#           git push origin artifacts
           
