@@ -9,9 +9,12 @@ $workflowmethod = $env:run
 Write-Host $workflowmethod
 Write-Host $env:manualorg
 
+# Initialize $org with a default value
+$org = "default-org"
+
 if ($workflowmethod -eq "manual"){
     Write-Host "Entered into Manual...!"
-    $org = $env:manualorg
+    # No need to reassign $org in the "manual" branch
     Write-Host $org
 }
 else{
@@ -19,11 +22,12 @@ else{
     $orgs = $env:org -split ","
     Write-Host $orgs
     foreach ($org in $orgs){
-    	Write-Host $org
-	 }
-   
+        Write-Host $org
+    }
 }
+
 Write-Host "Exited out of the IF with: $org"
+
 
 # --------------------Apigee All Artifacts-------------------------------------------
 
