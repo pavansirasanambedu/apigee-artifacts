@@ -1,0 +1,27 @@
+{
+  "environment": "eval",
+  "apiProxy": "ResponseCachePreFilter",
+  "revision": "3",
+  "deployStartTime": "1691090069558",
+  "state": "READY",
+  "instances": [
+    {
+      "instance": "eval-instance",
+      "deployedRevisions": [
+        {
+          "revision": "3",
+          "percentage": 100
+        }
+      ],
+      "deployedRoutes": [
+        {
+          "basepath": "/v1/responsecacheprefilter",
+          "envgroup": "eval-group",
+          "environment": "eval",
+          "percentage": 100
+        }
+      ]
+    }
+  ],
+  "proxyDeploymentType": "EXTENSIBLE"
+}

@@ -1,0 +1,37 @@
+{
+  "name": "test-key",
+  "displayName": "test-key",
+  "approvalType": "auto",
+  "attributes": [
+    {
+      "name": "access",
+      "value": "public"
+    }
+  ],
+  "description": "test key value",
+  "environments": [
+    "eval"
+  ],
+  "createdAt": "1693934060492",
+  "lastModifiedAt": "1693934060492",
+  "operationGroup": {
+    "operationConfigs": [
+      {
+        "apiSource": "oauth-jwt-token",
+        "operations": [
+          {
+            "resource": "/test",
+            "methods": [
+              "DELETE",
+              "GET",
+              "POST",
+              "PUT"
+            ]
+          }
+        ],
+        "quota": {}
+      }
+    ],
+    "operationConfigType": "proxy"
+  }
+}

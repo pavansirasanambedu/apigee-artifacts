@@ -1,0 +1,23 @@
+{
+  "name": "api-testcheck",
+  "displayName": "api-prod",
+  "approvalType": "auto",
+  "attributes": [
+    {
+      "name": "access",
+      "value": "public"
+    }
+  ],
+  "description": "Toaccesendpoints",
+  "apiResources": [
+    "/"
+  ],
+  "environments": [
+    "eval"
+  ],
+  "proxies": [
+    "test_messageid_rev3_2023_07_05"
+  ],
+  "createdAt": "1695288154552",
+  "lastModifiedAt": "1695288638027"
+}

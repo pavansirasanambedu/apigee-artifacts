@@ -1,0 +1,10 @@
+{
+  "name": "poc-lr-functions-2",
+  "host": "fzwe-cusexp-li-dev-mae-17.azurewebsites.net",
+  "port": 443,
+  "isEnabled": true,
+  "sSLInfo": {
+    "enabled": true
+  },
+  "protocol": "HTTP"
+}

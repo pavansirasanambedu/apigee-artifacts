@@ -1,0 +1,10 @@
+{
+  "deployments": [
+    {
+      "environment": "eval",
+      "apiProxy": "sample-hello-cicd-sf",
+      "revision": "2",
+      "deployStartTime": "1694175949666"
+    }
+  ]
+}
