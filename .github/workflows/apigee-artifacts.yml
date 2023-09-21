@@ -1,10 +1,30 @@
 name: Apigee Artifacts Export
 
 on:
-  workflow_run:
-    workflows: ["Scheduled Workflow"]
-    types:
-      - manual
+  workflow_dispatch:
+    inputs:
+      Workflow-run:
+        type: choice
+        description: Run type
+        default: "manual"
+        options:
+          - schedule
+          - manual
+      deployment-org:
+        type: choice
+        description: Import to Org
+        default: "esi-apigee-x-394004"
+        options:
+          - esi-apigee-x-394004
+          - esi-apigee-x-3940042
+      environment:
+        type: string
+        required: false
+        default: "eval"
+        description: Environment to deploy
+  schedule:
+    # Scheduled to run every day at 2AM UTC
+    - cron: '45 20 * * *'
 
 jobs:
   apigee-window-artifacts:
@@ -41,27 +61,19 @@ jobs:
           $env:FieldValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
           $env:appfieds = $env:APP_FIELDS
-          $env:run = $env:run
-          $env:manualorg = "${{ github.event.inputs.deployment-org }}"
-          $env:workflowmethod = "manual" # Set the workflowmethod to "manual" by default
 
-          if ("${{ github.event.workflow_run.event }}") {
-            if ("${{ github.event.workflow_run.event }}" == "schedule") {
-              $env:workflowmethod = "schedule"
-              $env:cron_expression = "${{ github.event.workflow_run.schedule }}"
-            }
-          }
-
-          if ($env:workflowmethod -eq "manual") {
-            Write-Host "Entered into Manual...!"
-            $org = $env:manualorg
-            Write-Host $org
+          if ( "${{ github.event_name }}" -eq "workflow_dispatch" ) {
+              $env:run = "${{ github.event.inputs.Workflow-run }}"
+              if ($env:run -eq "manual") {
+                  Write-Host "Entered into Manual...!"
+                  $org = "${{ github.event.inputs.deployment-org }}"
+                  Write-Host $org
+              }
           } else {
-            Write-Host "Entered into Schedule...!"
-            Write-Host "Cron Expression: $env:cron_expression"
+              Write-Host "Entered into Schedule...!"
           }
+          
           Invoke-Pester ./scripts.ps1 -Passthru
-
 
 
 
