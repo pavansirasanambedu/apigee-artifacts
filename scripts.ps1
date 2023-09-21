@@ -606,12 +606,12 @@ if (!(Test-Path -PathType Container $directoryName)) {
         cd ..
 
         # -------------------------------Environments - Targetservers-----------------------------
-        if(!(test-path -PathType container env-Targetservers)){
-            mkdir "env-Targetservers"
-            cd env-Targetservers
+        if(!(test-path -PathType container targetservers)){
+            mkdir "targetservers"
+            cd targetservers
         }
         else {
-            cd env-Targetservers
+            cd targetservers
         }
 
         $targetserverpathenv = $baseURL+$org+"/environments/"+$($env)+"/targetservers"
@@ -636,12 +636,12 @@ if (!(Test-Path -PathType Container $directoryName)) {
         cd ..
 
  	# --------------------------------Environment - keystores--------------------------------------
-        if(!(test-path -PathType container $org-keystores)){
-            mkdir "$org-keystores"
-            cd $org-keystores
+        if(!(test-path -PathType container keystores)){
+            mkdir "keystores"
+            cd keystores
         }
         else {
-            cd $org-keystores
+            cd keystores
         }
 
         $keystorepathenv = $baseURL+$org+"/environments/"+$($env)+"/keystores"
@@ -651,11 +651,11 @@ if (!(Test-Path -PathType Container $directoryName)) {
 
  	# --------------------------------Environment - caches--------------------------------------
         if(!(test-path -PathType container $org-caches)){
-            mkdir "$org-caches"
-            cd $org-caches
+            mkdir "caches"
+            cd caches
         }
         else {
-            cd $org-caches
+            cd caches
         }
 
         $cachepathenv = $baseURL+$org+"/environments/"+$($env)+"/caches"
@@ -746,7 +746,7 @@ if (!(Test-Path -PathType Container $directoryName)) {
 	            cd $($latestFlowRevision)
 	        }
 	        # $flowDetailRev2 = $baseURL+$org+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"?format=bundle"
-		 	$flowDetailRev2 = $baseURL+$org+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"/deployments"
+		 	$flowDetailRev2 = $baseURL+$org+"/environments/+$($env)+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"/deployments"
 	        # $SharedFlowZipFile = $org+"-sharedflow-"+$($sharedflow.name)+"-rev"+$($latestFlowRevision)+".zip"
 		 	Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$($sharedflow.name).json"
 	        
