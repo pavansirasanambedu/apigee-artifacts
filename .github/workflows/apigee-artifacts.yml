@@ -67,6 +67,7 @@ jobs:
                   Write-Host "Entered into Manual...!"
                   $org = "${{ github.event.inputs.deployment-org }}"
                   Write-Host $org
+                  $env:org = $org
               }
           } else {
               Write-Host "Entered into Schedule...!"
