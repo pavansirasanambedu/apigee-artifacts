@@ -10,7 +10,7 @@ Write-Host $workflowmethod
 Write-Host $env:manualorg
 
 # Initialize $org with a default value
-$org = "default-org"
+$org = $env:org
 
 if ($workflowmethod -eq "manual"){
     Write-Host "Entered into Manual...!"
