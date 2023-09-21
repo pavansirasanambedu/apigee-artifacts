@@ -23,8 +23,7 @@ on:
         default: "eval"
         description: Environment to deploy
   schedule:
-    # Scheduled to run every day at 2AM UTC
-    - cron: '45 20 * * *'
+    - cron: '23 15 * * *' # Scheduled to run every day at 15:15 UTC (20:45 IST)
 
 jobs:
   apigee-window-artifacts:
@@ -74,6 +73,7 @@ jobs:
           }
           
           Invoke-Pester ./scripts.ps1 -Passthru
+
 
 
 
