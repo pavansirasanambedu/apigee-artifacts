@@ -23,10 +23,10 @@ else{
    
 }
 
---------------------Apigee All Artifacts-------------------------------------------
+# --------------------Apigee All Artifacts-------------------------------------------
 
 
-----------------------create apigee organisation level artifacts folder------------
+# ----------------------create apigee organisation level artifacts folder------------
 # if(!(test-path -PathType container apigee)){
 #       mkdir "apigee"
 #       cd apigee
@@ -37,20 +37,20 @@ else{
 #       Write-Host "else"
 # }
 
-# create apigee artifacts non prod folder
-if(!(test-path -PathType container apigee-x-artifacts-eu-pilot)){
-      mkdir "apigee-x-artifacts-eu-pilot"
-      cd apigee-x-artifacts-eu-pilot
-      Write-Host "inside 1st if"
-}
-else {
-      cd apigee-x-artifacts-eu-pilot
-      Write-Host "1st else"
+# # create apigee artifacts non prod folder
+# if(!(test-path -PathType container apigee-x-artifacts-eu-pilot)){
+#       mkdir "apigee-x-artifacts-eu-pilot"
+#       cd apigee-x-artifacts-eu-pilot
+#       Write-Host "inside 1st if"
+# }
+# else {
+#       cd apigee-x-artifacts-eu-pilot
+#       Write-Host "1st else"
       
-}
+# }
 
 # Specify the directory name
-$directoryName = "FL-artifacts-nonprod"
+$directoryName = $org
 
 # Check if the directory exists
 if (!(Test-Path -PathType Container $directoryName)) {
