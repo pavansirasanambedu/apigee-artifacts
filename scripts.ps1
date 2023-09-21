@@ -22,6 +22,7 @@ else{
 	 }
    
 }
+Write-Host "Exited out of the IF with: $org"
 
 # --------------------Apigee All Artifacts-------------------------------------------
 
