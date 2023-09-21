@@ -750,7 +750,7 @@ if (!(Test-Path -PathType Container $directoryName)) {
 	        # $SharedFlowZipFile = $org+"-sharedflow-"+$($sharedflow.name)+"-rev"+$($latestFlowRevision)+".zip"
 		 	Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$($sharedflow.name).json"
 	        
-	        $response = Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile $SharedFlowZipFile
+	        # $response = Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile $SharedFlowZipFile
 	
 	        # Expand-Archive -Path $SharedFlowZipFile -Force
 	        # Remove-Item -Path $SharedFlowZipFile -Force
