@@ -8,11 +8,11 @@ $workflowmethod = $env:run
 
 Write-Host $workflowmethod
 
-if ($workflowmethod == "manual"){
-	Write-Host "Entered into Manual...!"
+if ($workflowmethod -eq "manual"){
+    Write-Host "Entered into Manual...!"
 }
 else{
-	Write-Host "Entered into Schedule...!"
+    Write-Host "Entered into Schedule...!"
 }
 
 # --------------------Apigee All Artifacts-------------------------------------------
