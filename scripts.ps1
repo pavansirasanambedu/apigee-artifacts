@@ -11,11 +11,12 @@ Write-Host $workflowmethod
 if ($workflowmethod -eq "manual"){
     Write-Host "Entered into Manual...!"
     $org = $env:manualorg
+    Write-Host $org
 }
 else{
     Write-Host "Entered into Schedule...!"
     $orgs = $env:org -split ","
-	 Write-Host $orgs
+    Write-Host $orgs
     foreach ($org in $orgs){
     	Write-Host $org
 	 }
