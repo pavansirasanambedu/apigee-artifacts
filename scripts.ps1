@@ -746,7 +746,7 @@ if (!(Test-Path -PathType Container $directoryName)) {
 	            cd $($latestFlowRevision)
 	        }
 	        # $flowDetailRev2 = $baseURL+$org+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"?format=bundle"
-		 	$flowDetailRev2 = $baseURL+$org+"/environments/+$($env)+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"/deployments"
+		 	$flowDetailRev2 = $baseURL+$org+"/environments/"+$($env)+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"/deployments"
 	        # $SharedFlowZipFile = $org+"-sharedflow-"+$($sharedflow.name)+"-rev"+$($latestFlowRevision)+".zip"
 		 	Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$($sharedflow.name).json"
 	        
