@@ -7,6 +7,7 @@ $headers = @{Authorization = "Bearer $token"}
 $workflowmethod = $env:run
 
 Write-Host $workflowmethod
+Write-Host $env:manualorg
 
 if ($workflowmethod -eq "manual"){
     Write-Host "Entered into Manual...!"
