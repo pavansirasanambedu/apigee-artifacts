@@ -663,6 +663,26 @@ if (!(Test-Path -PathType Container $directoryName)) {
         
         cd ..
 
+ 	# --------------------------------Environment - flowhooks--------------------------------------
+        if(!(test-path -PathType container flowhooks)){
+            mkdir "flowhooks"
+            cd flowhooks
+        }
+        else {
+            cd flowhooks
+        }
+
+        $flowhookpathenv = $baseURL+$org+"/environments/"+$($env)+"/flowhooks"
+        $flowhookdetail = Invoke-RestMethod -Uri $flowhookpathenv -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-flowhook.json"
+	# Iterate through each value in the response
+	foreach ($value in $flowhookdetail) {
+	    Write-Host "Processing value: $value"
+     	    $flowhookpathdetail = $baseURL+$org+"/environments/"+$($env)+"/flowhooks/"+$value
+	    Invoke-RestMethod -Uri $flowhookpathdetail -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$org-flowhook-$value.json"
+	}
+        
+        cd ..
+
         # --------------------------------Environment - Proxies--------------------------------------
         if(!(test-path -PathType container proxies)){
             mkdir "proxies"
