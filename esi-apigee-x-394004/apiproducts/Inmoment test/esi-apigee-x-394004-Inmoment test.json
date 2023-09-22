@@ -1,0 +1,16 @@
+{
+  "name": "Inmoment test",
+  "displayName": "Test Inmoment Proxy",
+  "approvalType": "auto",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "DA-inmoment"
+  ],
+  "createdAt": "1695318716755",
+  "lastModifiedAt": "1695318716755"
+}

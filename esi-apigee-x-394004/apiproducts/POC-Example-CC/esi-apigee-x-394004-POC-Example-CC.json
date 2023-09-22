@@ -1,0 +1,10 @@
+{
+  "name": "POC-Example-CC",
+  "displayName": "POC-Example-CC",
+  "approvalType": "auto",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318717482",
+  "lastModifiedAt": "1695318717482"
+}

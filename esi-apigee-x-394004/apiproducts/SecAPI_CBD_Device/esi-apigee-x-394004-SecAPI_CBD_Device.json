@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_CBD_Device",
+  "displayName": "SecAPI_CBD_Device",
+  "approvalType": "manual",
+  "apiResources": [
+    "/*"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_CBD_Device"
+  ],
+  "createdAt": "1695318725965",
+  "lastModifiedAt": "1695318725965"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_MISP",
+  "displayName": "SecAPI_MISP",
+  "approvalType": "manual",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_Misp"
+  ],
+  "createdAt": "1695318723067",
+  "lastModifiedAt": "1695318723067"
+}

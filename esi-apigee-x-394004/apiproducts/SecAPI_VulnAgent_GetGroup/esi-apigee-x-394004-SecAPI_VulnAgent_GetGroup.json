@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_VulnAgent_GetGroup",
+  "displayName": "SecAPI_VulnAgent_GetGroup",
+  "approvalType": "manual",
+  "apiResources": [
+    "/group"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_VulnAgent"
+  ],
+  "createdAt": "1695318724879",
+  "lastModifiedAt": "1695318724879"
+}

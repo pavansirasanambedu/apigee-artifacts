@@ -1,0 +1,13 @@
+{
+  "name": "Dummy for poc",
+  "displayName": "Dummy for poc",
+  "approvalType": "auto",
+  "environments": [
+    "dev"
+  ],
+  "proxies": [
+    "poc-jwt-exp"
+  ],
+  "createdAt": "1695318707540",
+  "lastModifiedAt": "1695318707540"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_Cuckoo",
+  "displayName": "SecAPI_Cuckoo",
+  "approvalType": "manual",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_Cuckoo"
+  ],
+  "createdAt": "1695318723429",
+  "lastModifiedAt": "1695318723429"
+}

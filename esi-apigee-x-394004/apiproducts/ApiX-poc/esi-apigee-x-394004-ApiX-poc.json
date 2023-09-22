@@ -1,0 +1,35 @@
+{
+  "name": "ApiX-poc",
+  "displayName": "ApiX-poc",
+  "approvalType": "auto",
+  "description": "API X poc product with access to customer, order, invoice, order tax",
+  "environments": [
+    "dev",
+    "shs-dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "POC1-wrapper-proxy",
+    "apiX-customer-core",
+    "apiX-order-apeasement",
+    "apiX-order-invoice-v2",
+    "daX-inmoment",
+    "dapX-crowdtwist-na",
+    "omsX-zendesk-orders-v2",
+    "omsX-zendesk-tax-v2",
+    "poc-apiX-customer-core",
+    "poc-apiX-order-apeasement",
+    "poc-apiX-order-invoice-v2",
+    "poc-apiX_crowdtwist_v1",
+    "poc-daX-inmoment",
+    "poc-dapX-crowdtwist-na",
+    "poc-omsX-zendesk-customer-orders-v2",
+    "poc-omsX-zendesk-orders-v2",
+    "poc-omsX-zendesk-tax-v2",
+    "poc6-customer-order"
+  ],
+  "createdAt": "1695318705232",
+  "lastModifiedAt": "1695318705232"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "API for Customer Payments",
+  "displayName": "API for Customer Payments",
+  "approvalType": "auto",
+  "description": "API for Customer Payments",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318710183",
+  "lastModifiedAt": "1695318710183"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "CEX-Cart Aggregation",
+  "displayName": "CEX Cart Aggregation Service",
+  "approvalType": "auto",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318714590",
+  "lastModifiedAt": "1695318714590"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "SecAPI_FiremonAndInfoblox",
+  "displayName": "SecAPI_FiremonAndInfoblox",
+  "approvalType": "manual",
+  "description": "Provides access to OAuth, Firemon, and Infoblox all methods",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_AccessToken",
+    "SecAPI_Firemon",
+    "SecAPI_Infoblox"
+  ],
+  "createdAt": "1695318727785",
+  "lastModifiedAt": "1695318727785"
+}

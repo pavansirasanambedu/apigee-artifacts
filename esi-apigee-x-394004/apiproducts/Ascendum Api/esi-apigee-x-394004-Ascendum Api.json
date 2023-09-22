@@ -1,0 +1,24 @@
+{
+  "name": "Ascendum Api",
+  "displayName": "API for Ascendum Launch Reservation",
+  "approvalType": "auto",
+  "description": "API for Launch Reservation Ascendum calls",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-anonymous-loyalty-info",
+    "api-customer-master-service",
+    "api-intershop-customer",
+    "api-intershop-customer-v2",
+    "api-loyalty-info",
+    "api-reservation-customer",
+    "api-reservation-customer-v2",
+    "coreservices-api-oauth"
+  ],
+  "createdAt": "1695318722713",
+  "lastModifiedAt": "1695318722713"
+}

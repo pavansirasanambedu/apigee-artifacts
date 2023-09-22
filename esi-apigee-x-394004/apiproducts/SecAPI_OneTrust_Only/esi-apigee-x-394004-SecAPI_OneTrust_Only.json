@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_OneTrust_Only",
+  "displayName": "SecAPI_OneTrust_Only",
+  "approvalType": "manual",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_OneTrust"
+  ],
+  "createdAt": "1695318726697",
+  "lastModifiedAt": "1695318726697"
+}

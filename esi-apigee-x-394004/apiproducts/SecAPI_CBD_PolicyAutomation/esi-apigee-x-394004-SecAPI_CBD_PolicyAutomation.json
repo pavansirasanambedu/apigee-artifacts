@@ -1,0 +1,17 @@
+{
+  "name": "SecAPI_CBD_PolicyAutomation",
+  "displayName": "SecAPI_CBD_PolicyAutomation",
+  "approvalType": "manual",
+  "apiResources": [
+    "/updatepolicy",
+    "/find"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_CBD_Device"
+  ],
+  "createdAt": "1695318725248",
+  "lastModifiedAt": "1695318725248"
+}

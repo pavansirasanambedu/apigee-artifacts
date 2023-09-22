@@ -1,0 +1,19 @@
+{
+  "name": "API for DA Crowdtwist EU",
+  "displayName": "DA-Crowdtwist-EU",
+  "approvalType": "auto",
+  "apiResources": [
+    "/dev/crowdtwist/redemption",
+    "/dev/crowdtwist/activity",
+    "/dev/crowdtwist/profile",
+    "/dev/crowdtwist/health"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "dap-crowdtwist-emea"
+  ],
+  "createdAt": "1695318710570",
+  "lastModifiedAt": "1695318710570"
+}

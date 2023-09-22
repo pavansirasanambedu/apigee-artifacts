@@ -1,0 +1,19 @@
+{
+  "name": "API for Release Calendar Guests",
+  "displayName": "API for Release Calendar Guests",
+  "approvalType": "auto",
+  "description": "product for release calendar guests",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-ascendumCalls-NA",
+    "api-releaseCalendar",
+    "cached-cms-releases-na"
+  ],
+  "createdAt": "1695318718919",
+  "lastModifiedAt": "1695318718919"
+}

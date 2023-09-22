@@ -1,0 +1,259 @@
+{
+  "apiProduct": [
+    {
+      "name": "Crowdtwist"
+    },
+    {
+      "name": "tatro-delete-me"
+    },
+    {
+      "name": "Flapigee"
+    },
+    {
+      "name": "OMS"
+    },
+    {
+      "name": "coreservices-api-partner-inventory-Product"
+    },
+    {
+      "name": "sand-cicd"
+    },
+    {
+      "name": "InfoSecAPI_PoC"
+    },
+    {
+      "name": "SecAPI_All"
+    },
+    {
+      "name": "SecAPI_FiremonAndInfoblox"
+    },
+    {
+      "name": "SecAPI_ControlledCalls"
+    },
+    {
+      "name": "SecAPI_AuthOnly"
+    },
+    {
+      "name": "SecAPI_OneTrust_Only"
+    },
+    {
+      "name": "SecAPI_CBDefense_Only"
+    },
+    {
+      "name": "SecAPI_CBD_Device"
+    },
+    {
+      "name": "SecAPI_TenableIO"
+    },
+    {
+      "name": "SecAPI_CBD_PolicyAutomation"
+    },
+    {
+      "name": "SecAPI_VulnAgent_GetGroup"
+    },
+    {
+      "name": "SecAPI_CBD_DeviceAll"
+    },
+    {
+      "name": "SecAPI_VulnAgent"
+    },
+    {
+      "name": "SecAPI_All_SC"
+    },
+    {
+      "name": "SecAPI_Cuckoo"
+    },
+    {
+      "name": "SecAPI_MISP"
+    },
+    {
+      "name": "Ascendum Api"
+    },
+    {
+      "name": "SecAPI_VIPReset"
+    },
+    {
+      "name": "API for Intershop"
+    },
+    {
+      "name": "cx-placeholder"
+    },
+    {
+      "name": "api-tatro-deleteme"
+    },
+    {
+      "name": "API tatro"
+    },
+    {
+      "name": "API-tatro"
+    },
+    {
+      "name": "API for Empowry-TeamSales"
+    },
+    {
+      "name": "API for operations"
+    },
+    {
+      "name": "da-customer-profile"
+    },
+    {
+      "name": "API for Release Calendar Guests"
+    },
+    {
+      "name": "OBF"
+    },
+    {
+      "name": "da-customer-notes"
+    },
+    {
+      "name": "Zendesk-Customer-Service"
+    },
+    {
+      "name": "POC-Example-CC"
+    },
+    {
+      "name": "ProductCore"
+    },
+    {
+      "name": "Inmoment test"
+    },
+    {
+      "name": "da-inmomentapi-eu"
+    },
+    {
+      "name": "da-inmomentapi"
+    },
+    {
+      "name": "API from Data Engineering"
+    },
+    {
+      "name": "API-EU from Data Engineering"
+    },
+    {
+      "name": "CEX-StoreCore"
+    },
+    {
+      "name": "CEX-Cart Aggregation"
+    },
+    {
+      "name": "API for Payment"
+    },
+    {
+      "name": "da-inmoment-OAuth"
+    },
+    {
+      "name": "API for SSO"
+    },
+    {
+      "name": "CEX-Product-Search"
+    },
+    {
+      "name": "CEX-PromotionsService"
+    },
+    {
+      "name": "API for Zendesk EU"
+    },
+    {
+      "name": "API for Core Retail"
+    },
+    {
+      "name": "API for MFA"
+    },
+    {
+      "name": "API for Customer Support"
+    },
+    {
+      "name": "poc-hello-kt"
+    },
+    {
+      "name": "API for DA Crowdtwist EU"
+    },
+    {
+      "name": "API for Customer Payments"
+    },
+    {
+      "name": "API for Enrollment"
+    },
+    {
+      "name": "Api Reviews"
+    },
+    {
+      "name": "Payment Api for ThirdParty"
+    },
+    {
+      "name": "APIEmailService"
+    },
+    {
+      "name": "Adress service"
+    },
+    {
+      "name": "API for Delivery Solutions"
+    },
+    {
+      "name": "Dummy for poc"
+    },
+    {
+      "name": "API for DA Crowdtwist NA"
+    },
+    {
+      "name": "Dummy for searchcore"
+    },
+    {
+      "name": "Dummy Product For SearchCore TypeAhead"
+    },
+    {
+      "name": "Dummy for Category Redirect"
+    },
+    {
+      "name": "ApiX-poc"
+    },
+    {
+      "name": "API for ForgeRock"
+    },
+    {
+      "name": "Dummy for loyalty experience"
+    },
+    {
+      "name": "product cards"
+    },
+    {
+      "name": "API for Sharepoint"
+    },
+    {
+      "name": "api-testcheck"
+    },
+    {
+      "name": "test"
+    },
+    {
+      "name": "github-apiproduct"
+    },
+    {
+      "name": "weatherProduct-legacy"
+    },
+    {
+      "name": "weatherProduct"
+    },
+    {
+      "name": "testapikey"
+    },
+    {
+      "name": "test-key"
+    },
+    {
+      "name": "EchoProduct-legacy CICD"
+    },
+    {
+      "name": "EchoProductCICD"
+    },
+    {
+      "name": "api-product"
+    },
+    {
+      "name": "Verify-key"
+    },
+    {
+      "name": "JWT-Credentials"
+    }
+  ]
+}

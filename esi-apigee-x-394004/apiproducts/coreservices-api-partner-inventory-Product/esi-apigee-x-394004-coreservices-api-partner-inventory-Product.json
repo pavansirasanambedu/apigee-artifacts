@@ -1,0 +1,22 @@
+{
+  "name": "coreservices-api-partner-inventory-Product",
+  "displayName": "FL Core Services Inventory APIs",
+  "approvalType": "manual",
+  "description": "Foot Locker core services APIs for storer inventory availability.",
+  "apiResources": [
+    "/",
+    "/**"
+  ],
+  "environments": [
+    "dev",
+    "shs-dev",
+    "uat"
+  ],
+  "proxies": [
+    "coreservices-api-oauth",
+    "coreservices-api-partner-inventory",
+    "coreservices-api-partner-reservation"
+  ],
+  "createdAt": "1695318729274",
+  "lastModifiedAt": "1695318729274"
+}

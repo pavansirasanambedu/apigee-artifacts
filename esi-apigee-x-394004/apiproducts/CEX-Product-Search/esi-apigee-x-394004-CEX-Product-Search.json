@@ -1,0 +1,12 @@
+{
+  "name": "CEX-Product-Search",
+  "displayName": "CEX-Product-Search",
+  "approvalType": "manual",
+  "environments": [
+    "dev",
+    "test",
+    "uat"
+  ],
+  "createdAt": "1695318713129",
+  "lastModifiedAt": "1695318713129"
+}

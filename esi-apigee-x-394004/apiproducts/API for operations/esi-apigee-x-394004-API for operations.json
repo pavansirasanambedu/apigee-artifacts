@@ -1,0 +1,20 @@
+{
+  "name": "API for operations",
+  "displayName": "API for Site Operations",
+  "approvalType": "auto",
+  "description": "List of apis for site operation needs",
+  "environments": [
+    "dev",
+    "shs-dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-health",
+    "api-jwt-generate",
+    "api-products-availability"
+  ],
+  "createdAt": "1695318719759",
+  "lastModifiedAt": "1695318719759"
+}

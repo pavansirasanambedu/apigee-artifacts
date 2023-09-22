@@ -1,0 +1,27 @@
+{
+  "name": "SecAPI_All",
+  "displayName": "SecAPI_All",
+  "approvalType": "manual",
+  "apiResources": [
+    "/*",
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_AccessToken",
+    "SecAPI_CBD_Device",
+    "SecAPI_CBDefense",
+    "SecAPI_Cuckoo",
+    "SecAPI_Firemon",
+    "SecAPI_Infoblox",
+    "SecAPI_Janrain",
+    "SecAPI_Misp",
+    "SecAPI_OneTrust",
+    "SecAPI_SecurityCenter",
+    "SecAPI_TenableIO"
+  ],
+  "createdAt": "1695318728156",
+  "lastModifiedAt": "1695318728156"
+}

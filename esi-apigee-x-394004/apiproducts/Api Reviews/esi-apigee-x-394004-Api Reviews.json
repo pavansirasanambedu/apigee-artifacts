@@ -1,0 +1,17 @@
+{
+  "name": "Api Reviews",
+  "displayName": "Portal Product For Reviews",
+  "approvalType": "auto",
+  "description": "dummy product for apigee portal",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-reviews"
+  ],
+  "createdAt": "1695318709441",
+  "lastModifiedAt": "1695318709441"
+}

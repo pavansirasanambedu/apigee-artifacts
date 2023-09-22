@@ -1,0 +1,13 @@
+{
+  "name": "CEX-StoreCore",
+  "displayName": "CEX-StoreCore",
+  "approvalType": "manual",
+  "description": "Place holder product for developer portal",
+  "environments": [
+    "dev",
+    "test",
+    "uat"
+  ],
+  "createdAt": "1695318714935",
+  "lastModifiedAt": "1695318714935"
+}

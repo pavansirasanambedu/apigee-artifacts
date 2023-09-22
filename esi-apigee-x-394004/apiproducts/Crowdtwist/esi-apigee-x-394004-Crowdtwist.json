@@ -1,0 +1,20 @@
+{
+  "name": "Crowdtwist",
+  "displayName": "Crowdtwist",
+  "approvalType": "manual",
+  "description": "Crowdtwist Vendor API",
+  "apiResources": [
+    "/dev/crowdtwist/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "DigitalAnalytics"
+  ],
+  "quota": "1000",
+  "quotaInterval": "1",
+  "quotaTimeUnit": "minute",
+  "createdAt": "1695318730762",
+  "lastModifiedAt": "1695318730762"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Zendesk-Customer-Service",
+  "displayName": "Zendesk-Customer-Service",
+  "approvalType": "auto",
+  "description": "Zendesk-Customer-Service - OMS and Customer Search endpoints",
+  "environments": [
+    "dev"
+  ],
+  "proxies": [
+    "api-customer-core",
+    "api-zendesk-order-invoice",
+    "oms-zendesk-customer-orders-dev",
+    "oms-zendesk-orders-dev",
+    "oms-zendesk-refund-dev",
+    "oms-zendesk-tax-dev"
+  ],
+  "createdAt": "1695318717845",
+  "lastModifiedAt": "1695318717845"
+}

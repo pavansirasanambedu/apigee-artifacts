@@ -1,0 +1,56 @@
+{
+  "app": [
+    {
+      "appId": "d12b3b4b-fd94-4d3a-910d-3ce65578b10a",
+      "attributes": [
+        {
+          "name": "DisplayName",
+          "value": "Sharepoint to carts"
+        }
+      ],
+      "createdAt": "1695387658990",
+      "credentials": [
+        {
+          "consumerKey": "5mHnlTBfeKD7OiCRGsr2GaBINVLjOiSMfyPc27pSaj30DJ6Q",
+          "consumerSecret": "cQhJtBfqWQLTOGxgvsW4oLZIE8O8Jkfbuqdl5w19sFGVKzdwOIZGclB8rju8Mvad",
+          "expiresAt": "-1",
+          "issuedAt": "1695387659034",
+          "status": "approved"
+        }
+      ],
+      "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
+      "lastModifiedAt": "1695387658990",
+      "name": "Sharepoint to carts",
+      "status": "approved"
+    },
+    {
+      "appId": "66b83e2a-4fdb-41ec-bd21-8594c7f4efbe",
+      "attributes": [
+        {
+          "name": "DisplayName",
+          "value": "app"
+        }
+      ],
+      "createdAt": "1695042306837",
+      "credentials": [
+        {
+          "apiProducts": [
+            {
+              "apiproduct": "github-apiproduct",
+              "status": "approved"
+            }
+          ],
+          "consumerKey": "FEvoDhyAko5aHjoDN08ufirPRiDdAnxzFAGndX6DHhORmW8h",
+          "consumerSecret": "S3FKt8mFooxESEcK2fqGUe1KADJ5X1VKDAwKBkeAc2DTrAK3WB62YoCfXtWDEyWi",
+          "expiresAt": "-1",
+          "issuedAt": "1695042306864",
+          "status": "approved"
+        }
+      ],
+      "developerId": "72d760c2-66dd-4358-b40c-e3ef8eee1e35",
+      "lastModifiedAt": "1695042306837",
+      "name": "app",
+      "status": "approved"
+    }
+  ]
+}

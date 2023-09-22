@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_VulnAgent",
+  "displayName": "SecAPI_VulnAgent",
+  "approvalType": "manual",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_VulnAgent"
+  ],
+  "createdAt": "1695318724149",
+  "lastModifiedAt": "1695318724149"
+}

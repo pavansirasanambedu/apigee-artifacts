@@ -1,0 +1,15 @@
+{
+  "name": "SecAPI_ControlledCalls",
+  "displayName": "SecAPI_ControlledCalls",
+  "approvalType": "manual",
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_CBD_Device",
+    "SecAPI_SCAsset",
+    "SecAPI_SCGroups"
+  ],
+  "createdAt": "1695318727417",
+  "lastModifiedAt": "1695318727417"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "weatherProduct",
+  "displayName": "weatherProduct",
+  "approvalType": "auto",
+  "attributes": [
+    {
+      "name": "access",
+      "value": "public"
+    }
+  ],
+  "description": "weatherProduct",
+  "environments": [
+    "eval"
+  ],
+  "quota": "10000",
+  "quotaInterval": "1",
+  "quotaTimeUnit": "month",
+  "createdAt": "1694198560245",
+  "lastModifiedAt": "1694198560245",
+  "operationGroup": {
+    "operationConfigs": [
+      {
+        "apiSource": "forecastweatherapi",
+        "operations": [
+          {
+            "resource": "/",
+            "methods": [
+              "GET"
+            ]
+          }
+        ],
+        "quota": {
+          "limit": "1000",
+          "interval": "1",
+          "timeUnit": "month"
+        },
+        "attributes": [
+          {
+            "name": "foo",
+            "value": "bar"
+          }
+        ]
+      }
+    ],
+    "operationConfigType": "proxy"
+  }
+}

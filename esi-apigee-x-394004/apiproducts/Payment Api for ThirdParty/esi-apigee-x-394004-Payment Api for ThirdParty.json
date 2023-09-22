@@ -1,0 +1,18 @@
+{
+  "name": "Payment Api for ThirdParty",
+  "displayName": "Payment Api for ThirdParty",
+  "approvalType": "auto",
+  "description": "product for payment apis for third party like EQL",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-payment-adyen-v1",
+    "oms-ackservice-v2"
+  ],
+  "createdAt": "1695318709077",
+  "lastModifiedAt": "1695318709077"
+}

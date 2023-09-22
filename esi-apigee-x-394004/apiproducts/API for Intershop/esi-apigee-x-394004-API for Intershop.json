@@ -1,0 +1,23 @@
+{
+  "name": "API for Intershop",
+  "displayName": "API for Intershop",
+  "approvalType": "auto",
+  "description": "Endpoints for Intershop calls.",
+  "environments": [
+    "dev",
+    "shs-dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "oms-intershop-paypal-refund",
+    "oms-intershop-paypal-refund-dev",
+    "oms-intershop-paypal-refund-stg",
+    "oms-intershop-paypal-refund-tst",
+    "oms-intershop-paypal-refund-uat",
+    "oms-intershop-paypal-refund-v2"
+  ],
+  "createdAt": "1695318721974",
+  "lastModifiedAt": "1695318721974"
+}

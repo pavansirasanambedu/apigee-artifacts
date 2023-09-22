@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_TenableIO",
+  "displayName": "SecAPI_TenableIO",
+  "approvalType": "manual",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_TenableIO"
+  ],
+  "createdAt": "1695318725597",
+  "lastModifiedAt": "1695318725597"
+}

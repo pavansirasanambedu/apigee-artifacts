@@ -1,0 +1,13 @@
+{
+  "name": "da-inmoment-OAuth",
+  "displayName": "Testing OAuth ",
+  "approvalType": "auto",
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "da-inmoment-oAuth"
+  ],
+  "createdAt": "1695318713853",
+  "lastModifiedAt": "1695318713853"
+}

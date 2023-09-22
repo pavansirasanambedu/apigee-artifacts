@@ -1,0 +1,17 @@
+{
+  "name": "API for MFA",
+  "displayName": "API for MFA",
+  "approvalType": "auto",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "mfa-service",
+    "mfa-service-webhook"
+  ],
+  "createdAt": "1695318711679",
+  "lastModifiedAt": "1695318711679"
+}

@@ -1,0 +1,17 @@
+{
+  "name": "da-inmomentapi",
+  "displayName": "da-inmomentapi",
+  "approvalType": "auto",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "dev",
+    "shs-dev"
+  ],
+  "proxies": [
+    "da-inmomentapi"
+  ],
+  "createdAt": "1695318716012",
+  "lastModifiedAt": "1695318716012"
+}

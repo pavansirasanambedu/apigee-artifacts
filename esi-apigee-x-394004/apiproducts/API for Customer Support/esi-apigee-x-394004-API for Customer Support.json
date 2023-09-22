@@ -1,0 +1,27 @@
+{
+  "name": "API for Customer Support",
+  "displayName": "API for Customer Support",
+  "approvalType": "auto",
+  "description": "product for third party support apps like zendesk, bot, 8*8 etc.,",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-customer-core",
+    "api-order-apeasement",
+    "api-order-invoice-v2",
+    "api-product-core",
+    "api-promotions-cpc",
+    "api-search-core",
+    "api-store-core",
+    "oms-order-customer-v2",
+    "oms-zendesk-customer-orders-v2",
+    "oms-zendesk-orders-v2",
+    "oms-zendesk-refund-v2"
+  ],
+  "createdAt": "1695318711316",
+  "lastModifiedAt": "1695318711316"
+}

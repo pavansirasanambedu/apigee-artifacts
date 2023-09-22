@@ -1,0 +1,17 @@
+{
+  "name": "SecAPI_All_SC",
+  "displayName": "SecAPI_All_SC",
+  "approvalType": "manual",
+  "apiResources": [
+    "/analysis/*",
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_SC"
+  ],
+  "createdAt": "1695318723789",
+  "lastModifiedAt": "1695318723789"
+}

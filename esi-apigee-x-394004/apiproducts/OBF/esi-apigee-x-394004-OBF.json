@@ -1,0 +1,25 @@
+{
+  "name": "OBF",
+  "displayName": "API for OBF (External Secure)",
+  "approvalType": "auto",
+  "environments": [
+    "dev",
+    "shs-dev"
+  ],
+  "proxies": [
+    "cr-ci-zendesk-stores",
+    "cr-obf-availability",
+    "cr-obf-external-inventory",
+    "cr-obf-order-capture-v2",
+    "cr-obf-rest-proxy-api",
+    "cr-obf-rest-proxy-api_NA_qat",
+    "cr-obf-rest-proxy-stg-api",
+    "cr-obf-saas",
+    "cr-obf-saas-EU",
+    "cr-obf-zendesk",
+    "cr-obf-zendesk-eu",
+    "cr-obf-zendesk_v1"
+  ],
+  "createdAt": "1695318718562",
+  "lastModifiedAt": "1695318718562"
+}

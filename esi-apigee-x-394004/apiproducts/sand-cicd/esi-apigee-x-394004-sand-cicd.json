@@ -1,0 +1,15 @@
+{
+  "name": "sand-cicd",
+  "displayName": "API for sand-cicd",
+  "approvalType": "auto",
+  "environments": [
+    "dev"
+  ],
+  "proxies": [
+    "sand-account-info",
+    "sand-auth",
+    "sand-session"
+  ],
+  "createdAt": "1695318728890",
+  "lastModifiedAt": "1695318728890"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "APIEmailService",
+  "displayName": "Email Service",
+  "approvalType": "auto",
+  "description": "Dummy product for the spec portal",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318708699",
+  "lastModifiedAt": "1695318708699"
+}

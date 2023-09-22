@@ -1,0 +1,11 @@
+{
+  "name": "api-tatro-deleteme",
+  "displayName": "api-tatro-deleteme",
+  "approvalType": "auto",
+  "description": "test",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318721215",
+  "lastModifiedAt": "1695318721215"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Dummy Product For SearchCore TypeAhead",
+  "displayName": "Dummy Product For SearchCore TypeAhead",
+  "approvalType": "auto",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "createdAt": "1695318706425",
+  "lastModifiedAt": "1695318706425"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "cx-placeholder",
+  "displayName": "cx-placeholder",
+  "approvalType": "auto",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318721605",
+  "lastModifiedAt": "1695318721605"
+}

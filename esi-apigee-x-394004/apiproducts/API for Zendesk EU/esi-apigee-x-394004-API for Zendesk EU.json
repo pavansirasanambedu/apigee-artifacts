@@ -1,0 +1,26 @@
+{
+  "name": "API for Zendesk EU",
+  "displayName": "API for Zendesk EU",
+  "approvalType": "auto",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-customer-core",
+    "api-order-apeasement",
+    "api-order-invoice-v2",
+    "api-product-core",
+    "api-promotions-cpc",
+    "api-search-core",
+    "api-store-core",
+    "oms-order-customer-v2",
+    "oms-zendesk-customer-orders-v2",
+    "oms-zendesk-orders-v2",
+    "oms-zendesk-refund-v2"
+  ],
+  "createdAt": "1695318712409",
+  "lastModifiedAt": "1695318712409"
+}

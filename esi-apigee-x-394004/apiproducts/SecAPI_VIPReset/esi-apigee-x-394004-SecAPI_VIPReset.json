@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_VIPReset",
+  "displayName": "SecAPI_VIPReset",
+  "approvalType": "manual",
+  "apiResources": [
+    "/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_VIPReset"
+  ],
+  "createdAt": "1695318722349",
+  "lastModifiedAt": "1695318722349"
+}

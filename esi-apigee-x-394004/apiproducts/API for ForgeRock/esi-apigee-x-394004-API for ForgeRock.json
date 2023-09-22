@@ -1,0 +1,17 @@
+{
+  "name": "API for ForgeRock",
+  "displayName": "API for ForgeRock",
+  "approvalType": "auto",
+  "description": "api for Forge Rock",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-customer-core"
+  ],
+  "createdAt": "1695318704858",
+  "lastModifiedAt": "1695318704858"
+}

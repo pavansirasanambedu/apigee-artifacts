@@ -1,0 +1,14 @@
+{
+  "name": "API from Data Engineering",
+  "displayName": "API from Data Engineering",
+  "approvalType": "auto",
+  "description": "All the API from Data Engineering are grouped under one",
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "da-inmomentapi"
+  ],
+  "createdAt": "1695318715660",
+  "lastModifiedAt": "1695318715660"
+}

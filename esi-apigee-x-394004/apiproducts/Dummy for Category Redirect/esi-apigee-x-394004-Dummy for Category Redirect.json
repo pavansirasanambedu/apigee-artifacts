@@ -1,0 +1,14 @@
+{
+  "name": "Dummy for Category Redirect",
+  "displayName": "Dummy for Category Redirect",
+  "approvalType": "auto",
+  "description": "Dummy for Category Redirect",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "createdAt": "1695318705594",
+  "lastModifiedAt": "1695318705594"
+}

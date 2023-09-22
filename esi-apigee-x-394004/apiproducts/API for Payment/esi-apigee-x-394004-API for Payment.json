@@ -1,0 +1,20 @@
+{
+  "name": "API for Payment",
+  "displayName": "API for Payment",
+  "approvalType": "auto",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-client-key",
+    "api-payment-key",
+    "api-payment-methods",
+    "api-payment-origin-key",
+    "oms-zendesk-orders-v2"
+  ],
+  "createdAt": "1695318714222",
+  "lastModifiedAt": "1695318714222"
+}

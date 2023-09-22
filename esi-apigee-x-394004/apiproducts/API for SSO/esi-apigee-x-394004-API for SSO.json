@@ -1,0 +1,10 @@
+{
+  "name": "API for SSO",
+  "displayName": "API for SSO",
+  "approvalType": "auto",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318713504",
+  "lastModifiedAt": "1695318713504"
+}

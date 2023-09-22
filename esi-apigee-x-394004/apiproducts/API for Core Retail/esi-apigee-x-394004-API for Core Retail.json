@@ -1,0 +1,16 @@
+{
+  "name": "API for Core Retail",
+  "displayName": "API for Core Retail",
+  "approvalType": "auto",
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "cr-jwt-generate",
+    "cr-wi-mif-routerOperations-us",
+    "cr-wmosch-mif-routerOperations-eu",
+    "cr-wmosch-mif-routerOperations-us"
+  ],
+  "createdAt": "1695318712043",
+  "lastModifiedAt": "1695318712043"
+}

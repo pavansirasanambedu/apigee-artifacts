@@ -1,0 +1,16 @@
+{
+  "name": "da-customer-notes",
+  "displayName": "da-customer-notes",
+  "approvalType": "auto",
+  "apiResources": [
+    "/dev/da-customernotes/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "DigitalAnalytics"
+  ],
+  "createdAt": "1695318718199",
+  "lastModifiedAt": "1695318718199"
+}

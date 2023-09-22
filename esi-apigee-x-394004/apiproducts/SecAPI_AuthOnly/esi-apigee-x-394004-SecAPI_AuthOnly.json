@@ -1,0 +1,16 @@
+{
+  "name": "SecAPI_AuthOnly",
+  "displayName": "SecAPI_AuthOnly",
+  "approvalType": "auto",
+  "apiResources": [
+    "/accesstoken"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "SecAPI_AccessToken"
+  ],
+  "createdAt": "1695318727061",
+  "lastModifiedAt": "1695318727061"
+}

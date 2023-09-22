@@ -1,0 +1,14 @@
+{
+  "name": "poc-hello-kt",
+  "displayName": "poc-kt",
+  "approvalType": "auto",
+  "description": "this is the api offering of kt",
+  "environments": [
+    "dev"
+  ],
+  "proxies": [
+    "poc-hello-world"
+  ],
+  "createdAt": "1695318710949",
+  "lastModifiedAt": "1695318710949"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Dummy for loyalty experience",
+  "displayName": "Dummy for loyalty experience",
+  "approvalType": "auto",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "createdAt": "1695318704337",
+  "lastModifiedAt": "1695318704337"
+}

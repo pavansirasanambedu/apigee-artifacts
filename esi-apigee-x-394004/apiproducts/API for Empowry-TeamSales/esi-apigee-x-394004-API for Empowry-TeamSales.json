@@ -1,0 +1,17 @@
+{
+  "name": "API for Empowry-TeamSales",
+  "displayName": "API for Empowry (TeamSales)",
+  "approvalType": "auto",
+  "description": "API for Empowry-TeamSales",
+  "environments": [
+    "dev",
+    "stage",
+    "test",
+    "uat"
+  ],
+  "proxies": [
+    "api-teamsales"
+  ],
+  "createdAt": "1695318720128",
+  "lastModifiedAt": "1695318720128"
+}

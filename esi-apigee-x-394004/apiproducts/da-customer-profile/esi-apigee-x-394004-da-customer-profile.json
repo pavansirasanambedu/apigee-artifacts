@@ -1,0 +1,16 @@
+{
+  "name": "da-customer-profile",
+  "displayName": "da-ccpastatus",
+  "approvalType": "auto",
+  "apiResources": [
+    "/dev/da-ccpastatus/**"
+  ],
+  "environments": [
+    "shs-dev"
+  ],
+  "proxies": [
+    "DigitalAnalytics"
+  ],
+  "createdAt": "1695318719369",
+  "lastModifiedAt": "1695318719369"
+}

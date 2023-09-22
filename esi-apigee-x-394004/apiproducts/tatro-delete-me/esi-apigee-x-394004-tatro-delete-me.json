@@ -1,0 +1,10 @@
+{
+  "name": "tatro-delete-me",
+  "displayName": "tatro-delete-me",
+  "approvalType": "auto",
+  "environments": [
+    "shs-dev"
+  ],
+  "createdAt": "1695318730403",
+  "lastModifiedAt": "1695318730403"
+}

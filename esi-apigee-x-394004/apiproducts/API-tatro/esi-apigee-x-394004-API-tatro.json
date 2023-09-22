@@ -1,0 +1,10 @@
+{
+  "name": "API-tatro",
+  "displayName": "test",
+  "approvalType": "auto",
+  "environments": [
+    "dev"
+  ],
+  "createdAt": "1695318720496",
+  "lastModifiedAt": "1695318720496"
+}

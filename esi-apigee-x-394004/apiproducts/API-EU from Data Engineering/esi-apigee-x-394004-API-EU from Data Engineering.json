@@ -1,0 +1,16 @@
+{
+  "name": "API-EU from Data Engineering",
+  "displayName": "API-EU from Data Engineering",
+  "approvalType": "auto",
+  "description": "All the API-EU from Data Engineering are grouped under one",
+  "environments": [
+    "dev",
+    "shs-dev"
+  ],
+  "proxies": [
+    "da-customernotes-eu",
+    "da-inmomentapi-eu"
+  ],
+  "createdAt": "1695318715307",
+  "lastModifiedAt": "1695318715307"
+}
