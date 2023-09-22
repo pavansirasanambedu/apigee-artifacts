@@ -673,7 +673,14 @@ if (!(Test-Path -PathType Container $directoryName)) {
 		}
 		
 		$flowhookpathenv = $baseURL + $org + "/environments/" + $env + "/flowhooks"
-		$flowhookdetail = Invoke-RestMethod -Uri $flowhookpathenv -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$baseDirectory\$org-flowhook.json"
+		Invoke-RestMethod -Uri $flowhookpathenv -Method Get -Headers $headers -ContentType "application/json" -ErrorAction Stop -TimeoutSec 60 -OutFile "$baseDirectory\$org-flowhook.json"
+		
+		# Load the JSON data from the file
+		$flowhookdetail = Get-Content "$baseDirectory\$org-flowhook.json" | ConvertFrom-Json
+		
+		# Add debugging output to check the contents of $flowhookdetail
+		Write-Host "JSON Data:$flowhookdetail"
+		
 		
 		# Iterate through each value in the response
 		foreach ($value in $flowhookdetail) {
