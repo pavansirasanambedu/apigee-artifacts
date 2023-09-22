@@ -767,9 +767,9 @@ if (!(Test-Path -PathType Container $directoryName)) {
 	        }
 	        # $flowDetailRev2 = $baseURL+$org+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"?format=bundle"
 		 	$flowDetailRev2 = $baseURL+$org+"/environments/"+$($env)+"/sharedflows/"+$($sharedflow.name)+"/revisions/"+$($latestFlowRevision)+"/deployments"
-			https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/sharedflows/SF-jwt-token/revisions/3/deployments
+			# https://apigee.googleapis.com/v1/organizations/esi-apigee-x-394004/environments/eval/sharedflows/SF-jwt-token/revisions/3/deployments
 	        # $SharedFlowZipFile = $org+"-sharedflow-"+$($sharedflow.name)+"-rev"+$($latestFlowRevision)+".zip"
-		 	Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$($sharedflow.name).json"
+		 	# Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "$($sharedflow.name).json"
 	        
 	        # $response = Invoke-RestMethod -Uri $flowDetailRev2 -Method:Get -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile $SharedFlowZipFile
 	
