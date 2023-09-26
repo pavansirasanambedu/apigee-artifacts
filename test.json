@@ -1,68 +1,13 @@
 {
-  "proxies": [
-    {
-      "name": "ResponseCachePreFilter",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "Template-oauth2",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "ZUUL-Filters",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "apigee-cicd",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "apigee-kVM",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "common-template_Ankit",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "esi-apigee-x-394004-proxy-FLSessionPreFilter-rev5",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "flowhook-proxy",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "json-extract",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "jwt-token",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "message-github-proxy_rev2_2023_09_04",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "oauth-jwt-token",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "sessionid-cache",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "test-apikey",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "test-world",
-      "apiProxyType": "PROGRAMMABLE"
-    },
-    {
-      "name": "test_messageid_rev3_2023_07_05",
-      "apiProxyType": "PROGRAMMABLE"
-    }
-  ]
+  "args": {}, 
+  "headers": {
+    "Authorization": "Bearer ya29.c.b0Aaekm1LZrLRK_IG2PqGVcLe8idQhfVvoYeXxlOBwd2DanJ5_dAl2TRzY9T_96YNniAsMg5iMcB6yLuU_yhuMWHsF_j5P9NzbxFwHCGtGDso9fDTTaz4pyKC4-p0ox4KkVYKUCdw5OvWzOGcUIA2a-LYKiAoIFrEdlm-bwSxTxywG37Y3b1TAvSWYJbhXqv_9UX3-Grg-8EMgjw2P999dbyu05poU6nDy4l6VTLfQhAWoOA4IQvWBaFMLXoFH1Yu86OpBtpH6TTJYdnAEX6YTOYgVqmQGMfdq130JoH9OFSZogIAWs4wN7BYQb261Kl1gl3J-MIUf-rQapv2rarnZEFbiBG3v_BGr26bcJ5Q8hsDuI0jskCEjDcz33zZfF4ZNWtY7lvVz3ivS8dBZ3PPpBYEL08SyjNSBR9MiKu-MYje9dHqab3U92X5qILjXMfYTWq62vvUn09vTNLqXUsiwIZcCG0VaaZ3y_hC9xvQyGyUjaKPhZKu1N_GtLDX99oem_EvjV4Tq9l0VrL2OUU2uEwJIGqV04pyIV1R0fi-JkptTBvidO2qBR-Sfe2u6iMDTBKMOveX7VO1jbIj6OBxV4oLBtqlT-K9pUoYqiBdLtU0mbh4IB66yCkxwaSmmRrHr9k5AVkRAZFWb34F8vmyAoOKYq7FBC6Q7VvPMLvP1cf6QLj8DbtmJr84DyXt41kV7qm5P7AjSmy2EGTJfoEHbE733Csdlf6htFakbMlOdUqmvjbldV5JbBl-ao-dfFbb09Rwd2tUZ7veRYB9XxMQyluJgUznoaM1uoZr8p5u_7pI9OcVwYByf_dtROJi_IQMQX0ZsZxZZUOzrOY9ZS2qdMbWRrapotxr_odiuhetuumFtI2zyasS0RW9soxqhB4qwFaOrf9cstzjop-I4QwtBpOyzOcbFXQ-5ksUF_b1w3u4bVyJI_b6ixrn_wh1fFmFB-5__9twfsJkiQtpxwfj219xcM57wfju5dfidausnw1cueR425J8vhBt", 
+    "Content-Length": "0", 
+    "Content-Type": "application/json", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Mozilla/5.0 (Linux; Linux 6.2.0-1011-azure #11~22.04.1-Ubuntu SMP Wed Aug 23 19:26:19 UTC 2023; ) PowerShell/7.2.13", 
+    "X-Amzn-Trace-Id": "Root=1-6512992c-237cc788354476dc4fc1cf76"
+  }, 
+  "origin": "20.42.49.152", 
+  "url": "https://httpbin.org/get"
 }
