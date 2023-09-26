@@ -17,11 +17,6 @@ on:
         options:
           - esi-apigee-x-394004
           - esi-apigee-x-3940042
-      environment:
-        type: string
-        required: false
-        default: "eval"
-        description: Environment to deploy
   schedule:
     - cron: '30 15 * * *' # Scheduled to run every day at 21:00 IST (15:30 UTC)
 env:
