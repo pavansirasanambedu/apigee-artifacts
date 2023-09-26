@@ -13,7 +13,7 @@ on:
       deployment-org:
         type: choice
         description: Import to Org
-        default: "esi-apigee-x-394004"
+        default: "test-schedule"
         options:
           - esi-apigee-x-394004
           - esi-apigee-x-3940042
@@ -111,6 +111,11 @@ jobs:
       - name: Push changes to Git
         run: |
           git push origin artifacts
+      - name: Send message to ms teams
+        uses: dhollerbach/actions.send-message-to-ms-teams@1.0.10
+        with:
+          webhook: 'https://easystepinit.webhook.office.com/webhookb2/2d93a69e-2f5d-4f76-b33c-ccdac9390ed9@ad0d83ba-dcda-4c3f-883e-d27383db90fe/IncomingWebhook/10fe6614258f47699496a5f773738c82/d808ff93-7a2a-4f8e-90a9-e22af125d537'
+          message: 'W00w it werked!'
 
 
 
