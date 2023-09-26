@@ -131,6 +131,8 @@ jobs:
           echo "Run ID: $RUN_ID"
           echo "Run Number: $RUN_NUMBER"
           echo "Timestamp: $timestamp"
+
+          echo "Timestamp in variable: $timestamp"  # Added this line for debugging
         
       - name: Get GitHub User Information
         id: github_user_info
@@ -146,6 +148,9 @@ jobs:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
           TIMESTAMP: $timestamp
         run: |
+          # Debugging: Display the value of TIMESTAMP
+          echo "TIMESTAMP in env: $TIMESTAMP"
+
           # Create a JSON payload with GitHub Actions details
           JSON='{
             "title": "GitHub Actions Notification",
@@ -156,8 +161,6 @@ jobs:
           
           # Send the JSON payload to the Teams webhook URL
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
-
-
 
 
           
