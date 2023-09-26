@@ -51,14 +51,11 @@ else {
       cd apps
       Write-Host "else"
 }
-# PowerShell script
 $github_actor = "${{ github.actor }}"  # Use the GitHub actor variable
+$github_actor = $github_actor -replace '\s*\([^)]*\)\s*', ''  # Remove parentheses and contents
 
-# Remove parentheses if they exist
-$github_actor = $github_actor -replace '\s*\([^)]*\)\s*', ''
-
-# Set the modified value as an output variable
 Write-Output "##vso[task.setvariable variable=githubActor;isOutput=true]$github_actor"
+
 
 
 
