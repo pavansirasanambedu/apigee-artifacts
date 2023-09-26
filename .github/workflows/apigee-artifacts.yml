@@ -157,14 +157,13 @@ jobs:
 
       - name: Send Notification to Teams - Failure
         if: failure()
-        env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
           # Create a JSON payload with GitHub Actions details for failure status
           JSON='{
             "title": "GitHub Actions Notification - Failure",
             "summary": "GitHub Actions workflow failed",
-            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} (${{ github.event.head_commit.author.email }}) on branch ${{ github.ref }}. Status: ${{ job.status
+            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} (${{ github.event.head_commit.author.email }}) on branch ${{ github.ref }}. Status: ${{ job.status }}",
+            }'
 
 
 
