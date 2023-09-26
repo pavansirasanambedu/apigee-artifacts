@@ -24,6 +24,8 @@ on:
         description: Environment to deploy
   schedule:
     - cron: '30 15 * * *' # Scheduled to run every day at 21:00 IST (15:30 UTC)
+  env:
+    TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
 
 jobs:
   apigee-window-artifacts:
@@ -111,11 +113,26 @@ jobs:
       - name: Push changes to Git
         run: |
           git push origin artifacts
-      - name: Send message to ms teams
-        uses: dhollerbach/actions.send-message-to-ms-teams@1.0.10
-        with:
-          webhook: 'https://easystepinit.webhook.office.com/webhookb2/2d93a69e-2f5d-4f76-b33c-ccdac9390ed9@ad0d83ba-dcda-4c3f-883e-d27383db90fe/IncomingWebhook/10fe6614258f47699496a5f773738c82/d808ff93-7a2a-4f8e-90a9-e22af125d537'
-          message: 'W00w it werked!'
+      - name: Send Notification to Teams
+        run: |
+          # Create a JSON payload with GitHub Actions details
+          JSON='{
+            "title": "GitHub Actions Notification",
+            "summary": "GitHub Actions workflow completed",
+            "text": "Workflow was triggered by '${{ github.event_name }}' event on '${{ github.ref }}' branch. Status: '${{ job.status }}'",
+            "themeColor": "0078D4"
+          }'
+          
+          # Send the JSON payload to the Teams webhook URL
+          curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
+
+
+          
+      # - name: Send message to ms teams
+      #   uses: dhollerbach/actions.send-message-to-ms-teams@1.0.10
+      #   with:
+      #     webhook: 'https://easystepinit.webhook.office.com/webhookb2/2d93a69e-2f5d-4f76-b33c-ccdac9390ed9@ad0d83ba-dcda-4c3f-883e-d27383db90fe/IncomingWebhook/10fe6614258f47699496a5f773738c82/d808ff93-7a2a-4f8e-90a9-e22af125d537'
+      #     message: 'W00w it werked!'
 
 
 
