@@ -27,6 +27,8 @@ on:
 env:
   TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
   current_timestamp: $(($(date +%s%N) / 1000000))
+  folder_names_string: ${{ some_value }}
+  github_actor: ${{ github.actor }}
 
 jobs:
   apigee-window-artifacts:
