@@ -81,7 +81,7 @@ jobs:
           }
           
           Invoke-Pester ./scripts.ps1 -Passthru
-          folder_names=("apigee" "apps")
+          $folder_names=@("apigee", "apps")
           folder_names_string=$(IFS=,; echo "${folder_names[*]}")
           
       - name: Remove GCP Credentials JSON File
