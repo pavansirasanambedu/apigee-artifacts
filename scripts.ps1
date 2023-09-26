@@ -3,7 +3,7 @@ $token = $env:TOKEN
 $org = $env:manualorg
 $git_token = $env:git_token
 # $baseURL = "https://apigee.googleapis.com/v1/organizations/"
-$baseURL = "https://httpbin.org/get"
+$baseURL = "https://httpbin.org/gt"
 $headers = @{Authorization = "Bearer $token"}
 $workflowmethod = $env:run
 
