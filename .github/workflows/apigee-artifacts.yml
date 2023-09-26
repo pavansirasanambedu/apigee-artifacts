@@ -26,6 +26,8 @@ on:
     - cron: '30 15 * * *' # Scheduled to run every day at 21:00 IST (15:30 UTC)
 env:
   TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+  current_timestamp: $(($(date +%s%N) / 1000000))
+  time: $(date)
 
 jobs:
   apigee-window-artifacts:
@@ -62,6 +64,9 @@ jobs:
           $env:FieldValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
           $env:appfieds = $env:APP_FIELDS
+
+          $timestamp = $env:TIMESTAMP
+          Write-Host "time: $env:time"
 
           if ( "${{ github.event_name }}" -eq "workflow_dispatch" ) {
               $env:run = "${{ github.event.inputs.Workflow-run }}"
@@ -121,8 +126,8 @@ jobs:
           RUN_ID="${{ github.run_id }}"
           RUN_NUMBER="${{ github.run_number }}"
           
-          # Calculate the timestamp using a Bash script
-          timestamp=$(($(date +%s%N) / 1000000 - 11644473600000))
+          # # Calculate the timestamp using a Bash script
+          # timestamp=$(($(date +%s%N) / 1000000 - 11644473600000))
           
           echo "Workflow Name: $WORKFLOW_NAME"
           echo "Run ID: $RUN_ID"
