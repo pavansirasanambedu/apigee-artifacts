@@ -25,13 +25,8 @@ on:
   schedule:
     - cron: '30 15 * * *' # Scheduled to run every day at 21:00 IST (15:30 UTC)
 env:
-  GIT_TOKEN: ${{ secrets.TOKEN_GIT }}
-  KEY: ${{ secrets.key }}
-  ORG: ${{ secrets.APIGEE_ORG }}
-  FIELD_VALUES: "name,value"
-  FIRST_LEVEL_OBJECT: "keyValueEntries"
-  DEPLOYMENT_ORG: ${{ github.event.inputs.deployment-org }}
-  GITHUB_ACTOR: ${{ github.actor }}
+  TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+  current_timestamp: $(($(date +%s%N) / 1000000))
 
 jobs:
   apigee-window-artifacts:
@@ -60,38 +55,32 @@ jobs:
       - name: Perform Apigee Export
         shell: pwsh
         run: |
+          $env:git_token = "${{ secrets.TOKEN_GIT }}"
+          $env:key = "${{ secrets.key }}"
+          $env:org = "${{ secrets.APIGEE_ORG }}"
+          $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
+          
           $env:FieldValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
-          $env:appfieds = "${{ env.APP_FIELDS }}"
-      
+          $env:appfieds = $env:APP_FIELDS
+
           $timestamp = $(date)
           Write-Host "Time: $timestamp"
           
-          $env:run = "${{ github.event.inputs.Workflow-run }}"
-          $env:deployment_org = "${{ github.event.inputs.deployment-org }}"
-          $env:github_actor = "${{ github.actor }}"
-          
-          # Export environment variables for use in the script
-          echo "GIT_TOKEN=$env:git_token" >> $GITHUB_ENV
-          echo "KEY=$env:key" >> $GITHUB_ENV
-          echo "ORG=$env:org" >> $GITHUB_ENV
-          echo "TOKEN=$env:TOKEN" >> $GITHUB_ENV
-          echo "FIELD_VALUES=$env:FieldValuestoEncrypt" >> $GITHUB_ENV
-          echo "FIRST_LEVEL_OBJECT=$env:FIRST_LEVEL_OBJECT" >> $GITHUB_ENV
-          echo "TIMESTAMP=$timestamp" >> $GITHUB_ENV
-          echo "RUN=$env:run" >> $GITHUB_ENV
-          echo "DEPLOYMENT_ORG=$env:deployment_org" >> $GITHUB_ENV
-          echo "GITHUB_ACTOR=$env:github_actor" >> $GITHUB_ENV
+
+          if ( "${{ github.event_name }}" -eq "workflow_dispatch" ) {
+              $env:run = "${{ github.event.inputs.Workflow-run }}"
+              if ($env:run -eq "manual") {
+                  Write-Host "Entered into Manual...!"
+                  $org = "${{ github.event.inputs.deployment-org }}"
+                  Write-Host $org
+                  $env:org = $org
+              }
+          } else {
+              Write-Host "Entered into Schedule...!"
+          }
           
           Invoke-Pester ./scripts.ps1 -Passthru
-
-          # Retrieve the output variables set by the script
-          folder_names_string=${{ steps.script_step.outputs.folder_names_string }}
-          github_actor=${{ steps.script_step.outputs.github_actor }}
-
-
-
-          
       - name: Remove GCP Credentials JSON File
         run: rm gha-creds*.json
 
@@ -138,20 +127,14 @@ jobs:
           RUN_NUMBER="${{ github.run_number }}"
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           echo "::set-output name=TIMESTAMP::$TIMESTAMP"
-
-      - name: Set GitHub Actor
-        id: set_github_actor
-        run: |
-          # Access the modified GitHub actor variable from the script
-          github_actor="${{ steps.script_step.outputs.githubActor }}"
-          echo "github_actor=$github_actor" >> $GITHUB_ENV
-
         
       - name: Get GitHub User Information
         id: github_user_info
         run: |
+          USERNAME="${{ github.actor }}"
           EMAIL="${{ github.event.head_commit.author.email }}"
           
+          echo "GitHub Actor (Username): $USERNAME"
           echo "GitHub Actor's Email: $EMAIL"
         
       - name: Convert Timestamp to Human Readable Format
@@ -160,16 +143,16 @@ jobs:
           TIMESTAMP="${{ steps.workflow_info.outputs.TIMESTAMP }}"
           HUMAN_READABLE_TIMESTAMP=$(date -u -d "$TIMESTAMP" +"%Y-%m-%d %H:%M:%S UTC")
           echo "::set-output name=HUMAN_READABLE_TIMESTAMP::$HUMAN_READABLE_TIMESTAMP"
+
       - name: Send Notification to Teams
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          org: ${{ secrets.APIGEE_ORG }}
         run: |
           # Create a JSON payload with GitHub Actions details
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed",
-            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ env.org }}\nFolder Names: $folder_names_string\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by $github_actor on branch ${{ github.ref }}. Status: ${{ job.status }}",
+            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} (${{ github.event.head_commit.author.email }}) on branch ${{ github.ref }}. Status: ${{ job.status }}",
             "themeColor": "0078D4"
           }'
           
