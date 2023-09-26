@@ -61,10 +61,19 @@ else {
       cd apps
       Write-Host "else"
 }
+# Create a hashtable for the output data
+$outputData = @{
+    Org = $org
+    "Folder Names" = $folder_names_string
+    "Triggered by" = "$github_actor on branch $env:GITHUB_REF. Status: $env:JOB_STATUS"
+}
 
-"Org: $($org)",
-"Folder Names: $($folder_names_string)",
-"Triggered by $($github_actor) on branch ${{ github.ref }}. Status: ${{ job.status }}",
+# Convert the hashtable to JSON
+$jsonPayload = $outputData | ConvertTo-Json
+
+# Output the JSON payload
+Write-Output $jsonPayload
+
 
 
 
