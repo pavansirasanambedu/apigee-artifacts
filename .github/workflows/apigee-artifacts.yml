@@ -24,8 +24,8 @@ on:
         description: Environment to deploy
   schedule:
     - cron: '30 15 * * *' # Scheduled to run every day at 21:00 IST (15:30 UTC)
-  env:
-    TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+env:
+  TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
 
 jobs:
   apigee-window-artifacts:
