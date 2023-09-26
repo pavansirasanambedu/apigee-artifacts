@@ -25,10 +25,18 @@ on:
   schedule:
     - cron: '30 15 * * *' # Scheduled to run every day at 21:00 IST (15:30 UTC)
 env:
-  TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-  current_timestamp: $(($(date +%s%N) / 1000000))
-  folder_names_string: your_actual_value
-  github_actor: ${{ github.actor }}
+  GIT_TOKEN: ${{ secrets.TOKEN_GIT }}
+  KEY: ${{ secrets.key }}
+  ORG: ${{ secrets.APIGEE_ORG }}
+  TOKEN: ${{ steps.auth.outputs.access_token }}
+  FIELD_VALUES: "name,value"
+  FIRST_LEVEL_OBJECT: "keyValueEntries"
+  APP_FIELDS: ${{ env.APP_FIELDS }}
+  TIMESTAMP: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}
+  RUN: ${{ github.event.inputs.Workflow-run }}
+  DEPLOYMENT_ORG: ${{ github.event.inputs.deployment-org }}
+  GITHUB_ACTOR: ${{ github.actor }}
+  FOLDER_NAMES_STRING: your_actual_value
 
 jobs:
   apigee-window-artifacts:
@@ -57,6 +65,18 @@ jobs:
       - name: Perform Apigee Export
         shell: pwsh
         run: |
+          $env:git_token = $env:GIT_TOKEN
+          $env:key = $env:KEY
+          $env:org = $env:ORG
+          $env:TOKEN = $env:TOKEN
+          $env:FieldValuestoEncrypt = $env:FIELD_VALUES
+          $env:FIRST_LEVEL_OBJECT = $env:FIRST_LEVEL_OBJECT
+          $env:appfieds = $env:APP_FIELDS
+          $timestamp = $env:TIMESTAMP
+          $env:run = $env:RUN
+          $env:deployment_org = $env:DEPLOYMENT_ORG
+          $env:github_actor = $env:GITHUB_ACTOR
+          $env:folder_names_string = $env:FOLDER_NAMES_STRING
           $env:git_token = "${{ secrets.TOKEN_GIT }}"
           $env:key = "${{ secrets.key }}"
           $env:org = "${{ secrets.APIGEE_ORG }}"
