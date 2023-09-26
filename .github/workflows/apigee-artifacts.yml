@@ -113,19 +113,43 @@ jobs:
       - name: Push changes to Git
         run: |
           git push origin artifacts
+
+      - name: Get GitHub Workflow Information
+        id: workflow_info
+        run: |
+          WORKFLOW_NAME="${{ github.workflow }}"
+          RUN_ID="${{ github.run_id }}"
+          RUN_NUMBER="${{ github.run_number }}"
+          TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"  # Get current UTC timestamp
+          
+          echo "Workflow Name: $WORKFLOW_NAME"
+          echo "Run ID: $RUN_ID"
+          echo "Run Number: $RUN_NUMBER"
+          echo "Timestamp: $TIMESTAMP"
+        
+      - name: Get GitHub User Information
+        id: github_user_info
+        run: |
+          USERNAME="${{ github.actor }}"
+          EMAIL="${{ github.event.head_commit.author.email }}"
+          
+          echo "GitHub Actor (Username): $USERNAME"
+          echo "GitHub Actor's Email: $EMAIL"
+        
       - name: Send Notification to Teams
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
           # Create a JSON payload with GitHub Actions details
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed",
-            "text": "Workflow was triggered by '${{ github.event_name }}' event on '${{ github.ref }}' branch. Status: '${{ job.status }}'",
+            "text": "Workflow Name: $WORKFLOW_NAME\nRun ID: $RUN_ID\nRun Number: $RUN_NUMBER\nTimestamp: $TIMESTAMP\nTriggered by $USERNAME ($EMAIL) on branch '${{ github.ref }}'. Status: '${{ job.status }}'",
             "themeColor": "0078D4"
           }'
           
           # Send the JSON payload to the Teams webhook URL
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
-
 
           
       # - name: Send message to ms teams
