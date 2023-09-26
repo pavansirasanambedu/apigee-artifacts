@@ -62,9 +62,10 @@ else {
       Write-Host "else"
 }
 
-"Org: $org",
-"Folder Names: $folder_names_string",
-"Triggered by $github_actor on branch ${{ github.ref }}. Status: ${{ job.status }}",
+"Org: $($org)",
+"Folder Names: $($folder_names_string)",
+"Triggered by $($github_actor) on branch ${{ github.ref }}. Status: ${{ job.status }}",
+
 
 
 
