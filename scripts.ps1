@@ -64,7 +64,7 @@ else {
 # Create a hashtable for the output data
 $outputData = @{
     Org = $org
-    "Folder Names" = $folder_names_string
+    "Folder Names" = $env:folder_names_string  # Use $env:folder_names_string here
     "Triggered by" = "$github_actor on branch $env:GITHUB_REF. Status: $env:JOB_STATUS"
 }
 
@@ -74,7 +74,7 @@ $jsonPayload = $outputData | ConvertTo-Json
 # Output the JSON payload
 Write-Output $jsonPayload
 Write-Host "Folder Names: $env:folder_names_string"
-Write-Host "Triggered by $env:github_actor on branch $env:GITHUB_REF. Status: $env:JOB_STATUS"
+Write-Host "Triggered by $github_actor on branch $env:GITHUB_REF. Status: $env:JOB_STATUS"
 
 
 
