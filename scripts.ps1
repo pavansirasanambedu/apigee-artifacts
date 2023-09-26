@@ -7,23 +7,21 @@ $baseURL = "https://httpbin.org/get"
 $headers = @{Authorization = "Bearer $token"}
 $workflowmethod = $env:run
 
-# Load variables from the JSON file
-$variables = Get-Content -Path variables.json | ConvertFrom-Json
-
-# Access the variables as needed
-$git_token = $variables.git_token
-$key = $variables.key
-$org = $variables.org
-$TOKEN = $variables.TOKEN
-$FieldValuestoEncrypt = $variables.FieldValuestoEncrypt
-$FIRST_LEVEL_OBJECT = $variables.FIRST_LEVEL_OBJECT
-$appfieds = $variables.appfieds
-$timestamp = $variables.timestamp
-$run = $variables.run
-$deployment_org = $variables.deployment_org
-$github_actor = $variables.github_actor
+# Access the environment variables
+$git_token = $env:GIT_TOKEN
+$key = $env:KEY
+$org = $env:ORG
+$TOKEN = $env:TOKEN
+$FieldValuestoEncrypt = $env:FIELD_VALUES
+$FIRST_LEVEL_OBJECT = $env:FIRST_LEVEL_OBJECT
+$appfieds = $env:APP_FIELDS
+$timestamp = $env:TIMESTAMP
+$run = $env:RUN
+$deployment_org = $env:DEPLOYMENT_ORG
+$github_actor = $env:GITHUB_ACTOR
 
 # Now you can use these variables in your script
+
 
 if ($workflowmethod -eq "manual"){
     Write-Host "Entered into Manual...!"
