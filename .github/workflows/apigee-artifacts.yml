@@ -136,8 +136,8 @@ jobs:
         run: |
           # Access the modified GitHub actor variable from the script
           github_actor="${{ steps.script_step.outputs.githubActor }}"
+          echo "github_actor=$github_actor" >> $GITHUB_ENV
 
-          echo "GitHub Actor (Username): $github_actor"
         
       - name: Get GitHub User Information
         id: github_user_info
