@@ -7,6 +7,10 @@ $baseURL = "https://httpbin.org/get"
 $headers = @{Authorization = "Bearer $token"}
 $workflowmethod = $env:run
 
+$org = $env:org
+$folder_names_string = $env:folder_names_string
+$github_actor = $env:github_actor
+
 Write-Host $workflowmethod
 Write-Host $env:manualorg
 
@@ -51,9 +55,11 @@ else {
       cd apps
       Write-Host "else"
 }
-$org = $env:org
-$folder_names_string = $env:folder_names_string
-$github_actor = $env:github_actor
+
+"Org: $org",
+"Folder Names: $folder_names_string",
+"Triggered by $github_actor on branch ${{ github.ref }}. Status: ${{ job.status }}",
+
 
 
 
