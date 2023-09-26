@@ -126,13 +126,18 @@ jobs:
             RUN_ID="${{ github.run_id }}"
             RUN_NUMBER="${{ github.run_number }}"
     
-            # Calculate the timestamp using a PowerShell script
-            $now = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+            # Calculate the timestamp using a Bash script
+            timestamp=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
     
             echo "Workflow Name: $WORKFLOW_NAME"
             echo "Run ID: $RUN_ID"
             echo "Run Number: $RUN_NUMBER"
-            echo "Timestamp: $now"
+            echo "Timestamp: $timestamp"
+    
+      - name: Print Timestamp
+        run: |
+            echo "Timestamp: ${{ steps.workflow_info.outputs.timestamp }}"
+
 
       - name: Get GitHub User Information
         id: github_user_info
