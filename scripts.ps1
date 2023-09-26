@@ -73,6 +73,8 @@ $jsonPayload = $outputData | ConvertTo-Json
 
 # Output the JSON payload
 Write-Output $jsonPayload
+Write-Host "Folder Names: $env:folder_names_string"
+Write-Host "Triggered by $env:github_actor on branch $env:GITHUB_REF. Status: $env:JOB_STATUS"
 
 
 
