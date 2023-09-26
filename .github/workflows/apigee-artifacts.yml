@@ -144,7 +144,7 @@ jobs:
       - name: Send Notification to Teams
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          TIMESTAMP: $timestamp
+          TIMESTAMP: $(date +%s)
         run: |
           # Debugging: Display the value of TIMESTAMP
           echo "Timestamp in variable: $TIMESTAMP"
