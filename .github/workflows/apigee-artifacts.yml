@@ -157,8 +157,6 @@ jobs:
 
       - name: Send Notification to Teams - Failure
         if: failure()
-        env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
           # Create a JSON payload with GitHub Actions details for failure status
           JSON='{
