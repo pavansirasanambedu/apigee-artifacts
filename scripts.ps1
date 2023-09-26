@@ -51,10 +51,9 @@ else {
       cd apps
       Write-Host "else"
 }
-$github_actor = "${{ github.actor }}"  # Use the GitHub actor variable
-$github_actor = $github_actor -replace '\s*\([^)]*\)\s*', ''  # Remove parentheses and contents
-
-Write-Output "##vso[task.setvariable variable=githubActor;isOutput=true]$github_actor"
+# Access GitHub Actor from the environment variable
+$github_actor = $env:github_actor
+Write-Host "GitHub Actor: $github_actor"
 
 
 
