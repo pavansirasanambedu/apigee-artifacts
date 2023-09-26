@@ -122,10 +122,10 @@ jobs:
           RUN_NUMBER="${{ github.run_number }}"
           TIMESTAMP=$(date)  # Get current UTC timestamp
           
-          Write-Host "Workflow Name: $WORKFLOW_NAME"
-          Write-Host "Run ID: $RUN_ID"
-          Write-Host "Run Number: $RUN_NUMBER"
-          Write-Host "Timestamp: $TIMESTAMP"
+          echo "Workflow Name: $WORKFLOW_NAME"
+          echo "Run ID: $RUN_ID"
+          echo "Run Number: $RUN_NUMBER"
+          echo "Timestamp: $TIMESTAMP"
         
       - name: Get GitHub User Information
         id: github_user_info
