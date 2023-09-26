@@ -126,11 +126,7 @@ jobs:
           RUN_ID="${{ github.run_id }}"
           RUN_NUMBER="${{ github.run_number }}"
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          
-          echo "Workflow Name: $WORKFLOW_NAME"
-          echo "Run ID: $RUN_ID"
-          echo "Run Number: $RUN_NUMBER"
-          echo "Timestamp: $TIMESTAMP"
+          echo "::set-output name=TIMESTAMP::$TIMESTAMP"
         
       - name: Get GitHub User Information
         id: github_user_info
@@ -145,17 +141,20 @@ jobs:
         id: convert_timestamp
         run: |
           TIMESTAMP="${{ steps.workflow_info.outputs.TIMESTAMP }}"
-          HUMAN_READABLE_TIMESTAMP=$(date -d "$TIMESTAMP" +"%Y-%m-%d %H:%M:%S %Z")
+          HUMAN_READABLE_TIMESTAMP=$(date -u -d "$TIMESTAMP" +"%Y-%m-%d %H:%M:%S UTC")
           echo "::set-output name=HUMAN_READABLE_TIMESTAMP::$HUMAN_READABLE_TIMESTAMP"
 
       - name: Send Notification to Teams
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
-          HUMAN_READABLE_TIMESTAMP="${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}"
-          
           # Create a JSON payload with GitHub Actions details
-          JSON="{\"title\": \"GitHub Actions Notification\",\"summary\": \"GitHub Actions workflow completed\",\"text\": \"Workflow Name: ${{ github.workflow }}\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nTimestamp: $HUMAN_READABLE_TIMESTAMP\\nTriggered by ${{ github.actor }} (${{ github.event.head_commit.author.email }}) on branch ${{ github.ref }}. Status: ${{ job.status }}\",\"themeColor\": \"0078D4\"}"
+          JSON='{
+            "title": "GitHub Actions Notification",
+            "summary": "GitHub Actions workflow completed",
+            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} (${{ github.event.head_commit.author.email }}) on branch ${{ github.ref }}. Status: ${{ job.status }}",
+            "themeColor": "0078D4"
+          }'
           
           # Send the JSON payload to the Teams webhook URL
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
