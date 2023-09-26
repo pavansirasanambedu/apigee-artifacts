@@ -71,23 +71,24 @@ jobs:
           $env:deployment_org = "${{ github.event.inputs.deployment-org }}"
           $env:github_actor = "${{ github.actor }}"
           
-          $variables = @{
-            git_token = $env:git_token
-            key = $env:key
-            org = $env:org
-            TOKEN = $env:TOKEN
-            FieldValuestoEncrypt = $env:FieldValuestoEncrypt
-            FIRST_LEVEL_OBJECT = $env:FIRST_LEVEL_OBJECT
-            appfieds = $env:appfieds
-            timestamp = $timestamp
-            run = $env:run
-            deployment_org = $env:deployment_org
-            github_actor = $env:github_actor
-          } | ConvertTo-Json | Set-Content -Path variables.json -Encoding UTF8
-          
-          Invoke-Pester ./scripts.ps1 -Passthru -VariablesFile variables.json
           $folder_names=@("apigee", "apps")
           $folder_names_string = $folder_names -join ','
+          
+          # Export environment variables for use in the script
+          echo "GIT_TOKEN=$env:git_token" >> $GITHUB_ENV
+          echo "KEY=$env:key" >> $GITHUB_ENV
+          echo "ORG=$env:org" >> $GITHUB_ENV
+          echo "TOKEN=$env:TOKEN" >> $GITHUB_ENV
+          echo "FIELD_VALUES=$env:FieldValuestoEncrypt" >> $GITHUB_ENV
+          echo "FIRST_LEVEL_OBJECT=$env:FIRST_LEVEL_OBJECT" >> $GITHUB_ENV
+          echo "APP_FIELDS=$env:appfieds" >> $GITHUB_ENV
+          echo "TIMESTAMP=$timestamp" >> $GITHUB_ENV
+          echo "RUN=$env:run" >> $GITHUB_ENV
+          echo "DEPLOYMENT_ORG=$env:deployment_org" >> $GITHUB_ENV
+          echo "GITHUB_ACTOR=$env:github_actor" >> $GITHUB_ENV
+          
+          Invoke-Pester ./scripts.ps1 -Passthru
+
 
           
       - name: Remove GCP Credentials JSON File
