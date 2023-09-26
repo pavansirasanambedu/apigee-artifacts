@@ -63,26 +63,32 @@ jobs:
           $env:FieldValuestoEncrypt = "name,value"
           $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
           $env:appfieds = $env:APP_FIELDS
-
+      
           $timestamp = $(date)
           Write-Host "Time: $timestamp"
           
-
-          if ( "${{ github.event_name }}" -eq "workflow_dispatch" ) {
-              $env:run = "${{ github.event.inputs.Workflow-run }}"
-              if ($env:run -eq "manual") {
-                  Write-Host "Entered into Manual...!"
-                  $org = "${{ github.event.inputs.deployment-org }}"
-                  Write-Host $org
-                  $env:org = $org
-              }
-          } else {
-              Write-Host "Entered into Schedule...!"
-          }
+          $env:run = "${{ github.event.inputs.Workflow-run }}"
+          $env:deployment_org = "${{ github.event.inputs.deployment-org }}"
+          $env:github_actor = "${{ github.actor }}"
           
-          Invoke-Pester ./scripts.ps1 -Passthru
+          $variables = @{
+            git_token = $env:git_token
+            key = $env:key
+            org = $env:org
+            TOKEN = $env:TOKEN
+            FieldValuestoEncrypt = $env:FieldValuestoEncrypt
+            FIRST_LEVEL_OBJECT = $env:FIRST_LEVEL_OBJECT
+            appfieds = $env:appfieds
+            timestamp = $timestamp
+            run = $env:run
+            deployment_org = $env:deployment_org
+            github_actor = $env:github_actor
+          } | ConvertTo-Json | Set-Content -Path variables.json -Encoding UTF8
+          
+          Invoke-Pester ./scripts.ps1 -Passthru -VariablesFile variables.json
           $folder_names=@("apigee", "apps")
           $folder_names_string = $folder_names -join ','
+
           
       - name: Remove GCP Credentials JSON File
         run: rm gha-creds*.json
