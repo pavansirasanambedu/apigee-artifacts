@@ -139,12 +139,12 @@ jobs:
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           echo "::set-output name=TIMESTAMP::$TIMESTAMP"
 
-      # - name: Set GitHub Actor
-      #   id: set_github_actor
-      #   run: |
-      #     # Access the modified GitHub actor variable from the script
-      #     github_actor="${{ steps.script_step.outputs.githubActor }}"
-      #     echo "github_actor=$github_actor" >> $GITHUB_ENV
+      - name: Set GitHub Actor
+        id: set_github_actor
+        run: |
+          # Access the modified GitHub actor variable from the script
+          github_actor="${{ steps.script_step.outputs.githubActor }}"
+          echo "github_actor=$github_actor" >> $GITHUB_ENV
 
         
       - name: Get GitHub User Information
