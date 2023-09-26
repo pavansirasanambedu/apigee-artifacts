@@ -81,6 +81,9 @@ jobs:
           }
           
           Invoke-Pester ./scripts.ps1 -Passthru
+          folder_names=("apigee" "apps")
+          folder_names_string=$(IFS=,; echo "${folder_names[*]}")
+          
       - name: Remove GCP Credentials JSON File
         run: rm gha-creds*.json
 
@@ -152,7 +155,7 @@ jobs:
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed",
-            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} (${{ github.event.head_commit.author.email }}) on branch ${{ github.ref }}. Status: ${{ job.status }}",
+            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: $org\nFolder Names: $folder_names_string\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} (${{ github.event.head_commit.author.email }}) on branch ${{ github.ref }}. Status: ${{ job.status }}",
             "themeColor": "0078D4"
           }'
           
