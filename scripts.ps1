@@ -51,9 +51,10 @@ else {
       cd apps
       Write-Host "else"
 }
-# Access GitHub Actor from the environment variable
+$org = $env:org
+$folder_names_string = $env:folder_names_string
 $github_actor = $env:github_actor
-Write-Host "GitHub Actor: $github_actor"
+
 
 
 
