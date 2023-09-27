@@ -77,10 +77,6 @@ jobs:
           
           Invoke-Pester ./scripts.ps1 -Passthru
 
-      - name: Use Output from Script
-        run: |
-          # Access the output value from the script
-          echo "Output Value: ${{ steps.my_step.outputs.my_variable }}"
       - name: Remove GCP Credentials JSON File
         run: rm gha-creds*.json
 
@@ -150,10 +146,12 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
+          # Get the dynamic value from the environment variable
+          MY_DYNAMIC_VALUE="${{ env.MY_DYNAMIC_VALUE }}"
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed successfully",
-            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} ($GITHUB_ACTOR_EMAIL) value ${{ steps.my_step.outputs.my_variable }} on branch ${{ github.ref }}. Status: ${{ job.status }}",
+            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} ($GITHUB_ACTOR_EMAIL) value $MY_DYNAMIC_VALUE on branch ${{ github.ref }}. Status: ${{ job.status }}",
             "themeColor": "0078D4"
           }'
           
