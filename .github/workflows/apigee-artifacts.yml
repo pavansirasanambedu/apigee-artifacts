@@ -76,10 +76,20 @@ jobs:
       #     }
           
           # Invoke-Pester ./scripts.ps1 -Passthru
-          
-      - name: Send Variable from Script File to YAML File
+      - name: Set execute permission for scripts.ps1
+        run: chmod +x variable-call.ps1
+
+      - name: Run PowerShell script
         run: |
-          powershell ./script.ps1
+          # Execute the PowerShell script and store its output in a variable
+          OUTPUT_FROM_SCRIPT=$(pwsh -File ./script.ps1)
+  
+          # Print the output to the workflow log
+          echo "Variable value: $OUTPUT_FROM_SCRIPT"
+          
+      # - name: Send Variable from Script File to YAML File
+      #   run: |
+      #     powershell ./script.ps1
 
       - name: Print Variable in YAML File
         id: print_variable
@@ -167,7 +177,7 @@ jobs:
           JSON="{
             \"title\": \"GitHub Actions Notification\",
             \"summary\": \"GitHub Actions workflow completed successfully\",
-            \"text\": \"Workflow Name: ${{ github.workflow }} (${{ steps.send_variable.outputs.my_variable }})\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nOrg: ${{ secrets.APIGEE_ORG }}\\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\\nvalue (${{ steps.print_variable.outputs }})\\non branch ${{ github.ref }}. Status: ${{ job.status }}\",
+            \"text\": \"Workflow Name: ${{ github.workflow }} (${{ steps.print_variable.outputs }})\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nOrg: ${{ secrets.APIGEE_ORG }}\\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\\nvalue (${{ steps.print_variable.outputs }})\\non branch ${{ github.ref }}. Status: ${{ job.status }}\",
             \"themeColor\": \"0078D4\"
           }"
 
