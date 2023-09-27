@@ -46,11 +46,10 @@ else {
       cd apps
       Write-Host "else"
 }
-# For this example, we set a sample variable
-SAMPLE_VARIABLE="Hello, world!"
+# PowerShell script to calculate a dynamic value
+$MY_DYNAMIC_VALUE = "Hello from PowerShell"
+Write-Host "##[set-output name=MY_DYNAMIC_VALUE;isOutput=true]$MY_DYNAMIC_VALUE"
 
-# Print the variable value
-echo $SAMPLE_VARIABLE
 
 
 
