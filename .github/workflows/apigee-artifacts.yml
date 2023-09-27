@@ -146,8 +146,9 @@ jobs:
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
           ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
-          MY_DYNAMIC_VALUE: ${{ steps.run_script.outputs.my_variable }}
+          
         run: |
+          MY_DYNAMIC_VALUE: ${{ steps.run_script.outputs.my_variable }}
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed successfully",
