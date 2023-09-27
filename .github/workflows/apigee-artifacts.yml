@@ -47,48 +47,51 @@ jobs:
           workload_identity_provider: 'projects/127369686749/locations/global/workloadIdentityPools/pavan-apigee-git/providers/pavan-apigee-git'
           service_account: 'workload-identity-federation@esi-apigee-x-394004.iam.gserviceaccount.com'
 
-      - name: Perform Apigee Export
-        shell: pwsh
-        run: |
-          $env:git_token = "${{ secrets.TOKEN_GIT }}"
-          $env:key = "${{ secrets.key }}"
-          $env:org = "${{ secrets.APIGEE_ORG }}"
-          $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
+      # - name: Perform Apigee Export
+      #   shell: pwsh
+      #   run: |
+      #     $env:git_token = "${{ secrets.TOKEN_GIT }}"
+      #     $env:key = "${{ secrets.key }}"
+      #     $env:org = "${{ secrets.APIGEE_ORG }}"
+      #     $env:TOKEN = "${{ steps.auth.outputs.access_token }}"
           
-          $env:FieldValuestoEncrypt = "name,value"
-          $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
-          $env:appfieds = $env:APP_FIELDS
+      #     $env:FieldValuestoEncrypt = "name,value"
+      #     $env:FIRST_LEVEL_OBJECT = "keyValueEntries"
+      #     $env:appfieds = $env:APP_FIELDS
 
-          $timestamp = $(date)
-          Write-Host "Time: $timestamp"
+      #     $timestamp = $(date)
+      #     Write-Host "Time: $timestamp"
           
 
-          if ( "${{ github.event_name }}" -eq "workflow_dispatch" ) {
-              $env:run = "${{ github.event.inputs.Workflow-run }}"
-              if ($env:run -eq "manual") {
-                  Write-Host "Entered into Manual...!"
-                  $org = "${{ github.event.inputs.deployment-org }}"
-                  Write-Host $org
-                  $env:org = $org
-              }
-          } else {
-              Write-Host "Entered into Schedule...!"
-          }
+      #     if ( "${{ github.event_name }}" -eq "workflow_dispatch" ) {
+      #         $env:run = "${{ github.event.inputs.Workflow-run }}"
+      #         if ($env:run -eq "manual") {
+      #             Write-Host "Entered into Manual...!"
+      #             $org = "${{ github.event.inputs.deployment-org }}"
+      #             Write-Host $org
+      #             $env:org = $org
+      #         }
+      #     } else {
+      #         Write-Host "Entered into Schedule...!"
+      #     }
           
           # Invoke-Pester ./scripts.ps1 -Passthru
           
-          # Run your script and capture the output in a variable
-          OUTPUT_FROM_SCRIPT=$(pwsh -File ./scripts.ps1)
-          echo "::set-output name=MY_DYNAMIC_VALUE::$OUTPUT_FROM_SCRIPT"
+      - name: Send Variable from Script File to YAML File
+        run: |
+          powershell ./script.ps1
+
+      - name: Print Variable in YAML File
+        id: print_variable
+        run: |
+          echo "Variable value: ${{ steps.send_variable.outputs.my_variable }}"
+
+      - name: Debug Print Variable
+        run: |
+          echo "Variable value: ${{ steps.print_variable.outputs }}"
 
       - name: Remove GCP Credentials JSON File
         run: rm gha-creds*.json
-
-      - name: Use the variable in YAML
-        run: |
-          # Access the variable from the previous step
-          VARIABLE_FROM_SCRIPT="${{ steps.script.outputs.MY_DYNAMIC_VALUE }}"
-          echo "Variable from script: $VARIABLE_FROM_SCRIPT"
 
       - name: Debug Git Config
         run: |
@@ -164,7 +167,7 @@ jobs:
           JSON="{
             \"title\": \"GitHub Actions Notification\",
             \"summary\": \"GitHub Actions workflow completed successfully\",
-            \"text\": \"Workflow Name: ${{ github.workflow }} ($VARIABLE_FROM_SCRIPT)\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nOrg: ${{ secrets.APIGEE_ORG }}\\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\\nvalue ($VARIABLE_FROM_SCRIPT)\\non branch ${{ github.ref }}. Status: ${{ job.status }}\",
+            \"text\": \"Workflow Name: ${{ github.workflow }} (${{ steps.send_variable.outputs.my_variable }})\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nOrg: ${{ secrets.APIGEE_ORG }}\\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\\nvalue (${{ steps.print_variable.outputs }})\\non branch ${{ github.ref }}. Status: ${{ job.status }}\",
             \"themeColor\": \"0078D4\"
           }"
 
