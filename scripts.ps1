@@ -7,21 +7,6 @@ $baseURL = "https://httpbin.org/gt"
 $headers = @{Authorization = "Bearer $token"}
 $workflowmethod = $env:run
 
-# Access the environment variables
-$git_token = $env:GIT_TOKEN
-$key = $env:KEY
-$org = $env:ORG
-$TOKEN = $env:TOKEN
-$FieldValuestoEncrypt = $env:FIELD_VALUES
-$FIRST_LEVEL_OBJECT = $env:FIRST_LEVEL_OBJECT
-$appfieds = $env:APP_FIELDS
-$timestamp = $env:TIMESTAMP
-$run = $env:RUN
-$deployment_org = $env:DEPLOYMENT_ORG
-$github_actor = $env:GITHUB_ACTOR
-
-# Now you can use these variables in your script
-
 
 if ($workflowmethod -eq "manual"){
     Write-Host "Entered into Manual...!"
@@ -61,25 +46,12 @@ else {
       cd apps
       Write-Host "else"
 }
-# Create a hashtable for the output data
-$outputData = @{
-    Org = $org
-    "Folder Names" = $folder_names_string
-    "Triggered by" = "$github_actor on branch $env:GITHUB_REF. Status: $env:JOB_STATUS"
-}
-
-# Convert the hashtable to JSON
-$jsonPayload = $outputData | ConvertTo-Json
-
-# Output the JSON payload
-Write-Output $jsonPayload
-Write-Host "Folder Names: $folder_names_string"
-Write-Host "Triggered by $github_actor on branch $env:GITHUB_REF. Status: $env:JOB_STATUS"
+$my_variable = "apps"
+# Set an output variable to send to the YAML workflow
+echo "::set-output name=my_variable::$my_variable"
 
 
-# Set output variables
-Write-Output "::set-output name=folder_names_string::$folder_names_string"
-Write-Output "::set-output name=github_actor::$github_actor"
+
 
 
 
