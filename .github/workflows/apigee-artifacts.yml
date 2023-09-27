@@ -148,7 +148,7 @@ jobs:
           ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
           
         run: |
-          MY_DYNAMIC_VALUE: ${{ steps.run_script.outputs.my_variable }}
+          MY_DYNAMIC_VALUE: "${{ steps.run_script.outputs.my_variable }}"
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed successfully",
