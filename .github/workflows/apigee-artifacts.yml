@@ -128,7 +128,11 @@ jobs:
         id: github_user_info
         run: |
           USERNAME="${{ github.actor }}"
+          ACTOR_EMAIL=$(curl -s -H "Authorization: token ${{ secrets.TOKEN_GIT }}" "https://api.github.com/users/${{ github.actor }}" | jq -r '.email')
           echo "GitHub Actor (Username): $USERNAME"
+          echo "GitHub Actor's Email: $ACTOR_EMAIL"
+        shell: bash
+
         
       - name: Convert Timestamp to Human Readable Format
         id: convert_timestamp
