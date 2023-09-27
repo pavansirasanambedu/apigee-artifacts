@@ -148,10 +148,13 @@ jobs:
         run: |
           # Get the dynamic value from the environment variable
           MY_DYNAMIC_VALUE="${{ env.MY_DYNAMIC_VALUE }}"
+          # Get the email address of the person who triggered the workflow
+          GITHUB_ACTOR_EMAIL=$(curl -s -H "Authorization: token ${{ secrets.TOKEN_GIT }}" "https://api.github.com/users/${{ github.actor }}" | jq -r '.email')
+
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed successfully",
-            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} ($GITHUB_ACTOR_EMAIL) value $MY_DYNAMIC_VALUE on branch ${{ github.ref }}. Status: ${{ job.status }}",
+            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} ($GITHUB_ACTOR_EMAIL)\nvalue $MY_DYNAMIC_VALUE\non branch ${{ github.ref }}. Status: ${{ job.status }}",
             "themeColor": "0078D4"
           }'
           
