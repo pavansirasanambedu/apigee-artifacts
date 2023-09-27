@@ -47,11 +47,19 @@
 #       Write-Host "else"
 # }
 
-# Set the variable to send
-$variable = "Hello, world!"
+# Inside variable-call.ps1, create an array of messages
+$messages = @("apps is created", "developers is created", "error in kvm")
 
-# Print the variable to the output stream
-echo "::set-output name=my_variable::$variable"
+# Convert the array to a JSON string (optional, depends on your use case)
+$jsonMessages = $messages | ConvertTo-Json
+
+# Print the messages to the workflow log
+Write-Host "Messages: $messages"
+Write-Host "JSON Messages: $jsonMessages"
+
+# Set the messages as environment variables
+Write-Host "::set-env name=MY_MESSAGES::$messages"
+Write-Host "::set-env name=MY_JSON_MESSAGES::$jsonMessages"
 
 
 
