@@ -1,51 +1,51 @@
-# write-output Apigee Artifacts
-$token = $env:TOKEN
-$org = $env:manualorg
-$git_token = $env:git_token
-# $baseURL = "https://apigee.googleapis.com/v1/organizations/"
-$baseURL = "https://httpbin.org/gt"
-$headers = @{Authorization = "Bearer $token"}
-$workflowmethod = $env:run
+# # write-output Apigee Artifacts
+# $token = $env:TOKEN
+# $org = $env:manualorg
+# $git_token = $env:git_token
+# # $baseURL = "https://apigee.googleapis.com/v1/organizations/"
+# $baseURL = "https://httpbin.org/gt"
+# $headers = @{Authorization = "Bearer $token"}
+# $workflowmethod = $env:run
 
 
-if ($workflowmethod -eq "manual"){
-    Write-Host "Entered into Manual...!"
-    # No need to reassign $org in the "manual" branch
-    Write-Host $org
-}
-else{
-    Write-Host "Entered into Schedule...!"
-    $orgs = $env:org -split ","
-    Write-Host $orgs
-    foreach ($org in $orgs){
-        Write-Host $org
-    }
-}
+# if ($workflowmethod -eq "manual"){
+#     Write-Host "Entered into Manual...!"
+#     # No need to reassign $org in the "manual" branch
+#     Write-Host $org
+# }
+# else{
+#     Write-Host "Entered into Schedule...!"
+#     $orgs = $env:org -split ","
+#     Write-Host $orgs
+#     foreach ($org in $orgs){
+#         Write-Host $org
+#     }
+# }
 
-Write-Host "Exited out of the IF with: $org"
+# Write-Host "Exited out of the IF with: $org"
 
-$path = $baseURL
-Invoke-RestMethod -Uri "https://httpbin.org/get" -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "test.json"
+# $path = $baseURL
+# Invoke-RestMethod -Uri "https://httpbin.org/get" -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "test.json"
 
-if(!(test-path -PathType container apigee)){
-      mkdir "apigee"
-      cd apigee
-      Write-Host "inside if"
-}
-else {
-      cd apigee
-      Write-Host "else"
-}
+# if(!(test-path -PathType container apigee)){
+#       mkdir "apigee"
+#       cd apigee
+#       Write-Host "inside if"
+# }
+# else {
+#       cd apigee
+#       Write-Host "else"
+# }
 
-if(!(test-path -PathType container apps)){
-      mkdir "apps"
-      cd apps
-      Write-Host "inside if"
-}
-else {
-      cd apps
-      Write-Host "else"
-}
+# if(!(test-path -PathType container apps)){
+#       mkdir "apps"
+#       cd apps
+#       Write-Host "inside if"
+# }
+# else {
+#       cd apps
+#       Write-Host "else"
+# }
 # PowerShell script to calculate a dynamic value
 $MY_DYNAMIC_VALUE = "Hello from PowerShell"
 Write-Host "##[set-output name=MY_DYNAMIC_VALUE;isOutput=true]$MY_DYNAMIC_VALUE"
