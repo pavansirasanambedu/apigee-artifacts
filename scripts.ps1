@@ -59,7 +59,7 @@ Write-Host "JSON Messages: $jsonMessages"
 
 # Set the messages as environment variables
 Write-Host "::set-output name=MY_MESSAGES::$messages"
-Write-Host "::set-output name=MY_JSON_MESSAGES::$jsonMessages"
+# Write-Host "::set-output name=MY_JSON_MESSAGES::$jsonMessages"
 
 
 
