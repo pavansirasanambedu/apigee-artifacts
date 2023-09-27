@@ -21,8 +21,6 @@ on:
     - cron: '30 15 * * *' # Scheduled to run every day at 21:00 IST (15:30 UTC)
 env:
   TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-  ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
-  MY_DYNAMIC_VALUE: ${{ steps.run_script.outputs.my_variable }}
   current_timestamp: $(($(date +%s%N) / 1000000))
 
 jobs:
