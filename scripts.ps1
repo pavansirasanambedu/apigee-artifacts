@@ -46,14 +46,9 @@ else {
       cd apps
       Write-Host "else"
 }
-# Calculate the dynamic value you want to send
-$dynamic_value = "apps"  # Replace with your actual calculation
+$MY_DYNAMIC_VALUE = "apps"
+echo "::set-output name=MY_DYNAMIC_VALUE::$MY_DYNAMIC_VALUE"
 
-# Set an environment variable with the dynamic value
-$env:MY_DYNAMIC_VALUE = $dynamic_value
-
-# Set an output variable to send to the YAML workflow
-echo "::set-output name=my_variable::$dynamic_value"
 
 
 
