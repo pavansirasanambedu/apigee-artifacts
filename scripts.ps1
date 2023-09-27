@@ -47,13 +47,14 @@ else {
       Write-Host "else"
 }
 # Set the dynamic value
-$MY_DYNAMIC_VALUE = "Your Dynamic Value Here"
+$MY_DYNAMIC_VALUE = "apps"
 
 # Print the dynamic value for debugging (remove this line after troubleshooting)
 Write-Host "Dynamic Value: $MY_DYNAMIC_VALUE"
 
 # Set the dynamic value as an output
 echo "::set-output name=MY_DYNAMIC_VALUE::$MY_DYNAMIC_VALUE"
+
 
 
 
