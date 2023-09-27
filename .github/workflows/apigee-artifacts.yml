@@ -78,7 +78,7 @@ jobs:
           # Invoke-Pester ./scripts.ps1 -Passthru
           
           # Run your script and capture the output in a variable
-          OUTPUT_FROM_SCRIPT=$(./scripts.ps1)
+          OUTPUT_FROM_SCRIPT=$(pwsh -File ./scripts.ps1)
           echo "::set-output name=MY_DYNAMIC_VALUE::$OUTPUT_FROM_SCRIPT"
 
       - name: Remove GCP Credentials JSON File
