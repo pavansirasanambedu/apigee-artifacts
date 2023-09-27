@@ -55,11 +55,9 @@ $jsonMessages = $messages | ConvertTo-Json
 
 # Print the messages to the workflow log
 Write-Host "Messages: $messages"
-Write-Host "JSON Messages: $jsonMessages"
 
 # Set the messages as environment variables
 Write-Host "::set-output name=MY_MESSAGES::$messages"
-# Write-Host "::set-output name=MY_JSON_MESSAGES::$jsonMessages"
 
 
 
