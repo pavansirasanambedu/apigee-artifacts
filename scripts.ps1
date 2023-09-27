@@ -46,9 +46,13 @@
 #       cd apps
 #       Write-Host "else"
 # }
-# PowerShell script to calculate a dynamic value
-$MY_DYNAMIC_VALUE = "Hello from PowerShell"
-Write-Host "##[set-output name=MY_DYNAMIC_VALUE;isOutput=true]$MY_DYNAMIC_VALUE"
+
+# Set the variable to send
+$variable = "Hello, world!"
+
+# Print the variable to the output stream
+echo "::set-output name=my_variable::$variable"
+
 
 
 
