@@ -46,14 +46,11 @@ else {
       cd apps
       Write-Host "else"
 }
-# Set the dynamic value
-$MY_DYNAMIC_VALUE = "apps"
+# For this example, we set a sample variable
+SAMPLE_VARIABLE="Hello, world!"
 
-# Print the dynamic value for debugging (remove this line after troubleshooting)
-Write-Host "Dynamic Value: $MY_DYNAMIC_VALUE"
-
-# Set the dynamic value as an output
-echo "::set-output name=MY_DYNAMIC_VALUE::$MY_DYNAMIC_VALUE"
+# Print the variable value
+echo $SAMPLE_VARIABLE
 
 
 
