@@ -76,9 +76,6 @@ jobs:
           }
           
           Invoke-Pester ./scripts.ps1 -Passthru
-          # Capture the output variable from the script
-          env:
-            MY_DYNAMIC_VALUE: ${{ steps.run_script.outputs.my_variable }}
 
       - name: Remove GCP Credentials JSON File
         run: rm gha-creds*.json
@@ -118,6 +115,14 @@ jobs:
         run: |
           git push origin artifacts
 
+      - name: Get GitHub Actor Email
+        id: get_actor_email
+        run: |
+          GITHUB_ACTOR_EMAIL=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/users/${{ github.actor }}" | jq -r '.email')
+          echo "::set-output name=ACTOR_EMAIL::$GITHUB_ACTOR_EMAIL"
+        shell: bash
+
+
       - name: Get GitHub Workflow Information
         id: workflow_info
         run: |
@@ -148,15 +153,13 @@ jobs:
         if: success()
         env:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
+          MY_DYNAMIC_VALUE: ${{ steps.run_script.outputs.my_variable }}
         run: |
-          
-          # Get the email address of the person who triggered the workflow
-          GITHUB_ACTOR_EMAIL=$(curl -s -H "Authorization: token ${{ secrets.TOKEN_GIT }}" "https://api.github.com/users/${{ github.actor }}" | jq -r '.email')
-
           JSON='{
             "title": "GitHub Actions Notification",
             "summary": "GitHub Actions workflow completed successfully",
-            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} ($GITHUB_ACTOR_EMAIL)\nvalue ($env:MY_DYNAMIC_VALUE)\non branch ${{ github.ref }}. Status: ${{ job.status }}",
+            "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\nvalue ($env:MY_DYNAMIC_VALUE)\non branch ${{ github.ref }}. Status: ${{ job.status }}",
             "themeColor": "0078D4"
           }'
           
