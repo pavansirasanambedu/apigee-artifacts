@@ -54,7 +54,7 @@ $messages = @("apps is created", "developers is created", "error in kvm")
 $jsonMessages = $messages | ConvertTo-Json
 
 # Print the messages to the workflow log
-Write-Host "Messages: $messages"
+Write-Host $messages
 
 # Set the messages as environment variables
 Write-Host "::set-output name=MY_MESSAGES::$messages"
