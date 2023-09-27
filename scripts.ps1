@@ -40,7 +40,7 @@ else{
 Write-Host "Exited out of the IF with: $org"
 
 $path = $baseURL
-Invoke-RestMethod -Uri "https://httpbin.org/gt" -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "test.json"
+Invoke-RestMethod -Uri "https://httpbin.org/get" -Method 'GET' -Headers $headers -ContentType "application/json" -ErrorAction:Stop -TimeoutSec 60 -OutFile "test.json"
 
 if(!(test-path -PathType container apigee)){
       mkdir "apigee"
