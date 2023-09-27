@@ -77,7 +77,7 @@ jobs:
           
           # Invoke-Pester ./scripts.ps1 -Passthru
       - name: Set execute permission for scripts.ps1
-        run: chmod +x variable-call.ps1
+        run: chmod +x script.ps1
 
       - name: Run PowerShell script
         run: |
