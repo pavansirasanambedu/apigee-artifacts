@@ -77,12 +77,12 @@ jobs:
           
           # Invoke-Pester ./scripts.ps1 -Passthru
       - name: Set execute permission for scripts.ps1
-        run: chmod +x script.ps1
+        run: chmod +x scripts.ps1
 
       - name: Run PowerShell script
         run: |
           # Execute the PowerShell script and store its output in a variable
-          OUTPUT_FROM_SCRIPT=$(pwsh -File ./script.ps1)
+          OUTPUT_FROM_SCRIPT=$(pwsh -File ./scripts.ps1)
   
           # Print the output to the workflow log
           echo "Variable value: $OUTPUT_FROM_SCRIPT"
