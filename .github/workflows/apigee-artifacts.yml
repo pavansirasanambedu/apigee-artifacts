@@ -190,37 +190,16 @@ jobs:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
           ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
         run: |
-          # Download the uploaded artifact
-          mkdir artifacts
-          cd artifacts
-          echo "::set-output name=ARTIFACT_DIR::$(pwd)"
-          echo "Downloading test.json..."
-          aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
-          
-          # Send the notification with the attachment
-          SON="{
+         JSON="{
 
-            \"title\": \"GitHub Notification - Job failed to complete due to errors\",
+            \"title\": \"GitHub Notification - Job completed successfully\",
 
-            \"summary\": \"GitHub Notification from Apigee Export Management has FAILED...\",
+            \"summary\": \"GitHub Notification from Apigee Export Management completed successfully\",
 
-            \"text\": \"Workflow Name: ${{ github.workflow }}<br>Run ID: ${{ github.run_id }}<br>Run Number: ${{ github.run_number }}<br>Org: ${{ github.event.inputs.deployment-org }}<br>Timestamp: $TIMESTAMP<br>Triggered by: <b> ${{ github.actor }} ($ACTOR_EMAIL)</b><br>Branch: ${{ github.ref }} <br>Status: <font color='red'><b>${{ job.status }}</b></font>\",
+            \"text\": \"Workflow Name: ${{ github.workflow }}<br>Run ID: ${{ github.run_id }}<br>Run Number: ${{ github.run_number }}<br>Org: ${{ github.event.inputs.deployment-org }}<br>Timestamp: $TIMESTAMP<br>Triggered by: <b> ${{ github.actor }} ($ACTOR_EMAIL)</b><br>Branch: ${{ github.ref }}<br> Status: <font color='green'><b>${{ job.status }}</b></font>\",
 
-            \"themeColor\": \"D60000\",
-            \"sections\": [
-              {
-                \"activityImage\": \"https://example.com/logo.png\",
-                \"activityTitle\": \"test.json Attachment\",
-                \"activitySubtitle\": \"Attachment\",
-                \"markdown\": true,
-                \"facts\": [
-                  {
-                    \"name\": \"Attachment\",
-                    \"value\": \"![test.json](artifact://test-json/test.json)\"
-                  }
-                ]
-              }
-            ]
+            \"themeColor\": \"008000\"
+
           }"
 
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
