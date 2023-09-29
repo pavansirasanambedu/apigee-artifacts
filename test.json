@@ -6,8 +6,8 @@
     "Content-Type": "application/json", 
     "Host": "httpbin.org", 
     "User-Agent": "Mozilla/5.0 (Linux; Linux 6.2.0-1012-azure #12~22.04.1-Ubuntu SMP Thu Sep  7 14:07:14 UTC 2023; ) PowerShell/7.2.14", 
-    "X-Amzn-Trace-Id": "Root=1-6516b413-6f1dbeaa7808c5e610acc150"
+    "X-Amzn-Trace-Id": "Root=1-6516b4b6-675a117a6b19d97240a5deb5"
   }, 
-  "origin": "13.89.2.175", 
+  "origin": "13.83.45.16", 
   "url": "https://httpbin.org/get"
 }
