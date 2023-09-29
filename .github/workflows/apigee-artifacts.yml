@@ -188,7 +188,7 @@ jobs:
 
       - name: Send Notification
         env:
-          TEAMS_WEBHOOK: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
+          TEAMS_WEBHOOK: ${{ secrets.TEAMS_WEBHOOK_URL }}
         run: |
           # Send a Teams message with the JSON file as an attachment
           json_content="${{ steps.read-json.outputs.json_content }}"
