@@ -187,9 +187,8 @@ jobs:
       - name: Download test.json
         run: |
           set -x  # Enable debugging output
-          aws s3 cp "s3://github-artifact-store/pavansirasanambedu/apigee-artifacts/test-json" .
+          aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
           set +x  # Disable debugging output
-
 
       - name: Send Success Notification to Teams
         if: success()
@@ -202,7 +201,7 @@ jobs:
           cd artifacts
           echo "Downloading test.json..."
           aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
-      
+
           # Send the notification with the attachment
           JSON="{
             \"title\": \"GitHub Actions Notification\",
@@ -224,11 +223,9 @@ jobs:
               }
             ]
           }"
-      
+
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
 
-
-      
       - name: Send Failure Notification to Teams
         if: failure()
         env:
@@ -240,7 +237,7 @@ jobs:
             "text": "Workflow Name: ${{ github.workflow }}\nRun ID: ${{ github.run_id }}\nRun Number: ${{ github.run_number }}\nOrg: ${{ secrets.APIGEE_ORG }}\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL) on branch ${{ github.ref }}. Status: ${{ job.status }}",
             "themeColor": "D60000"
           }'
-      
+
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
 
 
