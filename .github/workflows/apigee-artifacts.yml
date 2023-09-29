@@ -193,7 +193,6 @@ jobs:
           # Download the uploaded artifact
           mkdir artifacts
           cd artifacts
-          echo "::set-env name=ARTIFACT_DIR::$(pwd)"
           echo "Downloading test.json..."
           aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
       
@@ -212,7 +211,7 @@ jobs:
                 \"facts\": [
                   {
                     \"name\": \"Attachment\",
-                    \"value\": \"![test.json](artifact://test-json/test.json)\"
+                    \"value\": \"[test.json](artifact://./artifacts/test.json)\"
                   }
                 ]
               }
@@ -220,6 +219,7 @@ jobs:
           }"
       
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
+
 
       
       - name: Send Failure Notification to Teams
