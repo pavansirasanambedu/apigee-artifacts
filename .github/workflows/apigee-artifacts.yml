@@ -178,57 +178,39 @@ jobs:
       
       #     curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
 
-      - name: Upload test.json as an artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-json
-          path: test.json
-
-      - name: Download test.json
+      - name: Read JSON file
+        id: read-json
         run: |
-          set -x  # Enable debugging output
-          aws s3 cp "s3://github-artifact-store/pavansirasanambedu/apigee-artifacts/test-json" .
-          set +x  # Disable debugging output
-        env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
+          # Read the JSON file and save its content to an output variable
+          content=$(cat test.json)
+          echo "::set-output name=json_content::$content"
+        shell: bash
 
-
-      - name: Send Success Notification to Teams
-        if: success()
+      - name: Send Notification
         env:
-          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-          ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
+          TEAMS_WEBHOOK: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK }}
         run: |
-          # Download the uploaded artifact
-          mkdir artifacts
-          cd artifacts
-          echo "Downloading test.json..."
-          aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
-
-          # Send the notification with the attachment
-          JSON="{
-            \"title\": \"GitHub Actions Notification\",
-            \"summary\": \"GitHub Actions workflow completed successfully\",
-            \"text\": \"Workflow Name: ${{ github.workflow }}\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nOrg: ${{ secrets.APIGEE_ORG }}\\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\\non branch ${{ github.ref }}. Status: ${{ job.status }}\",
-            \"themeColor\": \"0078D4\",
-            \"sections\": [
+          # Send a Teams message with the JSON file as an attachment
+          json_content="${{ steps.read-json.outputs.json_content }}"
+          curl -H "Content-Type: application/json" -d '{
+            "@context": "http://schema.org/extensions",
+            "@type": "MessageCard",
+            "themeColor": "0078D4",
+            "title": "JSON File Attachment",
+            "text": "The JSON file is attached below.",
+            "potentialAction": [
               {
-                \"activityImage\": \"https://example.com/logo.png\",
-                \"activityTitle\": \"test.json Attachment\",
-                \"activitySubtitle\": \"Attachment\",
-                \"markdown\": true,
-                \"facts\": [
+                "@type": "ViewAction",
+                "name": "View JSON",
+                "targets": [
                   {
-                    \"name\": \"Attachment\",
-                    \"value\": \"[test.json](artifact://./artifacts/test.json)\"
+                    "os": "default",
+                    "uri": "data:application/json;base64,'$(echo -n "$json_content" | base64 -w 0)'"
                   }
                 ]
               }
             ]
-          }"
-
-          curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
+          }' -X POST $TEAMS_WEBHOOK
 
       - name: Send Failure Notification to Teams
         if: failure()
