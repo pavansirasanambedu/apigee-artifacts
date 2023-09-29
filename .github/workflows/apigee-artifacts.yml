@@ -80,12 +80,14 @@ jobs:
         run: chmod +x scripts.ps1
 
       - name: Run PowerShell script
+        shell: pwsh
         run: |
-          # Execute the PowerShell script and store its output in a variable
-          OUTPUT_FROM_SCRIPT=$(pwsh -File ./scripts.ps1)
+          Invoke-Pester ./scripts.ps1 -Passthru
+          # # Execute the PowerShell script and store its output in a variable
+          # OUTPUT_FROM_SCRIPT=$(pwsh -File ./scripts.ps1)
   
-          # Print the output to the workflow log
-          echo "Variable value: $OUTPUT_FROM_SCRIPT"
+          # # Print the output to the workflow log
+          # echo "Variable value: $OUTPUT_FROM_SCRIPT"
           
       # - name: Send Variable from Script File to YAML File
       #   run: |
@@ -196,11 +198,15 @@ jobs:
           aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
           
           # Send the notification with the attachment
-          JSON="{
-            \"title\": \"GitHub Actions Notification\",
-            \"summary\": \"GitHub Actions workflow completed successfully\",
-            \"text\": \"Workflow Name: ${{ github.workflow }}\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nOrg: ${{ secrets.APIGEE_ORG }}\\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\\non branch ${{ github.ref }}. Status: ${{ job.status }}\",
-            \"themeColor\": \"0078D4\",
+          SON="{
+
+            \"title\": \"GitHub Notification - Job failed to complete due to errors\",
+
+            \"summary\": \"GitHub Notification from Apigee Export Management has FAILED...\",
+
+            \"text\": \"Workflow Name: ${{ github.workflow }}<br>Run ID: ${{ github.run_id }}<br>Run Number: ${{ github.run_number }}<br>Org: ${{ github.event.inputs.deployment-org }}<br>Timestamp: $TIMESTAMP<br>Triggered by: <b> ${{ github.actor }} ($ACTOR_EMAIL)</b><br>Branch: ${{ github.ref }} <br>Status: <font color='red'><b>${{ job.status }}</b></font>\",
+
+            \"themeColor\": \"D60000\",
             \"sections\": [
               {
                 \"activityImage\": \"https://example.com/logo.png\",
