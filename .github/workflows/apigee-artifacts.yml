@@ -187,8 +187,12 @@ jobs:
       - name: Download test.json
         run: |
           set -x  # Enable debugging output
-          aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
+          aws s3 cp "s3://github-artifact-store/pavansirasanambedu/apigee-artifacts/test-json" .
           set +x  # Disable debugging output
+        env:
+          TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
+          ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
+
 
       - name: Send Success Notification to Teams
         if: success()
