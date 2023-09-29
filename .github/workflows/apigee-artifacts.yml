@@ -193,7 +193,7 @@ jobs:
           # Download the uploaded artifact
           mkdir artifacts
           cd artifacts
-          echo "::set-env name=ARTIFACT_DIR::$(pwd)"
+          echo "::set-output name=ARTIFACT_DIR::$(pwd)"
           echo "Downloading test.json..."
           aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
           
