@@ -182,7 +182,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-json
-          path: path/to/test.json
+          path: test.json
+
+      - name: Download test.json
+        run: |
+          set -x  # Enable debugging output
+          aws s3 cp "s3://github-artifact-store/pavansirasanambedu/apigee-artifacts/test-json" .
+          set +x  # Disable debugging output
+
 
       - name: Send Success Notification to Teams
         if: success()
