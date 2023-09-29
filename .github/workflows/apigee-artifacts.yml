@@ -182,7 +182,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-json
-          path: test.json
+          path: path/to/test.json
 
       - name: Send Success Notification to Teams
         if: success()
@@ -190,19 +190,37 @@ jobs:
           TEAMS_WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
           ACTOR_EMAIL: ${{ steps.get_actor_email.outputs.ACTOR_EMAIL }}
         run: |
-         JSON="{
-
-            \"title\": \"GitHub Notification - Job completed successfully\",
-
-            \"summary\": \"GitHub Notification from Apigee Export Management completed successfully\",
-
-            \"text\": \"Workflow Name: ${{ github.workflow }}<br>Run ID: ${{ github.run_id }}<br>Run Number: ${{ github.run_number }}<br>Org: ${{ github.event.inputs.deployment-org }}<br>Timestamp: $TIMESTAMP<br>Triggered by: <b> ${{ github.actor }} ($ACTOR_EMAIL)</b><br>Branch: ${{ github.ref }}<br> Status: <font color='green'><b>${{ job.status }}</b></font>\",
-
-            \"themeColor\": \"008000\"
-
+          # Download the uploaded artifact
+          mkdir artifacts
+          cd artifacts
+          echo "::set-env name=ARTIFACT_DIR::$(pwd)"
+          echo "Downloading test.json..."
+          aws s3 cp "s3://github-artifact-store/${{ github.repository }}/test-json" .
+      
+          # Send the notification with the attachment
+          JSON="{
+            \"title\": \"GitHub Actions Notification\",
+            \"summary\": \"GitHub Actions workflow completed successfully\",
+            \"text\": \"Workflow Name: ${{ github.workflow }}\\nRun ID: ${{ github.run_id }}\\nRun Number: ${{ github.run_number }}\\nOrg: ${{ secrets.APIGEE_ORG }}\\nTimestamp: ${{ steps.convert_timestamp.outputs.HUMAN_READABLE_TIMESTAMP }}\\nTriggered by ${{ github.actor }} ($ACTOR_EMAIL)\\non branch ${{ github.ref }}. Status: ${{ job.status }}\",
+            \"themeColor\": \"0078D4\",
+            \"sections\": [
+              {
+                \"activityImage\": \"https://example.com/logo.png\",
+                \"activityTitle\": \"test.json Attachment\",
+                \"activitySubtitle\": \"Attachment\",
+                \"markdown\": true,
+                \"facts\": [
+                  {
+                    \"name\": \"Attachment\",
+                    \"value\": \"![test.json](artifact://test-json/test.json)\"
+                  }
+                ]
+              }
+            ]
           }"
-
+      
           curl -X POST -H "Content-Type: application/json" -d "$JSON" "$TEAMS_WEBHOOK_URL"
+
       
       - name: Send Failure Notification to Teams
         if: failure()
